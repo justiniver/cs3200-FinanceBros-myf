@@ -21,8 +21,8 @@ def get_all_users():
 
 # POST /users
 # [Emily-1]
-@user.route('/users', methods=['POST'])
-def create_user():
+@user.route('/users/create', methods=['POST'])
+def create_user(data):
     current_app.logger.info('POST /users route')
     data = request.get_json()
     cursor = db.get_db().cursor()
@@ -53,7 +53,7 @@ def get_user_by_id(user_id):
 def get_all_influencers():
     current_app.logger.info('GET /influencers route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM influencers')
+    cursor.execute('SELECT * FROM users WHERE verified = True')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -63,12 +63,12 @@ def get_all_influencers():
 # POST /influencers/{id}/notifications
 # [Emily-4]
 @user.route('/influencers/<int:influencer_id>/notifications', methods=['POST'])
-def create_influencer_notification(influencer_id):
+def create_influencer_notification(influencer_id, message):
     current_app.logger.info(f'POST /influencers/{influencer_id}/notifications route')
     data = request.get_json()
     cursor = db.get_db().cursor()
     cursor.execute('INSERT INTO notifications (influencer_id, message) VALUES (%s, %s)', 
-                   (influencer_id, data['message']))
+                   (influencer_id, message,))
     db.get_db().commit()
     the_response = make_response({'message': 'Notification created successfully'})
     the_response.status_code = 201
@@ -81,7 +81,7 @@ def create_influencer_notification(influencer_id):
 def get_influencer_by_id(influencer_id):
     current_app.logger.info(f'GET /influencers/{influencer_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM influencers WHERE influencer_id = %s', (influencer_id,))
+    cursor.execute('SELECT * FROM erifiedPublicProfile WHERE verified_user_id = %s', (influencer_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -104,12 +104,12 @@ def get_all_portfolios():
 # POST /portfolios/{id}
 # [Emily-1]
 @user.route('/portfolios/<int:user_id>', methods=['POST'])
-def create_portfolio(user_id):
+def create_portfolio(user_id, portfolio_id):
     current_app.logger.info(f'POST /portfolios/{user_id} route')
     data = request.get_json()
     cursor = db.get_db().cursor()
-    cursor.execute('INSERT INTO portfolios (user_id, portfolio_name) VALUES (%s, %s)', 
-                   (user_id, data['portfolio_name']))
+    cursor.execute('INSERT INTO personalPortfolios (user_id, portoflio_id) VALUES (%s, %s)', 
+                   (user_id, portfolio_id))
     db.get_db().commit()
     the_response = make_response({'message': 'Portfolio created successfully'})
     the_response.status_code = 201
@@ -122,7 +122,7 @@ def create_portfolio(user_id):
 def get_portfolio_by_id(portfolio_id):
     current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM portfolios WHERE portfolio_id = %s', (portfolio_id,))
+    cursor.execute('SELECT * FROM personalPortfolios WHERE portfolio_id = %s', (portfolio_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -135,7 +135,7 @@ def get_portfolio_by_id(portfolio_id):
 def get_all_stocks():
     current_app.logger.info('GET /stocks route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stocks')
+    cursor.execute('SELECT * FROM stock')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -145,10 +145,10 @@ def get_all_stocks():
 # GET /stocks/{id}
 # [Emily-2]
 @user.route('/stocks/<int:stock_id>', methods=['GET'])
-def get_stock_by_id(stock_id):
-    current_app.logger.info(f'GET /stocks/{stock_id} route')
+def get_stock_by_ticker(ticker):
+    current_app.logger.info(f'GET /stock/{ticker} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stocks WHERE stock_id = %s', (stock_id,))
+    cursor.execute('SELECT * FROM stock WHERE ticker = %s', (ticker,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
