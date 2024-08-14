@@ -10,7 +10,7 @@ def get_all_notifications():
     current_app.logger.info('GET /notifications route')
     user_id = request.args.get('user_id')  # Ensure that you get the correct user_id
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notifications WHERE user_id = %s', (user_id,))
+    cursor.execute('SELECT * FROM notifications')
     theData = cursor.fetchall()
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
