@@ -51,7 +51,6 @@ def get_all_influencers():
     return the_response
 
 
-
 # GET /influencers/{id}
 
 @dataAnalyst.route('/influencers/<int:influencer_id>', methods=['GET'])
@@ -94,8 +93,6 @@ def get_portfolio_by_id(portfolio_id):
     return the_response
 
 
-
-
 # GET /stocks
 
 @dataAnalyst.route('/stocks', methods=['GET'])
@@ -108,9 +105,6 @@ def get_all_stocks():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
-
-
-
 
 
 # GET /stocks/{id}
@@ -139,6 +133,7 @@ def get_all_notifications():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
 
 # Delete /users/{id}
 
