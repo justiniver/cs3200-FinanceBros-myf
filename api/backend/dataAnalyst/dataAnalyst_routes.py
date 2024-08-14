@@ -135,6 +135,17 @@ def get_all_notifications():
     the_response.mimetype = 'application/json'
     return the_response
 
+@dataAnalyst.route('/notifications/<notification_id>', methods=['GET'])
+def get_all_notifications(notifcation_id):
+    current_app.logger.info('GET /notifications/{notifcation_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM notifications WHERE notifcation_id = %s', (notifcation_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 
 # Delete /users/{id}
 
