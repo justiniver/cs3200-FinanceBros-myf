@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `financeBrosDB`.`personalPortfolio` (
 
 CREATE TABLE IF NOT EXISTS `financeBrosDB`.`portfolioStocks` (
     `portfolio_id` INT NOT NULL,
-    `ticker` VARCHAR(10) UNIQUE NOT NULL,
+    `ticker` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`portfolio_id`, `ticker`),
     FOREIGN KEY (`ticker`)
         REFERENCES stock(`ticker`)
