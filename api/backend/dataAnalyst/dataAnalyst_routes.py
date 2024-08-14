@@ -56,7 +56,7 @@ def get_user_metrics_notifications_follows(user_id):
     return the_response
 
 # User story 3
-"""@dataAnalyst.route('/personal-portfolio/high-value', methods=['GET'])
+@dataAnalyst.route('/personal-portfolio/high-value', methods=['GET'])
 def get_high_value_portfolios():
     try:
         current_app.logger.info('GET /personal-portfolio/high-value route')
@@ -72,4 +72,3 @@ def get_high_value_portfolios():
         the_response.status_code = 200
         the_response.mimetype = 'application/json'
         return the_response
-"""
