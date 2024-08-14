@@ -94,7 +94,7 @@ def get_influencer_by_id(influencer_id):
 def get_all_portfolios():
     current_app.logger.info('GET /portfolios route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM portfolios')
+    cursor.execute('SELECT * FROM personalPortfolio')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -117,7 +117,7 @@ def create_portfolio(user_id, portfolio_id):
     return the_response
 
 @user.route('/portfolios_stock/<int:user_id>', methods=['POST'])
-def get_portfolio_stocks():
+def get_portfolio_stocks(user_id):
         current_app.logger.info(f'POST /portfolios_stock/{user_id} route')
         data = request.get_json()
         cursor = db.get_db().cursor()
@@ -126,7 +126,7 @@ def get_portfolio_stocks():
                         JOIN portfolioStocks portS ON ps.portfolio_id = portS.portfolio_id\
                         JOIN stock s ON s.ticker = portS.ticker')
         db.get_db().commit()
-        the_response = make_response({'message': 'Portfolio created successfully'})
+        the_response = make_response()
         the_response.status_code = 201
         the_response.mimetype = 'application/json'
         return the_response

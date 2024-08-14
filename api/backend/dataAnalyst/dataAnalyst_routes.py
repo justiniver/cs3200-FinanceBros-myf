@@ -96,7 +96,6 @@ def get_portfolio_by_id(portfolio_id):
 def get_all_stocks():
     current_app.logger.info('GET /stocks route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = %s', (user_id,))
     cursor.execute('SELECT * FROM stock')
     theData = cursor.fetchall()
     the_response = make_response(theData)
@@ -110,7 +109,7 @@ def get_all_stocks():
 
 @dataAnalyst.route('/stocks/<ticker>', methods=['GET'])
 def get_stock_by_id(ticker):
-    current_app.logger.info(f'GET /stock/{ticker} route')
+    current_app.logger.info(f'GET /stocks/{ticker} route')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM stock WHERE ticker = %s', (ticker,))
     theData = cursor.fetchall()
@@ -147,7 +146,7 @@ def get_notification_by_id(notification_id):
 
 # Delete /users/{id}
 
-@dataAnalyst.route('/users/<user_id>', methods=['DELETE'])
+@dataAnalyst.route('/delete-users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     current_app.logger.info(f'DELETE /users/{user_id} route')
     cursor = db.get_db().cursor()
