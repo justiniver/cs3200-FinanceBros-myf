@@ -81,7 +81,7 @@ def create_influencer_notification(influencer_id, message):
 def get_influencer_by_id(influencer_id):
     current_app.logger.info(f'GET /influencers/{influencer_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM erifiedPublicProfile WHERE verified_user_id = %s', (influencer_id,))
+    cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (influencer_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -101,48 +101,46 @@ def get_all_portfolios():
     the_response.mimetype = 'application/json'
     return the_response
 
-# POST /portfolios/{id}
-# [Emily-1]
-@user.route('/portfolios/<int:user_id>', methods=['POST'])
-def create_portfolio(user_id, portfolio_id):
-    current_app.logger.info(f'POST /portfolios/{user_id} route')
-    data = request.get_json()
-    cursor = db.get_db().cursor()
-    cursor.execute('INSERT INTO personalPortfolios (user_id, portoflio_id) VALUES (%s, %s)', 
-                   (user_id, portfolio_id))
-    db.get_db().commit()
-    the_response = make_response({'message': 'Portfolio created successfully'})
-    the_response.status_code = 201
-    the_response.mimetype = 'application/json'
-    return the_response
+# # POST /portfolios/{id}
+# # CHANGE THIS TO INSERTING STOCKS IN USER PORTFOLIO
+# # [Emily-1]
+# @user.route('/portfolios/<int:user_id>', methods=['POST'])
+# def create_portfolio(user_id, portfolio_id):
+#     current_app.logger.info(f'POST /portfolios/{user_id} route')
+#     data = request.get_json()
+#     cursor = db.get_db().cursor()
+#     cursor.execute('INSERT INTO personalPortfolio (user_id, portoflio_id) VALUES (%s, %s)', 
+#                    (user_id, portfolio_id))
+#     db.get_db().commit()
+#     the_response = make_response({'message': 'Portfolio created successfully'})
+#     the_response.status_code = 200
+#     the_response.mimetype = 'application/json'
+#     return the_response
 
-@user.route('/portfolios_stock/<int:user_id>', methods=['POST'])
-def get_portfolio_stocks(user_id):
-        current_app.logger.info(f'POST /portfolios_stock/{user_id} route')
-        data = request.get_json()
-        cursor = db.get_db().cursor()
-        cursor.execute('Select portS.ticker, s.sharePrice, s.stockName, s.beta\
-                        from users u JOIN personalPortfolio ps on u.user_id = ps.user_id\
-                        JOIN portfolioStocks portS ON ps.portfolio_id = portS.portfolio_id\
-                        JOIN stock s ON s.ticker = portS.ticker')
-        db.get_db().commit()
-        the_response = make_response()
-        the_response.status_code = 201
-        the_response.mimetype = 'application/json'
-        return the_response
 
-# GET /portfolios/{id}
-# [Emily-2]
-@user.route('/portfolios/<int:portfolio_id>', methods=['GET'])
-def get_portfolio_by_id(portfolio_id):
-    current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
+# GET /myportfolios
+@user.route('/myportfolios/<int:user_id>', methods=['GET'])
+def get_my_portfolios(user_id):
+    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM personalPortfolios WHERE portfolio_id = %s', (portfolio_id,))
+    cursor.execute('SELECT P_L, liquidated_Value, beta FROM personalPortfolio WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+@user.route('/portfolios_stock/<int:user_id>', methods=['GET'])
+def get_portfolios_userID(user_id):
+    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT s.ticker, s.sharePrice, s.stockName, s.beta FROM users u JOIN personalPortfolio ps ON u.user_id = ps.user_id JOIN portfolioStocks p ON ps.portfolio_id = p.portfolio_id JOIN stock s ON s.ticker = p.ticker WHERE u.user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 
 # GET /stocks
 # [Emily-2]
