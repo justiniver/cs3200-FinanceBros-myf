@@ -5,6 +5,7 @@ from backend.db_connection import db
 experiencedTrader = Blueprint('experiencedTrader', __name__)
 
 # GET /notifications
+# [Alex-1]
 @experiencedTrader.route('/notifications', methods=['GET'])
 def get_all_notifications():
     current_app.logger.info('GET /notifications route')
@@ -18,6 +19,7 @@ def get_all_notifications():
     return the_response
 
 # POST /notifications
+# [Alex-1]
 @experiencedTrader.route('/notifications', methods=['POST'])
 def create_notification():
     current_app.logger.info('POST /notifications route')
@@ -32,6 +34,7 @@ def create_notification():
     return jsonify({'message': 'Notification created successfully'}), 201
 
 # PUT /notifications/{id}
+# This should be fixed to /notifications from /notifications/{id}
 @experiencedTrader.route('/notifications/<int:notification_id>', methods=['PUT'])
 def update_notification(notification_id):
     current_app.logger.info(f'PUT /notifications/{notification_id} route')
@@ -45,6 +48,7 @@ def update_notification(notification_id):
     return jsonify({'message': 'Notification updated successfully'}), 200
 
 # GET /follows
+# [Alex-4]
 @experiencedTrader.route('/follows', methods=['GET'])
 def get_all_followers():
     current_app.logger.info('GET /follows route')
@@ -58,6 +62,7 @@ def get_all_followers():
     return the_response
 
 # GET /users/{id}
+# [Alex-4]
 @experiencedTrader.route('/users/<int:user_id>', methods=['GET'])
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
@@ -75,6 +80,7 @@ def get_user_by_id(user_id):
     return the_response
 
 # PUT /users/{id}
+# [Alex-3]
 @experiencedTrader.route('/users/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     current_app.logger.info(f'PUT /users/{user_id} route')
@@ -88,6 +94,7 @@ def update_user(user_id):
     return jsonify({'message': 'User updated successfully'}), 200
 
 # GET /stocks
+# [Alex-1]
 @experiencedTrader.route('/stocks', methods=['GET'])
 def get_all_stocks():
     current_app.logger.info('GET /stocks route')
