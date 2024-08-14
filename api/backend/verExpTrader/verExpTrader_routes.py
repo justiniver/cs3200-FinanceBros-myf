@@ -6,14 +6,15 @@ experiencedTrader = Blueprint('experiencedTrader', __name__)
 
 # GET /notifications
 # [Alex-1]
-@experiencedTrader.route('/notifications', methods=['GET'])
-def get_all_notifications():
-    current_app.logger.info('GET /notifications route')
-    user_id = request.args.get('user_id')  # Ensure that you get the correct user_id
+@experiencedTrader.route('/notifications/<user_id>', methods=['GET'])
+def get_all_notifications(user_id):
+    current_app.logger.info('GET /notifications{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notifications')
+    cursor.execute('SELECT *\
+                   FROM userNotifications un join notifications n on un.user_id = n.user_id\
+                   WHERE un.user_id = %s', (user_id,))
     theData = cursor.fetchall()
-    the_response = make_response(jsonify(theData))
+    the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
