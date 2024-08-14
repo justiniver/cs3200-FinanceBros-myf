@@ -25,11 +25,11 @@ def get_all_users():
 
 # GET /users{id}
 
-@dataAnalyst.route('/users/<int:user_id>', methods=['GET'])
+@dataAnalyst.route('/users/<user_id>', methods=['GET'])
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
+    cursor.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -53,11 +53,11 @@ def get_all_influencers():
 
 # GET /influencers/{id}
 
-@dataAnalyst.route('/influencers/<int:influencer_id>', methods=['GET'])
+@dataAnalyst.route('/influencers/<influencer_id>', methods=['GET'])
 def get_influencer_by_id(influencer_id):
     current_app.logger.info(f'GET /influencers/{influencer_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM influencers WHERE influencer_id = ?', (influencer_id,))
+    cursor.execute('SELECT * FROM influencers WHERE influencer_id = %s', (influencer_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -81,11 +81,11 @@ def get_all_portfolios():
 
 # GET /portfolios/{id}
 
-@dataAnalyst.route('/portfolios/<int:portfolio_id>', methods=['GET'])
+@dataAnalyst.route('/portfolios/<portfolio_id>', methods=['GET'])
 def get_portfolio_by_id(portfolio_id):
     current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM portfolios WHERE portfolio_id = ?', (portfolio_id,))
+    cursor.execute('SELECT * FROM portfolios WHERE portfolio_id = %s', (portfolio_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -99,7 +99,7 @@ def get_portfolio_by_id(portfolio_id):
 def get_all_stocks():
     current_app.logger.info('GET /stocks route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stocks')
+    cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = ?', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -109,11 +109,11 @@ def get_all_stocks():
 
 # GET /stocks/{id}
 
-@dataAnalyst.route('/stocks/<int:stock_id>', methods=['GET'])
+@dataAnalyst.route('/stocks/<stock_id>', methods=['GET'])
 def get_stock_by_id(stock_id):
     current_app.logger.info(f'GET /stocks/{stock_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stocks WHERE stock_id = ?', (stock_id,))
+    cursor.execute('SELECT * FROM stocks WHERE stock_id = %s', (stock_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -137,11 +137,11 @@ def get_all_notifications():
 
 # Delete /users/{id}
 
-@dataAnalyst.route('/users/<int:user_id>', methods=['DELETE'])
+@dataAnalyst.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     current_app.logger.info(f'DELETE /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM users WHERE user_id = ?', (user_id,))
+    cursor.execute('DELETE FROM users WHERE user_id = %s', (user_id,))
     db.get_db().commit()
     the_response = make_response({'message': 'User deleted successfully'})
     the_response.status_code = 200
