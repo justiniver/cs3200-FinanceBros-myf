@@ -324,7 +324,7 @@ INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_
 INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_metric_id) VALUES ('50', 'Abigail', 'Vise', 'Ozatlán', '2024-07-13 21:56:06', '1998-04-19 13:34:42', '388');
 INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_metric_id) VALUES ('65', 'Ric', 'Coldridge', 'Shaliangzi', '2024-02-04 21:39:03', '1987-01-03 03:37:04', '226');
 INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_metric_id) VALUES ('21', 'Edlin', 'Ewert', 'Abha', '2024-01-14 23:07:08', '1997-08-28 12:05:52', '802');
-INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_metric_id) VALUES ('15', 'Tammy', 'Huggard', 'La‘l', '2023-09-09 16:50:42', '1996-01-28 15:25:07', '669');
+INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_metric_id) VALUES ('15', 'Tammy', 'Huggard', 'Lal', '2023-09-09 16:50:42', '1996-01-28 15:25:07', '669');
 INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_metric_id) VALUES ('97', 'Jamil', 'Sandaver', 'Caracol', '2023-10-25 02:15:44', '1985-03-14 05:58:06', '800');
 INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_metric_id) VALUES ('96', 'Ginny', 'Fairbard', 'Samashki', '2024-06-29 08:19:13', '1981-05-20 03:58:32', '517');
 INSERT INTO employees (employee_id, f_name, l_name, city, start_date, dob, user_metric_id) VALUES ('8437', 'Merwyn', 'Harkins', 'Begejci', '2024-03-02 09:40:46', '1984-08-19 23:03:02', '37');
