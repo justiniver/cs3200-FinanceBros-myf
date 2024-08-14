@@ -51,14 +51,13 @@ def get_all_influencers():
     return the_response
 
 
-
 # GET /influencers/{id}
 
 @dataAnalyst.route('/influencers/<influencer_id>', methods=['GET'])
-def get_influencer_by_id(influencer_id):
-    current_app.logger.info(f'GET /influencers/{influencer_id} route')
+def get_influencer_by_id(verified_user_id):
+    current_app.logger.info(f'GET /influencers/{verified_user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (influencer_id,))
+    cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (verified_user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -92,8 +91,6 @@ def get_portfolio_by_id(portfolio_id):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
-
-
 
 
 # GET /stocks
@@ -137,6 +134,7 @@ def get_all_notifications():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
 
 # Delete /users/{id}
 
