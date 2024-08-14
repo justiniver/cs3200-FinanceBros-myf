@@ -25,11 +25,11 @@ def get_all_users():
 
 # GET /users{id}
 
-@dataAnalyst.route('/users/<int:user_id>', methods=['GET'])
+@dataAnalyst.route('/users/<user_id>', methods=['GET'])
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
+    cursor.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
