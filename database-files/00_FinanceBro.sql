@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `financeBrosDB`.`notifications` (
     `timeCreated` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `firstViewedAt` DATETIME,
     `lastViewedAt` DATETIME,
-    `viewedAtResponseTime` DATETIME,
+    `viewedAtResponseTime` INT,
     `user_id` INT NOT NULL,
     PRIMARY KEY (`notification_id`),
     FOREIGN KEY (`user_id`)
