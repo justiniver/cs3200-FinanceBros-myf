@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 from streamlit_extras.app_logo import add_logo
 import world_bank_data as wb
-import matplotlib.pyplot as plt
+from regular_user_routes import get_all_stocks
 import numpy as np
 import plotly.express as px
 from modules.nav import SideBarLinks
@@ -20,7 +20,7 @@ st.write(f"### Hi, {st.session_state['first_name']}.")
 
 # get the countries from the world bank data
 with st.echo(code_location='above'):
-    countries:pd.DataFrame = wb.get_countries()
+    countries:pd.DataFrame = get_all_stocks()
    
     st.dataframe(countries)
 
