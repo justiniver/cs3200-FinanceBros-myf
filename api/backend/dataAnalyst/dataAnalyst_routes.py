@@ -1,3 +1,7 @@
+########################################################
+# Sample customers blueprint of endpoints
+# Remove this file if you are not using it in your project
+########################################################
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
@@ -5,76 +9,150 @@ from backend.db_connection import db
 dataAnalyst = Blueprint('dataAnalyst', __name__)
 
 
-@dataAnalyst.route('/dataAnalyst', methods=['GET'])
-def get_all_dataAnalyst():
-    current_app.logger.info('GET /dataAnalyst route')
+# GET /user
+
+@dataAnalyst.route('/users', methods=['GET'])
+def get_all_users():
+    current_app.logger.info('GET /users route')
     cursor = db.get_db().cursor()
-    # the_query = '''
-    # SELECT * 
-    # FROM stock
-    # '''
-    cursor.execute('select * from stock')
+    cursor.execute('SELECT * FROM users')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
 
-# User story 1
-@dataAnalyst.route('/user-metrics/<user_id>/metrics', methods=['GET'])
-def get_user_metrics(user_id):
-    current_app.logger.info('GET /user-metrics/{user_id}/metrics route')
+
+# GET /users{id}
+
+@dataAnalyst.route('/users/<int:user_id>', methods=['GET'])
+def get_user_by_id(user_id):
+    current_app.logger.info(f'GET /users/{user_id} route')
     cursor = db.get_db().cursor()
-    x = tuple(user_id)
-    cursor.execute('SELECT * FROM users WHERE user_id = %s', int(user_id,))
+    cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
 
-# User story 2
-@dataAnalyst.route('/user-metrics/<user_id>/notifications-follows', methods=['GET'])
-def get_user_metrics_notifications_follows(user_id):
-    current_app.logger.info('GET /user-metrics/{user_id}/notifications-follows route')
+
+# GET /influencers
+
+@dataAnalyst.route('/influencers', methods=['GET'])
+def get_all_influencers():
+    current_app.logger.info('GET /influencers route')
     cursor = db.get_db().cursor()
-    cursor.execute('''
-        SELECT * 
-        FROM userMetrics um
-        JOIN notifications n ON um.user_id = n.user_id
-        JOIN follows f ON f.following_id = n.user_id
-        WHERE um.user_id = ?
-        ORDER BY likes, timeCreated
-    ''', (user_id,))
+    cursor.execute('SELECT * FROM influencers')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
 
-@dataAnalyst.route('/personal-portfolio/high-value', methods=['GET'])
-def get_high_value_portfolios():
-    current_app.logger.info('GET /personal-portfolio/high-value route')
+
+
+# GET /influencers/{id}
+
+@dataAnalyst.route('/influencers/<int:influencer_id>', methods=['GET'])
+def get_influencer_by_id(influencer_id):
+    current_app.logger.info(f'GET /influencers/{influencer_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('''
-        SELECT *
-        FROM personalPortfolio
-        WHERE liquidated_Value > 20000 AND P_L >= (liquidated_Value * 0.15)
-        ORDER BY P_L DESC
-    ''')
+    cursor.execute('SELECT * FROM influencers WHERE influencer_id = ?', (influencer_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
 
-@dataAnalyst.route('/users/<int:user_id>/ban', methods=['PUT'])
-def ban_user(user_id):
-    current_app.logger.info(f'PUT /users/{user_id}/ban route')
+
+# GET /portfolios
+
+@dataAnalyst.route('/portfolios', methods=['GET'])
+def get_all_portfolios():
+    current_app.logger.info('GET /portfolios route')
     cursor = db.get_db().cursor()
-    cursor.execute('UPDATE users SET banned = true WHERE user_id = ?', (user_id,))
+    cursor.execute('SELECT * FROM portfolios')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+# GET /portfolios/{id}
+
+@dataAnalyst.route('/portfolios/<int:portfolio_id>', methods=['GET'])
+def get_portfolio_by_id(portfolio_id):
+    current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM portfolios WHERE portfolio_id = ?', (portfolio_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+
+
+# GET /stocks
+
+@dataAnalyst.route('/stocks', methods=['GET'])
+def get_all_stocks():
+    current_app.logger.info('GET /stocks route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = ?', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+
+
+
+# GET /stocks/{id}
+
+@dataAnalyst.route('/stocks/<int:stock_id>', methods=['GET'])
+def get_stock_by_id(stock_id):
+    current_app.logger.info(f'GET /stocks/{stock_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM stocks WHERE stock_id = ?', (stock_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+# GET /notifications
+
+@dataAnalyst.route('/notifications', methods=['GET'])
+def get_all_notifications():
+    current_app.logger.info('GET /notifications route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM notifications')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# Delete /users/{id}
+
+@dataAnalyst.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    current_app.logger.info(f'DELETE /users/{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('DELETE FROM users WHERE user_id = ?', (user_id,))
     db.get_db().commit()
-    the_response = make_response({'message': 'User banned successfully'})
+    the_response = make_response({'message': 'User deleted successfully'})
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+
+    
+
