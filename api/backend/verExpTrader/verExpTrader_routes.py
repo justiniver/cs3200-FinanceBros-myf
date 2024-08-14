@@ -20,15 +20,15 @@ def get_all_notifications():
 
 # POST /notifications
 # [Alex-1]
-@experiencedTrader.route('/notifications', methods=['POST'])
+@experiencedTrader.route('/create-notifications', methods=['POST'])
 def create_notification(data):
     current_app.logger.info('POST /notifications route')
     data = request.get_json()
     cursor = db.get_db().cursor()
     cursor.execute(
-        'INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) '
+        'INSERT INTO notifications (notification_id, text, likes, user_id) '
         'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
-        (data['notification_id'], data['text'], data['likes'], data['timeCreated'], data['firstViewedAt'], data['lastViewedAt'], data['viewedAtResponseTime'], data['user_id'])
+        (data['notification_id'], data['text'], data['likes'], data['user_id'])
     )
     db.get_db().commit()
     return jsonify({'message': 'Notification created successfully'}), 201
@@ -36,7 +36,7 @@ def create_notification(data):
 # PUT /notifications/{id}
 # This should be fixed to /notifications from /notifications/{id}
 @experiencedTrader.route('/notifications/<int:notification_id>', methods=['PUT'])
-def update_notification(text, user_id):
+def update_notification(text, user_id, notification_id):
     current_app.logger.info(f'PUT /notifications/{notification_id} route')
     data = request.get_json()
     cursor = db.get_db().cursor()
@@ -49,8 +49,8 @@ def update_notification(text, user_id):
 
 # GET /follows
 # [Alex-4]
-@experiencedTrader.route('/follows', methods=['GET'])
-def get_all_followers():
+@experiencedTrader.route('/follows/<user_id>', methods=['GET'])
+def get_all_followers(user_id):
     current_app.logger.info('GET /follows route')
     user_id = request.args.get('user_id')  # Ensure that you get the correct user_id
     cursor = db.get_db().cursor()
@@ -63,7 +63,7 @@ def get_all_followers():
 
 # GET /users/{id}
 # [Alex-4]
-@experiencedTrader.route('/users/<int:user_id>', methods=['GET'])
+@experiencedTrader.route('/users/<user_id>', methods=['GET'])
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
     cursor = db.get_db().cursor()
@@ -95,11 +95,11 @@ def update_user(user_id):
 
 # GET /stocks
 # [Alex-1]
-@experiencedTrader.route('/stocks', methods=['GET'])
-def get_all_stocks():
-    current_app.logger.info('GET /stocks route')
+@experiencedTrader.route('/stocks-in-portfolio/<portoflio_id>', methods=['GET'])
+def get_all_stocks_in_portfolio(portoflio_id):
+    current_app.logger.info('GET /personalPortfolio{portfolio_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT ticker, stockName, sharePrice, beta FROM stock')
+    cursor.execute('SELECT * FROM personalPortfolio WHERE portfolio_id = %s', (portoflio_id,))
     theData = cursor.fetchall()
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
