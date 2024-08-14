@@ -108,7 +108,7 @@ def get_all_stocks_in_portfolio(portoflio_id):
 
 # POST /users
 
-@dataAnalyst.route('/follow', methods=['POST'])
+@experiencedTrader.route('/follow', methods=['POST'])
 def follow_user():
     data = request.json
     follower_id = data.get('follower_id') 
@@ -128,7 +128,7 @@ def follow_user():
 
 # DELETE /users
 
-@dataAnalyst.route('/unfollow', methods=['DELETE'])
+@experiencedTrader.route('/unfollow', methods=['DELETE'])
 def unfollow_user():
     data = request.json
     follower_id = data.get('follower_id') 
