@@ -1,7 +1,4 @@
-########################################################
-# Sample customers blueprint of endpoints
-# Remove this file if you are not using it in your project
-########################################################
+
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
@@ -43,7 +40,7 @@ def get_user_by_id(user_id):
 def get_all_influencers():
     current_app.logger.info('GET /influencers route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM influencers')
+    cursor.execute('SELECT * FROM verifiedPublicProfile')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -53,11 +50,11 @@ def get_all_influencers():
 
 # GET /influencers/{id}
 
-@dataAnalyst.route('/influencers/<influencer_id>', methods=['GET'])
-def get_influencer_by_id(influencer_id):
-    current_app.logger.info(f'GET /influencers/{influencer_id} route')
+@dataAnalyst.route('/influencers/<verified_user_id>', methods=['GET'])
+def get_influencer_by_id(verified_user_id):
+    current_app.logger.info(f'GET /influencers/{verified_user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM influencers WHERE influencer_id = %s', (influencer_id,))
+    cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (verified_user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -71,7 +68,7 @@ def get_influencer_by_id(influencer_id):
 def get_all_portfolios():
     current_app.logger.info('GET /portfolios route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM portfolios')
+    cursor.execute('SELECT * FROM personalPortfolio')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -85,7 +82,7 @@ def get_all_portfolios():
 def get_portfolio_by_id(portfolio_id):
     current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM portfolios WHERE portfolio_id = %s', (portfolio_id,))
+    cursor.execute('SELECT * FROM personalPortfolio WHERE portfolio_id = %s', (portfolio_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -100,6 +97,7 @@ def get_all_stocks():
     current_app.logger.info('GET /stocks route')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = %s', (user_id,))
+    cursor.execute('SELECT * FROM stock')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -107,13 +105,14 @@ def get_all_stocks():
     return the_response
 
 
+
 # GET /stocks/{id}
 
-@dataAnalyst.route('/stocks/<stock_id>', methods=['GET'])
-def get_stock_by_id(stock_id):
-    current_app.logger.info(f'GET /stocks/{stock_id} route')
+@dataAnalyst.route('/stocks/<ticker>', methods=['GET'])
+def get_stock_by_id(ticker):
+    current_app.logger.info(f'GET /stock/{ticker} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stocks WHERE stock_id = %s', (stock_id,))
+    cursor.execute('SELECT * FROM stock WHERE ticker = %s', (ticker,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -128,6 +127,17 @@ def get_all_notifications():
     current_app.logger.info('GET /notifications route')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM notifications')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+@dataAnalyst.route('/notifications/<notification_id>', methods=['GET'])
+def get_notification_by_id(notification_id):
+    current_app.logger.info('GET /notifications/{notification_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM notifications WHERE notification_id = %s', (notification_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
