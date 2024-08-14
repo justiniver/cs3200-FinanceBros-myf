@@ -9,7 +9,7 @@ experiencedTrader = Blueprint('experiencedTrader', __name__)
 def get_all_notifications():
     current_app.logger.info('GET /notifications route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notifications WHERE user_id = %s', (experienced_trader_user_id,))
+    cursor.execute('SELECT * FROM notifications WHERE user_id = %s', (verified_user_id,))
     theData = cursor.fetchall()
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
