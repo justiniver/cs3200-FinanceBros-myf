@@ -52,15 +52,17 @@ def update_notification(text, user_id, notification_id):
 # [Alex-4]
 @experiencedTrader.route('/follows/<user_id>', methods=['GET'])
 def get_all_followers(user_id):
-    current_app.logger.info('GET /follows route')
-    user_id = request.args.get('user_id')  # Ensure that you get the correct user_id
+    current_app.logger.info('GET /follows{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT follower_id FROM follows WHERE following_id = %s', (user_id,))
+    cursor.execute('SELECT follower_id\
+                    FROM follows\
+                    WHERE following_id = %s', (user_id,))
     theData = cursor.fetchall()
-    the_response = make_response(jsonify(theData))
+    the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
 
 # GET /users/{id}
 # [Alex-4]
@@ -68,16 +70,11 @@ def get_all_followers(user_id):
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT user_id, f_name, l_name, email, username FROM users WHERE user_id = %s', (user_id,))
-    theData = cursor.fetchone()  # Fetch one since user_id is unique
-    if theData:
-        the_response = make_response(jsonify(theData))
-        the_response.status_code = 200
-        the_response.mimetype = 'application/json'
-    else:
-        the_response = make_response(jsonify({'message': 'User not found'}))
-        the_response.status_code = 404
-        the_response.mimetype = 'application/json'
+    cursor.execute('SELECT * from users WHERE user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
     return the_response
 
 # PUT /users/{id}
