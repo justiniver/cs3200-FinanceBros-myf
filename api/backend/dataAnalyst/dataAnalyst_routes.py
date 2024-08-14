@@ -51,13 +51,22 @@ def get_all_influencers():
     return the_response
 
 
+
 # GET /influencers/{id}
 
+<<<<<<< HEAD
 @dataAnalyst.route('/influencers/<influencer_id>', methods=['GET'])
 def get_influencer_by_id(verified_user_id):
     current_app.logger.info(f'GET /influencers/{verified_user_id} route')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (verified_user_id,))
+=======
+@dataAnalyst.route('/influencers/<int:influencer_id>', methods=['GET'])
+def get_influencer_by_id(influencer_id):
+    current_app.logger.info(f'GET /influencers/{influencer_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM influencers WHERE influencer_id = ?', (influencer_id,))
+>>>>>>> f4794ca26d0f764ecb91c7db5626be7cff151d03
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -81,16 +90,22 @@ def get_all_portfolios():
 
 # GET /portfolios/{id}
 
-@dataAnalyst.route('/portfolios/<portfolio_id>', methods=['GET'])
+@dataAnalyst.route('/portfolios/<int:portfolio_id>', methods=['GET'])
 def get_portfolio_by_id(portfolio_id):
     current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
     cursor = db.get_db().cursor()
+<<<<<<< HEAD
     cursor.execute('SELECT * FROM personalPortfolio WHERE portfolio_id = %s', (portfolio_id,))
+=======
+    cursor.execute('SELECT * FROM portfolios WHERE portfolio_id = ?', (portfolio_id,))
+>>>>>>> f4794ca26d0f764ecb91c7db5626be7cff151d03
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+
 
 
 # GET /stocks
@@ -108,6 +123,7 @@ def get_all_stocks():
 
 
 
+<<<<<<< HEAD
 # GET /stocks/{id}
 
 @dataAnalyst.route('/stocks/<ticker>', methods=['GET'])
@@ -115,6 +131,17 @@ def get_stock_by_id(ticker):
     current_app.logger.info(f'GET /stock/{ticker} route')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM stock WHERE ticker = %s', (ticker,))
+=======
+
+
+# GET /stocks/{id}
+
+@dataAnalyst.route('/stocks/<int:stock_id>', methods=['GET'])
+def get_stock_by_id(stock_id):
+    current_app.logger.info(f'GET /stocks/{stock_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM stocks WHERE stock_id = ?', (stock_id,))
+>>>>>>> f4794ca26d0f764ecb91c7db5626be7cff151d03
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -135,14 +162,13 @@ def get_all_notifications():
     the_response.mimetype = 'application/json'
     return the_response
 
-
 # Delete /users/{id}
 
-@dataAnalyst.route('/users/<user_id>', methods=['DELETE'])
+@dataAnalyst.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     current_app.logger.info(f'DELETE /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM users WHERE user_id = %s', (user_id,))
+    cursor.execute('DELETE FROM users WHERE user_id = ?', (user_id,))
     db.get_db().commit()
     the_response = make_response({'message': 'User deleted successfully'})
     the_response.status_code = 200
