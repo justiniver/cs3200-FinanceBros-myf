@@ -77,11 +77,11 @@ def create_influencer_notification(influencer_id, message):
 
 # GET /influencers/{id}
 # [Emily-4]
-@user.route('/influencers/<int:influencer_id>', methods=['GET'])
-def get_influencer_by_id(influencer_id):
-    current_app.logger.info(f'GET /influencers/{influencer_id} route')
+@user.route('/influencers/<verified_user_id>', methods=['GET'])
+def get_influencer_by_id(verified_user_id):
+    current_app.logger.info(f'GET /influencers/{verified_user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM erifiedPublicProfile WHERE verified_user_id = %s', (influencer_id,))
+    cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (verified_user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
