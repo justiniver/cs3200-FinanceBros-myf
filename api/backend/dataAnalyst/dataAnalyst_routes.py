@@ -24,3 +24,18 @@ def get_all_dataAnalyst():
     the_response.mimetype = 'application/json'
     return the_response
 
+@dataAnalyst.route('/dataAnalyst/d', methods=['GET'])
+def getDataAnalyst():
+    current_app.logger.info('GET /dataAnalyst/d route')
+    cursor = db.get_db().cursor()
+    # the_query = '''
+    # SELECT * 
+    # FROM stock
+    # '''
+    cursor.execute('select * from users')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
