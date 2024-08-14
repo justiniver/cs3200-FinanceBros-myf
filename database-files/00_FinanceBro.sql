@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `financeBrosDB`.`personalPortfolio` (
 
 CREATE TABLE IF NOT EXISTS `financeBrosDB`.`portfolioStocks` (
     `portfolio_id` INT NOT NULL,
-    `ticker` VARCHAR(10) NOT NULL,
+    `ticker` VARCHAR(10) UNIQUE NOT NULL,
     PRIMARY KEY (`portfolio_id`, `ticker`),
     FOREIGN KEY (`ticker`)
         REFERENCES stock(`ticker`)
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `financeBrosDB`.`notifications` (
     `timeCreated` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `firstViewedAt` DATETIME,
     `lastViewedAt` DATETIME,
-    `viewedAtResponseTime` INT,
+    `viewedAtResponseTime` DATETIME,
     `user_id` INT NOT NULL,
     PRIMARY KEY (`notification_id`),
     FOREIGN KEY (`user_id`)
