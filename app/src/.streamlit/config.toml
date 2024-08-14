@@ -4,7 +4,7 @@ showSidebarNavigation = false
 [theme]
 base="dark"
 primaryColor="#4b0082"  # indigo
-secondaryBackgroundColor="#2e2e2e"  # lighter shade
+secondaryBackgroundColor="#353A42"  # lighter shade
 textColor="#e0e0e0"  # light gray
 font="Garamond"  # garamond font
 
