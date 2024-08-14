@@ -21,7 +21,7 @@ def get_all_notifications():
 # POST /notifications
 # [Alex-1]
 @experiencedTrader.route('/notifications', methods=['POST'])
-def create_notification():
+def create_notification(data):
     current_app.logger.info('POST /notifications route')
     data = request.get_json()
     cursor = db.get_db().cursor()
@@ -36,13 +36,13 @@ def create_notification():
 # PUT /notifications/{id}
 # This should be fixed to /notifications from /notifications/{id}
 @experiencedTrader.route('/notifications/<int:notification_id>', methods=['PUT'])
-def update_notification(notification_id):
+def update_notification(text, user_id):
     current_app.logger.info(f'PUT /notifications/{notification_id} route')
     data = request.get_json()
     cursor = db.get_db().cursor()
     cursor.execute(
         'UPDATE notifications SET text = %s WHERE notification_id = %s AND user_id = %s',
-        (data['text'], notification_id, data['user_id'])
+        (text, user_id,)
     )
     db.get_db().commit()
     return jsonify({'message': 'Notification updated successfully'}), 200
