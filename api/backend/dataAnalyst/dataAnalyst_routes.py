@@ -99,7 +99,7 @@ def get_portfolio_by_id(portfolio_id):
 def get_all_stocks():
     current_app.logger.info('GET /stocks route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = ?', (user_id,))
+    cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
