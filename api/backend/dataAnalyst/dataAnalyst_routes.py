@@ -43,7 +43,7 @@ def get_user_by_id(user_id):
 def get_all_influencers():
     current_app.logger.info('GET /influencers route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM influencers')
+    cursor.execute('SELECT * FROM verifiedPublicProfile')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -58,7 +58,7 @@ def get_all_influencers():
 def get_influencer_by_id(influencer_id):
     current_app.logger.info(f'GET /influencers/{influencer_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM influencers WHERE influencer_id = %s', (influencer_id,))
+    cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (influencer_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -72,7 +72,7 @@ def get_influencer_by_id(influencer_id):
 def get_all_portfolios():
     current_app.logger.info('GET /portfolios route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM portfolios')
+    cursor.execute('SELECT * FROM personalPortfolio')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -86,7 +86,7 @@ def get_all_portfolios():
 def get_portfolio_by_id(portfolio_id):
     current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM portfolios WHERE portfolio_id = %s', (portfolio_id,))
+    cursor.execute('SELECT * FROM personalPortfolio WHERE portfolio_id = %s', (portfolio_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -102,7 +102,7 @@ def get_portfolio_by_id(portfolio_id):
 def get_all_stocks():
     current_app.logger.info('GET /stocks route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = ?', (user_id,))
+    cursor.execute('SELECT * FROM stock')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -111,15 +111,13 @@ def get_all_stocks():
 
 
 
-
-
 # GET /stocks/{id}
 
-@dataAnalyst.route('/stocks/<stock_id>', methods=['GET'])
-def get_stock_by_id(stock_id):
-    current_app.logger.info(f'GET /stocks/{stock_id} route')
+@dataAnalyst.route('/stocks/<ticker>', methods=['GET'])
+def get_stock_by_id(ticker):
+    current_app.logger.info(f'GET /stock/{ticker} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stocks WHERE stock_id = %s', (stock_id,))
+    cursor.execute('SELECT * FROM stock WHERE ticker = %s', (ticker,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
