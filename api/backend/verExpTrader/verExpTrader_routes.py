@@ -1,17 +1,23 @@
-# from flask import Blueprint, request, jsonify, make_response, current_app
-# from backend.db_connection import db
+from flask import Blueprint, request, jsonify, make_response, current_app
+from backend.db_connection import db
 
-# experienced_trader = Blueprint('experienced_trader', __name__)
+experienced_trader = Blueprint('experienced_trader', __name__)
 
-# # Route to view the number of followers (GET)
-# @experienced_trader.route('/followers/count/<int:user_id>', methods=['GET'])
-# def get_follower_count(user_id):
-#     current_app.logger.info(f'GET /followers/count/{user_id} route')
-#     cursor = db.get_db().cursor()
-#     cursor.execute('SELECT COUNT(*) as follower_count FROM follows WHERE following_id = %s', (user_id,))
-    
-#     follower_count = cursor.fetchone()[0]
-#     the_response = make_response(jsonify({'follower_count': follower_count}))
-#     the_response.status_code = 200
-#     the_response.mimetype = 'application/json'
-#     return the_response
+# User Story 1
+@experienced_trader.route('/notifications', methods=['POST'])
+def send_trade_notifications():
+    current_app.logger.info('POST /notifications route')
+    notification_data = request.json
+
+    notification_text = notification_data.get('text')
+    user_id = notification_data.get('user_id')
+    time_created = notification_data.get('timeCreated')
+
+    query = '''INSERT INTO notifications (text, timeCreated, user_id)
+               VALUES (%s, %s, %s)'''
+    data = (notification_text, time_created, user_id)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)
+    db.get_db().commit()
+    return jsonify({'message': 'Notification sent successfully'}), 201
