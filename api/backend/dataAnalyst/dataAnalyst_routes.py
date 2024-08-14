@@ -29,7 +29,7 @@ def get_all_dataAnalyst():
 def get_user_metrics(user_id):
     current_app.logger.info('GET /user-metrics/{user_id}/metrics route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * from users')
+    cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = ?', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -54,3 +54,21 @@ def get_user_metrics_notifications_follows(user_id):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+# User story 3
+@dataAnalyst.route('/personal-portfolio/high-value', methods=['GET'])
+def get_high_value_portfolios():
+    try:
+        current_app.logger.info('GET /personal-portfolio/high-value route')
+        cursor = db.get_db().cursor()
+        cursor.execute('''
+            SELECT *
+            FROM personalPortfolio
+            WHERE liquidated_Value > 20000 AND P_L >= (liquidated_Value * 0.15)
+            ORDER BY P_L DESC
+        ''')
+        theData = cursor.fetchall()
+        the_response = make_response(jsonify(theData))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
