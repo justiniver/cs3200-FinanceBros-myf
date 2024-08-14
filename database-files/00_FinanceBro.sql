@@ -84,11 +84,14 @@ CREATE TABLE IF NOT EXISTS `financeBrosDB`.`follows` (
     `user_id` INT,
     PRIMARY KEY (`following_id`, `follower_id`),
     FOREIGN KEY (`user_id`)
-        REFERENCES users(`user_id`),
+        REFERENCES users(`user_id`)
+        ON UPDATE CASDADE ON DEELTE CASCADE,
     FOREIGN KEY (`follower_id`)
-        REFERENCES users(`user_id`),
+        REFERENCES users(`user_id`)
+        ON UPDATE CASDADE ON DEELTE CASCADE,
     FOREIGN KEY (following_id)
         REFERENCES users(`user_id`)
+        ON UPDATE CASDADE ON DEELTE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `financeBrosDB`.`dashboardFeed` (
