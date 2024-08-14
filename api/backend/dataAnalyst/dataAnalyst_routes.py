@@ -24,8 +24,9 @@ def get_all_dataAnalyst():
     the_response.mimetype = 'application/json'
     return the_response
 
+@dataAnalyst.route('/dataAnalyst/d', methods=['GET'])
 def get_all_users():
-    current_app.logger.info('GET /dataAnalyst route')
+    current_app.logger.info('GET /dataAnalyst/d route')
     cursor = db.get_db().cursor()
     # the_query = '''
     # SELECT * 
