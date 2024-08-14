@@ -8,8 +8,9 @@ experiencedTrader = Blueprint('experiencedTrader', __name__)
 @experiencedTrader.route('/notifications', methods=['GET'])
 def get_all_notifications():
     current_app.logger.info('GET /notifications route')
+    user_id = request.args.get('user_id')  # Ensure that you get the correct user_id
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notifications WHERE user_id = %s', (verified_user_id,))
+    cursor.execute('SELECT * FROM notifications WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -30,7 +31,7 @@ def create_notification():
     db.get_db().commit()
     return jsonify({'message': 'Notification created successfully'}), 201
 
-# PUT /notifications/<int:notification_id>
+# PUT /notifications/{id}
 @experiencedTrader.route('/notifications/<int:notification_id>', methods=['PUT'])
 def update_notification(notification_id):
     current_app.logger.info(f'PUT /notifications/{notification_id} route')
@@ -47,27 +48,33 @@ def update_notification(notification_id):
 @experiencedTrader.route('/follows', methods=['GET'])
 def get_all_followers():
     current_app.logger.info('GET /follows route')
+    user_id = request.args.get('user_id')  # Ensure that you get the correct user_id
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM follows WHERE user_id = %s', (experienced_trader_user_id,))
+    cursor.execute('SELECT follower_id FROM follows WHERE following_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
 
-# GET /users/<int:user_id>
+# GET /users/{id}
 @experiencedTrader.route('/users/<int:user_id>', methods=['GET'])
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
-    theData = cursor.fetchall()
-    the_response = make_response(jsonify(theData))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
+    cursor.execute('SELECT user_id, f_name, l_name, email, username FROM users WHERE user_id = %s', (user_id,))
+    theData = cursor.fetchone()  # Fetch one since user_id is unique
+    if theData:
+        the_response = make_response(jsonify(theData))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+    else:
+        the_response = make_response(jsonify({'message': 'User not found'}))
+        the_response.status_code = 404
+        the_response.mimetype = 'application/json'
     return the_response
 
-# PUT /users/<int:user_id>
+# PUT /users/{id}
 @experiencedTrader.route('/users/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     current_app.logger.info(f'PUT /users/{user_id} route')
@@ -85,7 +92,7 @@ def update_user(user_id):
 def get_all_stocks():
     current_app.logger.info('GET /stocks route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stock')
+    cursor.execute('SELECT ticker, stockName, sharePrice, beta FROM stock')
     theData = cursor.fetchall()
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
