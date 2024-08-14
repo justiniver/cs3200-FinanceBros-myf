@@ -29,7 +29,7 @@ def get_all_dataAnalyst():
 def get_user_metrics(user_id):
     current_app.logger.info('GET /user-metrics/{user_id}/metrics route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT dmStartTime, dmEndTime, user_metric_ID, user_id FROM userMetrics WHERE user_id = ?', (user_id,))
+    cursor.execute('SELECT * from users')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
