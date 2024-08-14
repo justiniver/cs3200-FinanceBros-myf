@@ -136,10 +136,10 @@ def get_all_notifications():
     return the_response
 
 @dataAnalyst.route('/notifications/<notification_id>', methods=['GET'])
-def get_all_notifications(notifcation_id):
-    current_app.logger.info('GET /notifications/{notifcation_id} route')
+def get_notification_by_id(notification_id):
+    current_app.logger.info('GET /notifications/{notification_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notifications WHERE notifcation_id = %s', (notifcation_id,))
+    cursor.execute('SELECT * FROM notifications WHERE notification_id = %s', (notification_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
