@@ -109,14 +109,14 @@ def get_all_stocks_in_portfolio(portoflio_id):
 @experiencedTrader.route('/follow', methods=['POST'])
 def follow_user():
     data = request.json
-    follower_id = data.get('follower_id') 
-    following_id = data.get('following_id')
+    following_id = data.get('follower_id') 
+    user_id = data.get('following_id')
     current_app.logger.info(f'POST /follow route - Follower ID: {follower_id}, Following ID: {following_id}')
     cursor = db.get_db().cursor()
     cursor.execute('''
         INSERT INTO follows (follower_id, following_id, timestamp, count, user_id)
         VALUES (%s, %s, CURRENT_TIMESTAMP, %s, %s)
-    ''', (follower_id, following_id, follower_id))
+    ''', (following_id, user_id))
     db.get_db().commit()
     the_response = make_response({'message': 'User followed successfully'})
     the_response.status_code = 200

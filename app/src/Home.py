@@ -64,7 +64,7 @@ if st.button('Act as Sarah, the Data Analyst',
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'Sarah'
+    st.session_state['first_name'] = 'Sarah, the data analyst'
     st.switch_page('pages/data_analyst_home.py')
 
 

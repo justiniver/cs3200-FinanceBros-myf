@@ -22,9 +22,14 @@ if st.button('View My Portfolio',
 if st.button('View Verified Profiles', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_verified_profiles.py') 
+  st.switch_page('pages/00_Reg_User_View_Profile.py') 
 
 if st.button('My Dashboard', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/03_my_dashboard.py')
+
+if st.button('Financial AI Consultant', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/99_consult_chatbox.py') 
