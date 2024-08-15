@@ -32,4 +32,4 @@ if st.button('My Dashboard',
 if st.button('Financial AI Consultant', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/99_consult_chatbox.py') 
+  st.switch_page('pages/97_reg_chatbot.py') 
