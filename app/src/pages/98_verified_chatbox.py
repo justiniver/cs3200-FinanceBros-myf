@@ -1,8 +1,8 @@
 from openai import OpenAI
 import streamlit as st
 
-# Use your API key directly
-openai_api_key = "key"
+# This will only run with viable openAI API key
+openai_api_key = st.secrets["openai_api_key"]
 
 st.title("💬 Financial Consultation Chatbot")
 st.caption("🚀 Powered by OpenAI")
