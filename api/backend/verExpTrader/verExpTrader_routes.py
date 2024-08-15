@@ -34,9 +34,9 @@ def create_notification(data):
     db.get_db().commit()
     return jsonify({'message': 'Notification created successfully'}), 201
 
-# PUT /notifications/{id}
+# POST /notifications/{id}
 # This should be fixed to /notifications from /notifications/{id}
-@experiencedTrader.route('/notifications/<int:notification_id>', methods=['PUT'])
+@experiencedTrader.route('/notifications/<int:notification_id>', methods=['POST'])
 def update_notification(text, user_id, notification_id):
     current_app.logger.info(f'PUT /notifications/{notification_id} route')
     data = request.get_json()
@@ -109,14 +109,14 @@ def get_all_stocks_in_portfolio(portoflio_id):
 @experiencedTrader.route('/follow', methods=['POST'])
 def follow_user():
     data = request.json
-    following_id = data.get('follower_id') 
-    user_id = data.get('following_id')
+    follower_id = data.get('follower_id') 
+    following_id = data.get('following_id')
     current_app.logger.info(f'POST /follow route - Follower ID: {follower_id}, Following ID: {following_id}')
     cursor = db.get_db().cursor()
     cursor.execute('''
         INSERT INTO follows (follower_id, following_id, timestamp, count, user_id)
         VALUES (%s, %s, CURRENT_TIMESTAMP, %s, %s)
-    ''', (following_id, user_id))
+    ''', (follower_id, following_id, follower_id))
     db.get_db().commit()
     the_response = make_response({'message': 'User followed successfully'})
     the_response.status_code = 200
