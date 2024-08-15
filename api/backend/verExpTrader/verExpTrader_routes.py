@@ -61,13 +61,13 @@ def update_notification(text, user_id, notification_id):
 
 # GET /follows
 # [Alex-4]
-@experiencedTrader.route('/follows/<user_id>', methods=['GET'])
-def get_all_followers(user_id):
-    current_app.logger.info('GET /follows{user_id} route')
+@experiencedTrader.route('/followers/<verified_user_id>', methods=['GET'])
+def get_all_followers(verified_user_id):
+    current_app.logger.info('GET /followers route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT follower_id\
-                    FROM follows\
-                    WHERE following_id = %s', (user_id,))
+    cursor.execute('SELECT u.username\
+                    FROM follows f join users u on f.follower_id = u.user_id\
+                   WHERE following_id = %s', (verified_user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -96,7 +96,7 @@ def update_user(user_id):
     data = request.get_json()
     cursor = db.get_db().cursor()
     cursor.execute(
-        'UPDATE users SET bio = %s WHERE user_id = %s',
+        'UPDATE  SET bio = %s WHERE user_id = %s',
         (data['bio'], user_id)
     )
     db.get_db().commit()
@@ -155,3 +155,71 @@ def unfollow_user():
     return the_response
 
 
+@experiencedTrader.route('/public_profile/<user_id>', methods=['GET'])
+def get_public_profile(user_id):
+    current_app.logger.info('GET /public_profile{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT biography, verified_username, photo_url FROM verifiedPublicProfile WHERE user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+@experiencedTrader.route('/update-bio/<int:user_id>/<update_bio>', methods=['PUT'])
+def update_bio(user_id, update_bio):
+    current_app.logger.info(f'PUT /update-bio/{user_id}/{update_bio} route')
+
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute(
+            'UPDATE verifiedPublicProfile SET biography = %s WHERE user_id = %s',
+            (update_bio, user_id)
+        )
+        db.get_db().commit()
+
+        # Return a success message with status code 200
+        return jsonify({'message': 'Bio updated successfully'}), 200
+
+    except Exception as e:
+        current_app.logger.error(f"Error updating bio for user {user_id}: {str(e)}")
+        return jsonify({'error': 'Failed to update user bio'}), 500
+
+@experiencedTrader.route('/update-username/<int:user_id>/<update_username>', methods=['PUT'])
+def update_username(user_id, update_username):
+    current_app.logger.info(f'PUT /update-bio/{user_id}/{update_username} route')
+
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute(
+            'UPDATE verifiedPublicProfile SET verified_username = %s WHERE user_id = %s',
+            (update_username, user_id)
+        )
+        db.get_db().commit()
+
+        # Return a success message with status code 200
+        return jsonify({'message': 'Username updated successfully'}), 200
+
+    except Exception as e:
+        current_app.logger.error(f"Error updating bio for user {user_id}: {str(e)}")
+        return jsonify({'error': 'Failed to update user bio'}), 500
+
+
+@experiencedTrader.route('/update-photo/<int:user_id>/<update_photo>', methods=['PUT'])
+def update_photo(user_id, update_photo):
+    current_app.logger.info(f'PUT /update-bio/{user_id}/{update_photo} route')
+
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute(
+            'UPDATE verifiedPublicProfile SET photo_url = %s WHERE user_id = %s',
+            (update_photo, user_id)
+        )
+        db.get_db().commit()
+
+        # Return a success message with status code 200
+        return jsonify({'message': 'Profile photo updated successfully'}), 200
+
+    except Exception as e:
+        current_app.logger.error(f"Error updating bio for user {user_id}: {str(e)}")
+        return jsonify({'error': 'Failed to update user bio'}), 500

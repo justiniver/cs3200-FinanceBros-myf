@@ -1,62 +1,91 @@
 # Summer 2024 CS 3200 Finance Bros Repository
 
-Simple overview of use/purpose.
+This repository is for the Finance Bros project, which is part of the Summer 2024 CS 3200 course. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+The Finance Bros project is a social media platform for finance enthusiasts that aims to help users make informed financial decisions. By offering detailed performance metrics and strategies from leading financial figures, the platform provides a unique perspective on investment opportunities. Users can stay informed with real-time data and trends, receive personalized recommendations, and follow the activities of influential traders. This platform is designed to guide both novice and experienced investors through the complexities of the financial market.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Python 3.8 or higher
+* Flask 2.0.1
+* SQLAlchemy 1.4
+* PostgreSQL 13
+* OpenAI API Key
+* Streamlit 1.0.0
+* Windows 10 or macOS 10.15 Catalina
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Clone the repository from GitHub:
+
+* Set up a virtual environment and activate it:
+
+python -m venv venv
+source venv/bin/activate # On Windows use venv\Scripts\activate
+
+* Install the required dependencies:
+
+pip install -r requirements.txt
+
+* Set up the PostgreSQL database and run the provided SQL script to create necessary tables:
+
+psql -U yourusername -d yourdatabase -f setup.sql
+
+* Add your OpenAI API key to the Streamlit secrets:
+
+echo "[openai]\nopenai_api_key=your_api_key_here" > .streamlit/secrets.toml
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+* Start the Flask development server:
+
+flask run
+
+* Access the application by navigating to `http://127.0.0.1:5000/` in your web browser.
+* To execute specific user stories, navigate through the provided routes in the API matrix.
 
 ## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+For common issues:
+* Ensure that PostgreSQL is correctly installed and the database is running.
+* Virtual environment activation issues on Windows can be resolved by running:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+* If you encounter issues with the OpenAI API, ensure that your API key is correctly set in the Streamlit secrets file.
+* Check the Flask and Streamlit documentation for more details on error messages.
+
+flask --help
+streamlit --help
 
 ## Authors
 
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+* Bryan Guen  
+* Ethan Xin 
+* Eitan Berenfeld  
+* Justin Iverson  
+* Jared Mar  
+* Daniel Klevak  
 
 ## Version History
 
+* 0.3
+    * Added AI-powered financial consultation chatbot feature
+    * See [commit change](https://github.com/guenbr/cs3200-FinanceBros/commits/main) or [release history](https://github.com/guenbr/cs3200-FinanceBros/releases)
 * 0.2
     * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
 * 0.1
     * Initial Release
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed?
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+Will add later
+
