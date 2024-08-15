@@ -41,7 +41,7 @@ try:
     stock_names = [item["ticker"] for item in data]
     option = st.selectbox(
         "Select a stock by ticker:",
-        stock_names,
+        (stock_names),
         index=0,  
         placeholder="Select a ticker...",
     )
@@ -56,6 +56,18 @@ except Exception as e:
     st.write("**Important**: Could not connect to sample API, so using dummy data.")
     st.write(f"Error: {e}")
     data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+
+st.write(f"### Top 5 Recommended Stocks for lowest risk level:")
+
+data = {} 
+try:
+    data = requests.get('http://api:4000/u/recStocks').json()
+except:
+    st.write("**Important**: Could not connect to sample API, so using dummy data.")
+    data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+st.dataframe(data)
 
 st.write(f"### All Stocks:")
 

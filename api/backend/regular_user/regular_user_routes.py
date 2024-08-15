@@ -114,23 +114,6 @@ def get_all_portfolios():
     the_response.mimetype = 'application/json'
     return the_response
 
-# # POST /portfolios/{id}
-# # CHANGE THIS TO INSERTING STOCKS IN USER PORTFOLIO
-# # [Emily-1]
-# @user.route('/portfolios/<int:user_id>', methods=['POST'])
-# def create_portfolio(user_id, portfolio_id):
-#     current_app.logger.info(f'POST /portfolios/{user_id} route')
-#     data = request.get_json()
-#     cursor = db.get_db().cursor()
-#     cursor.execute('INSERT INTO personalPortfolio (user_id, portoflio_id) VALUES (%s, %s)', 
-#                    (user_id, portfolio_id))
-#     db.get_db().commit()
-#     the_response = make_response({'message': 'Portfolio created successfully'})
-#     the_response.status_code = 200
-#     the_response.mimetype = 'application/json'
-#     return the_response
-
-
 # GET /myportfolios
 @user.route('/myportfolios/<int:user_id>', methods=['GET'])
 def get_my_portfolios(user_id):
@@ -243,3 +226,15 @@ def get__user_portfolios(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# GET /RECOMDENDED STOCKS
+# [Emily-2]
+@user.route('/recStocks', methods=['GET'])
+def recStocks():
+    current_app.logger.info('GET /recStocks route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM stock ORDER BY beta LIMIT 5')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
