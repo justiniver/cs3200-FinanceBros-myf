@@ -10,7 +10,7 @@ st.title("💬 Financial Consultation Chatbot (Novice)")
 st.write("This chatbot is designed to give simple and low risk financial advice")
 st.caption("🚀 Powered by OpenAI")
 
-# Prompt-engineering for novice chatbot
+# Prompt for novice chatbot
 prompt_regCB = """
 You are a financial advisor chatbot designed to assist novice investors such as recent college graduates who are new to investing. Your goal is to simplify complex financial concepts and provide clear, easy-to-understand guidance to help users make informed investment decisions. When interacting with the user, ensure that you:
 
