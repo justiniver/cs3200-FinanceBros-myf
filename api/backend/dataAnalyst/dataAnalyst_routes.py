@@ -165,3 +165,13 @@ def ban_user(user_id):
 
     
 
+@dataAnalyst.route('/myportfolios_stock/<int:user_id>', methods=['GET'])
+def get__user_portfolios_userID(user_id):
+    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT s.ticker, s.sharePrice, s.stockName, s.beta FROM users u JOIN personalPortfolio ps ON u.user_id = ps.user_id JOIN portfolioStocks p ON ps.portfolio_id = p.portfolio_id JOIN stock s ON s.ticker = p.ticker WHERE u.user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response

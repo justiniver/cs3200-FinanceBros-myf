@@ -27,7 +27,7 @@ data = {}
 key = st.text_input("What is the user_id of the user you want to view?")
 if key:
   data = requests.get(f'http://api:4000/d/users/{key}').json()
-  data2 = requests.get(f'http://api:4000/d/portfolios_stock/{key}').json()
+  data2 = requests.get(f'http://api:4000/d/myportfolios_stock/{key}').json()
   st.dataframe(data)
   st.dataframe(data2)
 
