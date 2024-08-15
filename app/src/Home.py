@@ -54,7 +54,7 @@ if st.button("Act as Emily, the Novice Investor",
     st.session_state['first_name'] = 'Emily'
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
-    logger.info("Logging in as a novest trader Persona")
+    logger.info("Logging in as a novice trader Persona")
     st.switch_page('pages/00_Reg_User_Home.py')
 
 if st.button('Act as Alex, the Experienced Verified (Influencer) Trader', 
@@ -63,7 +63,7 @@ if st.button('Act as Alex, the Experienced Verified (Influencer) Trader',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'usaid_worker'
     st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/verified_user_home.py')
+    st.switch_page('pages/10_verified_user_home.py')
 
 if st.button('Act as Sarah, the Data Analyst', 
             type = 'primary', 
