@@ -19,7 +19,12 @@ if st.button('View My Portfolio',
              use_container_width=True):
   st.switch_page('pages/01_Portfolio_Info_Viz.py')
 
-if st.button('View World Map Demo', 
+if st.button('View Verified Profiles', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/02_verified_profiles.py') 
+
+if st.button('My Dashboard', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/03_my_dashboard.py')
