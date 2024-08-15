@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('View Individual User Metrics', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_Portfolio_Info_Viz.py')
+  st.switch_page('pages/01_portfolio_info_viz.py')
 
 if st.button('View All User Metrics', 
              type='primary',
