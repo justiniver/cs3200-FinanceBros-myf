@@ -1,4 +1,3 @@
-
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
@@ -154,7 +153,6 @@ def get_portfolios_userID(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-
 # GET /stocks
 # [Emily-2]
 @user.route('/stocks', methods=['GET'])
@@ -167,6 +165,18 @@ def get_all_stocks():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+@user.route('/recStocks', methods=['GET'])
+def recStocks():
+    current_app.logger.info('GET /stocks route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM stock ORDER BY beta LIMIT 5')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 
 # GET /stocks/{id}
 # [Emily-2]
@@ -203,3 +213,38 @@ def follow_user(user_id, following_id):
     response.status_code = 200
     response.mimetype = 'application/json'
     return response
+
+# GET /ticker
+# [Emily-2]
+@user.route('/getTicker', methods=['GET'])
+def get_all_ticker():
+    current_app.logger.info('GET /getTicker route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT ticker FROM stock')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+@user.route('/addStockToPortfolio/<int:portfolio_id>/<string:ticker>', methods=['POST'])
+def addStock(portfolio_id, ticker):
+    current_app.logger.info(f'POST /addStock route for portfolio_id: {portfolio_id} and ticker: {ticker}')
+    cursor = db.get_db().cursor()
+    cursor.execute('INSERT INTO portfolioStocks (portfolio_id, ticker) VALUES (%s, %s)', (portfolio_id, ticker))
+    db.get_db().commit()
+    response = make_response({'message': f'You added {ticker} to portfolio {portfolio_id}!'})
+    response.status_code = 200
+    response.mimetype = 'application/json'
+    return response
+
+@user.route('/getUserPortfolio/<int:user_id>', methods=['GET'])
+def get__user_portfolios(user_id):
+    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT portfolio_id FROM personalPortfolio WHERE user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
