@@ -22,13 +22,13 @@ if st.button('View Portfolio',
 if st.button('View Verified Profile', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/11_ver_public_profile.py')
 
 if st.button('Send Notifications to Followers', 
             type='primary',
             use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/12_send_notifs.py')
 if st.button('Dashboard', 
             type='primary',
             use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/03_my_dashboard.py')
