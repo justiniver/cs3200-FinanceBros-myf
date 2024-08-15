@@ -14,7 +14,7 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('View general user data or search detailed user data.', 
+if st.button('View General User Data, Specific User Data, Ban/Unban Users', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/01_DA_general_user.py')
