@@ -28,3 +28,8 @@ if st.button('My Dashboard',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/03_my_dashboard.py')
+
+if st.button('Financial AI Consultant', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/99_consult_chatbox.py') 
