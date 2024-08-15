@@ -29,7 +29,7 @@ if st.button('My Dashboard',
              use_container_width=True):
   st.switch_page('pages/03_my_dashboard.py')
 
-if st.button('Financial AI Consultant', 
+if st.button('Financial AI Consultant (Novice)', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/97_reg_chatbot.py') 

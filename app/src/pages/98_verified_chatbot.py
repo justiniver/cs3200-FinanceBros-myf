@@ -6,7 +6,7 @@ SideBarLinks()
 
 openai_api_key = st.secrets["openai_api_key"]
 
-st.title("💬 Financial Consultation Chatbot (Novice)")
+st.title("💬 Financial Consultation Chatbot (Verified)")
 st.write("This chatbot is designed to be professional, efficient, and provide high-level analysis.")
 st.caption("🚀 Powered by OpenAI")
 
@@ -31,7 +31,7 @@ Ensure that your responses are professional, efficient, and aligned with the use
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
-        {"role": "system", "content": prompt_regCB},
+        {"role": "system", "content": prompt_verCB},
         {"role": "assistant", "content": "Hello! How can I assist you with your financial queries today?"}]
 
 for msg in st.session_state.messages:
