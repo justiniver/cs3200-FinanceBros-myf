@@ -17,12 +17,12 @@ st.write('### What would you like to do today?')
 if st.button('View My Portfolio', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_portfolio_info_viz.py')
+  st.switch_page('pages/01_Portfolio_Info_Viz.py')
 
 if st.button('View Verified Profiles', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/00_reg_user_view_profile.py') 
+  st.switch_page('pages/00_Reg_User_View_Profile.py') 
 
 if st.button('Check Posted Notifications', 
              type='primary',
