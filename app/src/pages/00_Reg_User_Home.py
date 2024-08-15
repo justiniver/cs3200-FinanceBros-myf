@@ -19,7 +19,7 @@ if st.button('View My Portfolio',
              use_container_width=True):
   st.switch_page('pages/01_Portfolio_Info_Viz.py')
 
-if st.button('View Verified Profiles', 
+if st.button('View Verified Profiles and Follow', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/00_Reg_User_View_Profile.py') 
