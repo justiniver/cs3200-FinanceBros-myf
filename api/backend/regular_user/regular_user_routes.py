@@ -168,6 +168,19 @@ def get_all_stocks():
     the_response.mimetype = 'application/json'
     return the_response
 
+# GET /ticker
+# [Emily-2]
+@user.route('/getTicker', methods=['GET'])
+def get_all_ticker():
+    current_app.logger.info('GET /getTicker route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT ticker FROM stock')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # GET /stocks/{id}
 # [Emily-2]
 @user.route('/stocks/<int:stock_id>', methods=['GET'])
@@ -202,4 +215,44 @@ def follow_user(user_id, following_id):
     response = make_response({'message': f'User {user_id} followed {following_id} successfully'})
     response.status_code = 200
     response.mimetype = 'application/json'
+    return response
+
+# @user.route('/addStockToPortfolio/<int:user_id>/ticker>', methods=['POST'])
+# def addStock(user_id, ticker):
+#     current_app.logger.info(f'POST /addStock route')
+#     cursor = db.get_db().cursor()
+#     cursor.execute('INSERT INTO portfolioStocks (portfolio_id, ticker) VALUES (596999, %s)', (ticker))
+#     response = make_response({'message': f'You added {ticker} to your portfolio!'})
+#     response.status_code = 200
+#     response.mimetype = 'application/json'
+#     return response
+
+@user.route('/addStockToPortfolio/<int:user_id>/<ticker>', methods=['POST'])
+def addStock(user_id, ticker):
+    current_app.logger.info(f'POST /addStock route for user_id: {user_id}, ticker: {ticker}')
+    
+    try:
+        cursor = db.get_db().cursor()
+        # Ensure that ticker is passed as a tuple to avoid SQL errors
+        cursor.execute('INSERT INTO portfolioStocks (portfolio_id, ticker) VALUES (596999, %s)', (ticker,))
+        
+        # Commit the transaction
+        db.get_db().commit()
+
+        # Create a successful response
+        response = make_response({'message': f'You added {ticker} to your portfolio!'})
+        response.status_code = 200
+        response.mimetype = 'application/json'
+        
+    except Exception as e:
+        # Handle any errors that occur during the process
+        current_app.logger.error(f'Error adding stock to portfolio: {e}')
+        response = make_response({'error': 'An error occurred while adding the stock to your portfolio.'})
+        response.status_code = 500
+        response.mimetype = 'application/json'
+    
+    finally:
+        # Close the cursor to free resources
+        cursor.close()
+    
     return response
