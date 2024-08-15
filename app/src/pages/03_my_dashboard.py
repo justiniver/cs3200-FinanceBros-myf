@@ -1,66 +1,46 @@
 import logging
-logger = logging.getLogger(__name__)
+import requests
 import streamlit as st
-from streamlit_extras.app_logo import add_logo
-import numpy as np
-import random
-import time
 from modules.nav import SideBarLinks
 
+# Configure logging
+logger = logging.getLogger(__name__)
+
+# Set page configuration
+st.set_page_config(layout='wide')
+
+# Show appropriate sidebar links for the role of the currently logged-in user
 SideBarLinks()
 
-def response_generator():
-  response = random.choice (
-    [
-      "Hello there! How can I assist you today?",
-      "Hi, human!  Is there anything I can help you with?",
-      "Do you need help?",
-    ]
-  )
-  for word in response.split():
-    yield word + " "
-    time.sleep(0.05)
-#-----------------------------------------------------------------------
+# Title
+st.title("Notifications from Followed User")
 
-st.set_page_config (page_title="Sample Chat Bot", page_icon="🤖")
-add_logo("assets/logo.png", height=400)
+# Hardcoded follower user ID and followed user ID
+follower_id = 9379
+following_id = 1
 
-st.title("Echo Bot 🤖")
+def fetch_notifications(follower_id):
+    try:
+        response = requests.get(
+            f'http://api:4000/u/notifications/{follower_id}'
+        )
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        logger.error(f"Error fetching notifications: {e}")
+        return None
 
-st.markdown("""
-            Currently, this chat bot only returns a random message from the following list:
-            - Hello there! How can I assist you today?
-            - Hi, human!  Is there anything I can help you with?
-            - Do you need help?
-            """
-           )
+# Fetch notifications from the followed user
+notifications_data = fetch_notifications(following_id)
 
+if notifications_data:
+    if notifications_data:  # Check if the data is not empty
+        st.subheader(f"Notifications from User {following_id}")
 
-# Initialize chat history
-if "messages" not in st.session_state:
-  st.session_state.messages = []
-
-# Display chat message from history on app rerun
-for message in st.session_state.messages:
-  with st.chat_message(message["role"]):
-    st.markdown(message["content"])
-
-# React to user input
-if prompt := st.chat_input("What is up?"):
-  # Display user message in chat message container
-  with st.chat_message("user"):
-    st.markdown(prompt)
-  
-  # Add user message to chat history
-  st.session_state.messages.append({"role": "user", "content": prompt})
-
-  response = f"Echo: {prompt}"
-
-  # Display assistant response in chat message container
-  with st.chat_message("assistant"):
-    # st.markdown(response)
-    response = st.write_stream(response_generator())
-
-  # Add assistant response to chat history
-  st.session_state.messages.append({"role": "assistant", "content": response})
+        for notification in notifications_data:
+            st.write(notification['text'])
+    else:
+        st.write(f"No notifications from user {following_id}.")
+else:
+    st.error("Failed to fetch notifications.")
 
