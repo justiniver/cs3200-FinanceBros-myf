@@ -79,7 +79,7 @@ def get_user_by_id(user_id):
 
 # PUT /users/{id}
 # [Alex-3]
-@experiencedTrader.route('/users/<int:user_id>', methods=['PUT'])
+@experiencedTrader.route('/update-users/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     current_app.logger.info(f'PUT /users/{user_id} route')
     data = request.get_json()
