@@ -1,8 +1,15 @@
 from openai import OpenAI
 import streamlit as st
+from dotenv import load_dotenv
+import os
+
+def configure():
+    load_dotenv()
+
+configure()
 
 # Use your API key directly
-openai_api_key = "key"
+openai_api_key = os.getenv('api_key')
 
 st.title("💬 Financial Consultation Chatbot")
 st.caption("🚀 Powered by OpenAI")
