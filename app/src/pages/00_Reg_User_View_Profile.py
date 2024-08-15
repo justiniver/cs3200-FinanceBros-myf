@@ -4,6 +4,7 @@ import streamlit as st
 import requests
 from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
+import json
 
 SideBarLinks()
 
@@ -21,6 +22,6 @@ if key:
     follow = st.button("Follow?")
     if follow:
         follow_id = requests.get(f'http://api:4000/u/users/{key}').json()
-        follow_json = requests.get(f'http://api:4000/u/follow/{7061}/{follow_id}').json()
-        print(follow_json)
-        #st.write(f"You have followed {key} !")
+        user_id_influencer = follow_id[0]['user_id']
+        follow_json = requests.post(f'http://api:4000/u/follow/7061/{user_id_influencer}')
+        st.write(f"You have followed {key}!")
