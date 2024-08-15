@@ -22,7 +22,7 @@ if st.button('View My Portfolio',
 if st.button('View Verified Profiles', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/00_Reg_User_View_Profile.py') 
+  st.switch_page('pages/00_reg_user_view_profile.py') 
 
 if st.button('Check Posted Notifications', 
              type='primary',

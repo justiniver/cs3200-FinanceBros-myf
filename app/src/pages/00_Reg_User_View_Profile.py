@@ -23,6 +23,5 @@ if key:
     if follow:
         follow_id = requests.get(f'http://api:4000/u/users/{key}').json()
         user_id_influencer = follow_id[0]['user_id']
-        # 7061 should be emilys user id
         follow_json = requests.post(f'http://api:4000/u/follow/7061/{user_id_influencer}')
         st.write(f"You have followed {key}!")

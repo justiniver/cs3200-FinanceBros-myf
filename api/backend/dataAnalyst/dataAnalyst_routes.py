@@ -12,7 +12,7 @@ dataAnalyst = Blueprint('dataAnalyst', __name__)
 def get_all_users():
     current_app.logger.info('GET /users route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT dob AS dateOfBirth, ssn, email, f_name AS firstName, l_name AS lastName, password, user_id, username, verified FROM users ORDER BY user_id')
+    cursor.execute('SELECT * FROM users')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -26,7 +26,7 @@ def get_all_users():
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT dob AS dateOfBirth, ssn, email, f_name AS firstName, l_name AS lastName, password, user_id, username, verified FROM users WHERE user_id = %s', (user_id,))
+    cursor.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -169,7 +169,7 @@ def ban_user(user_id):
 def get__user_portfolios_userID(user_id):
     current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT s.ticker AS ticker, s.sharePrice AS sharePrice, s.stockName AS companyName, s.beta AS riskLevel FROM users u JOIN personalPortfolio ps ON u.user_id = ps.user_id JOIN portfolioStocks p ON ps.portfolio_id = p.portfolio_id JOIN stock s ON s.ticker = p.ticker WHERE u.user_id = %s', (user_id,))
+    cursor.execute('SELECT s.ticker, s.sharePrice, s.stockName, s.beta FROM users u JOIN personalPortfolio ps ON u.user_id = ps.user_id JOIN portfolioStocks p ON ps.portfolio_id = p.portfolio_id JOIN stock s ON s.ticker = p.ticker WHERE u.user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
