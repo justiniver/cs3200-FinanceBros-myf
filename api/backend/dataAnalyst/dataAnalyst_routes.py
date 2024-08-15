@@ -40,7 +40,7 @@ def get_user_by_id(user_id):
 def get_all_influencers():
     current_app.logger.info('GET /influencers route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM verifiedPublicProfile')
+    cursor.execute('SELECT * FROM verifiedPrivateProfile')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -109,7 +109,7 @@ def get_all_stocks():
 
 @dataAnalyst.route('/stocks/<ticker>', methods=['GET'])
 def get_stock_by_id(ticker):
-    current_app.logger.info(f'GET /stocks/{ticker} route')
+    current_app.logger.info(f'GET /stock/{ticker} route')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT * FROM stock WHERE ticker = %s', (ticker,))
     theData = cursor.fetchall()
@@ -132,6 +132,9 @@ def get_all_notifications():
     the_response.mimetype = 'application/json'
     return the_response
 
+
+# GET /notifications/{id}
+
 @dataAnalyst.route('/notifications/<notification_id>', methods=['GET'])
 def get_notification_by_id(notification_id):
     current_app.logger.info('GET /notifications/{notification_id} route')
@@ -146,16 +149,18 @@ def get_notification_by_id(notification_id):
 
 # Delete /users/{id}
 
-@dataAnalyst.route('/delete-users/<user_id>', methods=['DELETE'])
-def delete_user(user_id):
+@dataAnalyst.route('/users/<user_id>', methods=['DELETE'])
+def ban_user(user_id):
     current_app.logger.info(f'DELETE /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM users WHERE user_id = %s', (user_id,))
+    cursor.execute('UPDATE users SET banned = TRUE WHERE user_id = %s', (user_id,))
     db.get_db().commit()
-    the_response = make_response({'message': 'User deleted successfully'})
+    
+    the_response = make_response({'message': 'User banned successfully'})
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
 
 
     
