@@ -21,21 +21,6 @@ def get_all_notifications(user_id):
 
 # POST /notifications
 # [Alex-1]
-'''
-@experiencedTrader.route('/create-notifications', methods=['POST'])
-def create_notification(data):
-    current_app.logger.info('POST /notifications route')
-    data = request.get_json()
-    cursor = db.get_db().cursor()
-    cursor.execute(
-        'INSERT INTO notifications (notification_id, text, likes, user_id) '
-        'VALUES (%s, %s, %s)',
-        (data['notification_id'], data['text'], data['likes'], user_id)
-    )
-    db.get_db().commit()
-    return jsonify({'message': 'Notification created successfully'}), 201
-'''
-
 @experiencedTrader.route('/create-notifications', methods=['POST'])
 def create_notification():
     current_app.logger.info('POST /notifications route')
