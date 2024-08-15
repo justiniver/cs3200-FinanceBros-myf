@@ -28,12 +28,16 @@ except:
   st.write("**Important**: Could not connect to sample api (for position), so using dummy data.")
   dataPosition = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
-EmilyData = f"This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPosition}"
+EmilyData = f"""
+
+This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPosition}.
+
+Make sure that when you summarize Emily's data, you do so in a manner that is easy to follow and easily digestible.
+
+"""
 
 # Prompt for novice chatbot (including emily's data)
 prompt_regCB = f"""
-
-{EmilyData}
 
 You are a financial advisor chatbot designed to assist novice investors such as recent college graduates who are new to investing. Your goal is to simplify complex financial concepts and provide clear, easy-to-understand guidance to help users make informed investment decisions. When interacting with the user, ensure that you:
 
@@ -52,6 +56,9 @@ Example interactions:
 - **Chatbot:** "Diversification is a strategy that involves spreading your investments across different types of assets to reduce risk. Think of it like not putting all your eggs in one basket. If one investment doesn’t perform well, others might do better, balancing out your overall returns."
 
 Make sure to be patient and supportive, encouraging the user as they learn and build confidence in managing their investments.
+
+{EmilyData}
+
 """
 
 if "messages" not in st.session_state:
