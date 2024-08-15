@@ -181,7 +181,7 @@ def get_stock_by_ticker(ticker):
     the_response.mimetype = 'application/json'
     return the_response
 
-# GET /notifications
+# GET notifications/
 # [Emily-3]
 @user.route('/notifications', methods=['GET'])
 def get_all_notifications():

@@ -24,10 +24,10 @@ if st.button('View Verified Profiles',
              use_container_width=True):
   st.switch_page('pages/00_Reg_User_View_Profile.py') 
 
-if st.button('My Dashboard', 
+if st.button('Check Posted Notifications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/03_my_dashboard.py')
+  st.switch_page('pages/04_Reg_User_GetNot.py')
 
 if st.button('Financial AI Consultant (Novice)', 
              type='primary',
