@@ -146,6 +146,25 @@ def get_notification_by_id(notification_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+
+# Delete /users/{id}
+
+# @dataAnalyst.route('/users/<user_id>', methods=['DELETE'])
+# def ban_user(user_id):
+#     current_app.logger.info(f'DELETE /users/{user_id} route')
+#     cursor = db.get_db().cursor()
+#     cursor.execute('UPDATE users SET banned = TRUE WHERE user_id = %s', (user_id,))
+#     db.get_db().commit()
+    
+#     the_response = make_response({'message': 'User banned successfully'})
+#     the_response.status_code = 200
+#     the_response.mimetype = 'application/json'
+#     return the_response
+
+
+
+    
+
 @dataAnalyst.route('/myportfolios_stock/<int:user_id>', methods=['GET'])
 def get__user_portfolios_userID(user_id):
     current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
@@ -157,40 +176,30 @@ def get__user_portfolios_userID(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-@dataAnalyst.route('/banUser/<user_id>', methods=['PUT'])
+@dataAnalyst.route('/d/banUser/<int:user_id>', methods=['PUT'])
 def ban_user(user_id):
-    current_app.logger.info(f'PUT /d/users/{user_id} route')
+    current_app.logger.info(f'PUT /d/banUser/{user_id} route')
+    cursor = db.get_db().cursor()
+    
     try:
-        cursor = db.get_db().cursor()
-        current_app.logger.info(f"Attempting to ban user with id: {user_id}")
-        cursor.execute('UPDATE users SET banned = 1 WHERE user_id = %s', (user_id,))
+        # Update the banned status of the user
+        cursor.execute('UPDATE users SET banned = TRUE WHERE id = %s', (user_id,))
+        
+        # Commit the transaction
         db.get_db().commit()
+        
+        # Check if any rows were affected
         if cursor.rowcount == 0:
-            current_app.logger.info(f"No user found with id {user_id}")
             return jsonify({"error": "User not found"}), 404
-        return jsonify({"message": f"User {user_id} has been banned successfully."}), 200   
+        
+        # Return a success response
+        return jsonify({"message": f"User {user_id} has been banned successfully."}), 200
+    
     except Exception as e:
         current_app.logger.error(f"Error banning user {user_id}: {e}")
         db.get_db().rollback()
-        return jsonify({"error": "Failed to ban user"}), 500
+        return jsonify({"error": str(e)}), 500
+    
     finally:
         cursor.close()
 
-@dataAnalyst.route('/unbanUser/<user_id>', methods=['PUT'])
-def unban_user(user_id):
-    current_app.logger.info(f'PUT /d/users/{user_id} route')
-    try:
-        cursor = db.get_db().cursor()
-        current_app.logger.info(f"Attempting to unban user with id: {user_id}")
-        cursor.execute('UPDATE users SET banned = 0 WHERE user_id = %s', (user_id,))
-        db.get_db().commit()
-        if cursor.rowcount == 0:
-            current_app.logger.info(f"No user found with id {user_id}")
-            return jsonify({"error": "User not found"}), 404
-        return jsonify({"message": f"User {user_id} has been unbanned successfully."}), 200
-    except Exception as e:
-        current_app.logger.error(f"Error unbanning user {user_id}: {e}")
-        db.get_db().rollback()
-        return jsonify({"error": "Failed to unban user"}), 500    
-    finally:
-        cursor.close()
