@@ -47,13 +47,25 @@ def get_user_by_id(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+@user.route('/users/<username>', methods=['GET'])
+def get_username_by_id(username):
+    current_app.logger.info(f'GET /users/{username} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT user_id FROM users WHERE username = %s', (username,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
 # GET /influencers
 # [Emily-4]
 @user.route('/influencers', methods=['GET'])
 def get_all_influencers():
     current_app.logger.info('GET /influencers route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM users WHERE verified = True')
+    cursor.execute('SELECT username FROM users WHERE verified = True')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -77,11 +89,12 @@ def create_influencer_notification(influencer_id, message):
 
 # GET /influencers/{id}
 # [Emily-4]
-@user.route('/influencers/<int:influencer_id>', methods=['GET'])
-def get_influencer_by_id(influencer_id):
-    current_app.logger.info(f'GET /influencers/{influencer_id} route')
+@user.route('/influencers/<username>', methods=['GET'])
+def get_influencer_by_username(username):
+    current_app.logger.info(f'GET /influencers/{username} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (influencer_id,))
+    cursor.execute('SELECT verified_username, biography, photo_url\
+                    FROM verifiedPublicProfile WHERE verified_username = %s', (username,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -180,3 +193,20 @@ def get_all_notifications():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+@user.route('/follow/<int:user_id>/<int:following_id>', methods=['POST'])
+def follow_user(user_id, following_id):
+    current_app.logger.info(f'POST /follow/{user_id}/{following_id} route')
+    
+    cursor = db.get_db().cursor()
+    cursor.execute('''
+        INSERT INTO follows (follower_id, followee_id, timestamp)
+        VALUES (%s, %s, CURRENT_TIMESTAMP)
+    ''', (user_id, following_id))
+    
+    db.get_db().commit()
+    
+    response = make_response({'message': f'User {user_id} followed {following_id} successfully'})
+    response.status_code = 200
+    response.mimetype = 'application/json'
+    return response
