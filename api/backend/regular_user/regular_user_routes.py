@@ -200,12 +200,9 @@ def follow_user(user_id, following_id):
     
     cursor = db.get_db().cursor()
     cursor.execute('''
-        INSERT INTO follows (follower_id, followee_id, timestamp)
-        VALUES (%s, %s, CURRENT_TIMESTAMP)
-    ''', (user_id, following_id))
-    
-    db.get_db().commit()
-    
+        INSERT INTO follows (follower_id, followee_id, )
+        VALUES (%s, %s,)
+    ''' (user_id, following_id))
     response = make_response({'message': f'User {user_id} followed {following_id} successfully'})
     response.status_code = 200
     response.mimetype = 'application/json'

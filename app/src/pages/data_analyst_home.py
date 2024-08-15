@@ -28,3 +28,8 @@ if st.button('View All Influencers',
             type='primary',
             use_container_width=True):
   st.switch_page('pages/02_Map_Demo.py')
+
+if st.button('Analyst Chat Box', 
+            type='primary',
+            use_container_width=True):
+  st.switch_page('pages/98_analyst_chatbox.py')
