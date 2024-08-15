@@ -1,15 +1,13 @@
+import os
+from dotenv import load_dotenv
 from openai import OpenAI
 import streamlit as st
-from dotenv import load_dotenv
-import os
 
-def configure():
-    load_dotenv()
+# Load environment variables from .env file
+load_dotenv()
 
-configure()
-
-# Use your API key directly
-openai_api_key = os.getenv('api_key')
+# Retrieve the OpenAI API key from the environment variables
+openai_api_key = os.getenv("OPENAI_KEY")
 
 st.title("💬 Financial Consultation Chatbot")
 st.caption("🚀 Powered by OpenAI")
