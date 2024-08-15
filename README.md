@@ -65,23 +65,19 @@ streamlit --help
 ## Authors
 
 * Bryan Guen  
-  [LinkedIn](https://www.linkedin.com/in/bryan-guen)
-* Ethan Xin  
-  [LinkedIn](https://www.linkedin.com/in/ethan-xin)
+* Ethan Xin 
 * Eitan Berenfeld  
-  [LinkedIn](https://www.linkedin.com/in/eitan-berenfeld)
 * Justin Iverson  
-  [LinkedIn](https://www.linkedin.com/in/justin-iverson-552870159/)
 * Jared Mar  
-  [LinkedIn](https://www.linkedin.com/in/jared-mar)
 * Daniel Klevak  
-  [LinkedIn](https://www.linkedin.com/in/daniel-klevak)
 
 ## Version History
 
+* 0.3
+    * Added AI-powered financial consultation chatbot feature
+    * See [commit change](https://github.com/guenbr/cs3200-FinanceBros/commits/main) or [release history](https://github.com/guenbr/cs3200-FinanceBros/releases)
 * 0.2
     * Various bug fixes and optimizations
-    * See [commit change](https://github.com/guenbr/cs3200-FinanceBros/commits/main) or [release history](https://github.com/guenbr/cs3200-FinanceBros/releases)
 * 0.1
     * Initial Release
 
@@ -91,9 +87,5 @@ This project is licensed?
 
 ## Acknowledgments
 
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+Will add later
 
