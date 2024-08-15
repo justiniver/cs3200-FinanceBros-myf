@@ -22,17 +22,28 @@ def get_all_notifications(user_id):
 # POST /notifications
 # [Alex-1]
 @experiencedTrader.route('/create-notifications', methods=['POST'])
-def create_notification(data):
+def create_notification():
     current_app.logger.info('POST /notifications route')
+    # Get JSON data from the request
     data = request.get_json()
+    # Validate required fields
+    if 'text' not in data or 'user_id' not in data:
+        return jsonify({'error': 'Missing required data'}), 400
     cursor = db.get_db().cursor()
+    # Manually generate the next notification_id
+    cursor.execute('SELECT COALESCE(MAX(notification_id), 0) + 1 FROM notifications')
+    next_notification_id = cursor.fetchone()[0]
+    # Insert the new notification with the manually generated ID
     cursor.execute(
-        'INSERT INTO notifications (notification_id, text, likes, user_id) '
-        'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
-        (data['notification_id'], data['text'], data['likes'], data['user_id'])
+        'INSERT INTO notifications (notification_id, text, user_id) '
+        'VALUES (%s, %s, %s, %s)',
+        (next_notification_id, data['text'], 1)
     )
+    # Commit the transaction
     db.get_db().commit()
     return jsonify({'message': 'Notification created successfully'}), 201
+
+
 
 # POST /notifications/{id}
 # This should be fixed to /notifications from /notifications/{id}

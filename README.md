@@ -1,52 +1,99 @@
 # Summer 2024 CS 3200 Finance Bros Repository
 
-## About
+This repository is for the Finance Bros project, which is part of the Summer 2024 CS 3200 course. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses.
 
-This example project explores some features of Streamlit & Flask to build a comprehensive web app for your project.  You won't necessarily have to use all of the features in this example in your course project 
+## Description
 
-## Current Project Components
+The Finance Bros project is a social media platform for finance enthusiasts that aims to help users make informed financial decisions. By offering detailed performance metrics and strategies from leading financial figures, the platform provides a unique perspective on investment opportunities. Users can stay informed with real-time data and trends, receive personalized recommendations, and follow the activities of influential traders. This platform is designed to guide both novice and experienced investors through the complexities of the financial market.
 
-Currently, there are three major components:
-- Streamlit App (in the `./app` directory)
-- Flask REST api (in the `./api` directory)
-- MySQL setup files (in the `./database-files` directory)
+## Getting Started
 
-## Getting Started for Personal Exploration
-1. Clone the repo to your computer. 
-1. Set up the `.env` file in the `api` folder based on the `.env.template` file.
-1. Start the docker containers. 
+### Dependencies
 
-## Getting Started For Team Project
-1. Each team member should make a GitHub account if you don't already have one.  This should be for the public GitHub, not Khoury's enterprise server. 
-1. One team member should fork this repository. They will be the repo owner. 
-1. Add your team members as Collaborators on the repository.  You can find Collaborators under the Settings tab in the repository.
-1. Each team member needs to accept the invitation to collaborate
-1. Each team member (including the repo owner) needs to clone the repository to their laptops. 
+* Python 3.8 or higher
+* Flask 2.0.1
+* SQLAlchemy 1.4
+* PostgreSQL 13
+* OpenAI API Key
+* Streamlit 1.0.0
+* Windows 10 or macOS 10.15 Catalina
 
-## Handling User Role Access and Control
+### Installing
 
-In most applications, when a user logs in, they assume a particular role.  For instance, when one logs in to a stock price prediction app, they may be a single investor, a portfolio manager, or a corporate executive (of a publicly traded company).  Each of those *roles* will likely present some similar features as well as some different features when compared to the other roles. So, how do you accomplish this in Streamlit?  This is sometimes called Role-based Access Control, or **RBAC** for short. 
+* Clone the repository from GitHub:
 
-The code in this project demonstrates how to implement a simple RBAC system in Streamlit but without actually using user authentication (usernames and passwords).  The Streamlit pages from the original template repo are split up among 3 roles - Political Strategist, USAID Worker, and a System Administrator role (this is used for any sort of system tasks such as re-training ML model, etc.). It also demonstrates how to deploy an ML model. 
+* Set up a virtual environment and activate it:
 
-Wrapping your head around this will take a little time and exploration of this code base.  Some highlights are below. 
+python -m venv venv
+source venv/bin/activate # On Windows use venv\Scripts\activate
 
-### Getting Started with the RBAC 
-1. We need to turn off the standard panel of links on the left side of the Streamlit app. This is done through the `app/src/.streamlit/config.toml` file.  So check that out. We are turning it off so we can control directly what links are shown. 
-1. Then I created a new python module in `app/src/modules/nav.py`.  When you look at the file, you will se that there are functions for basically each page of the application. The `st.sidebar.page_link(...)` adds a single link to the sidebar. We have a separate function for each page so that we can organize the links/pages by role. 
-1. Next, check out the `app/src/Home.py` file. Notice that there are 3 buttons added to the page and when one is clicked, it redirects via `st.switch_page(...)` to that Roles Home page in `app/src/pages`.  But before the redirect, I set a few different variables in the Streamlit `session_state` object to track role, first name of the user, and that the user is now authenticated.  
-1. Notice near the top of `app/src/Home.py` and all other pages, there is a call to `SideBarLinks(...)` from the `app/src/nav.py` module.  This is the function that will use the role set in `session_state` to determine what links to show the user in the sidebar. 
-1. The pages are organized by Role.  Pages that start with a `0` are related to the *Political Strategist* role.  Pages that start with a `1` are related to the *USAID worker* role.  And, pages that start with a `2` are related to The *System Administrator* role. 
+* Install the required dependencies:
 
+pip install -r requirements.txt
 
-## Deploying An ML Model (Totally Optional for CS3200 Project)
+* Set up the PostgreSQL database and run the provided SQL script to create necessary tables:
 
-*Note*: This project only contains the infrastructure for a hypothetical ML model. 
+psql -U yourusername -d yourdatabase -f setup.sql
 
-1. Build, train, and test your ML model in a Jupyter Notebook. 
-1. Once you're happy with the model's performance, convert your Jupyter Notebook code for the ML model to a pure python script.  You can include the `training` and `testing` functionality as well as the `prediction` functionality.  You may or may not need to include data cleaning, though. 
-1. Check out the  `api/backend/ml_models` module.  In this folder, I've put a sample (read *fake*) ML model in `model01.py`.  The `predict` function will be called by the Flask REST API to perform '*real-time*' prediction based on model parameter values that are stored in the database.  **Important**: you would never want to hard code the model parameter weights directly in the prediction function.  tl;dr - take some time to look over the code in `model01.py`.  
-1. The prediction route for the REST API is in `api/backend/customers/customer_routes.py`. Basically, it accepts two URL parameters and passes them to the `prediction` function in the `ml_models` module. The `prediction` route/function packages up the value(s) it receives from the model's `predict` function and send its back to Streamlit as JSON. 
-1. Back in streamlit, check out `app/src/pages/11_Prediction.py`.  Here, I create two numeric input fields.  When the button is pressed, it makes a request to the REST API URL `/c/prediction/.../...` function and passes the values from the two inputs as URL parameters.  It gets back the results from the route and displays them. Nothing fancy here. 
+* Add your OpenAI API key to the Streamlit secrets:
 
- 
+echo "[openai]\nopenai_api_key=your_api_key_here" > .streamlit/secrets.toml
+
+### Executing program
+
+* Start the Flask development server:
+
+flask run
+
+* Access the application by navigating to `http://127.0.0.1:5000/` in your web browser.
+* To execute specific user stories, navigate through the provided routes in the API matrix.
+
+## Help
+
+For common issues:
+* Ensure that PostgreSQL is correctly installed and the database is running.
+* Virtual environment activation issues on Windows can be resolved by running:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+* If you encounter issues with the OpenAI API, ensure that your API key is correctly set in the Streamlit secrets file.
+* Check the Flask and Streamlit documentation for more details on error messages.
+
+flask --help
+streamlit --help
+
+## Authors
+
+* Bryan Guen  
+  [LinkedIn](https://www.linkedin.com/in/bryan-guen)
+* Ethan Xin  
+  [LinkedIn](https://www.linkedin.com/in/ethan-xin)
+* Eitan Berenfeld  
+  [LinkedIn](https://www.linkedin.com/in/eitan-berenfeld)
+* Justin Iverson  
+  [LinkedIn](https://www.linkedin.com/in/justin-iverson-552870159/)
+* Jared Mar  
+  [LinkedIn](https://www.linkedin.com/in/jared-mar)
+* Daniel Klevak  
+  [LinkedIn](https://www.linkedin.com/in/daniel-klevak)
+
+## Version History
+
+* 0.2
+    * Various bug fixes and optimizations
+    * See [commit change](https://github.com/guenbr/cs3200-FinanceBros/commits/main) or [release history](https://github.com/guenbr/cs3200-FinanceBros/releases)
+* 0.1
+    * Initial Release
+
+## License
+
+This project is licensed?
+
+## Acknowledgments
+
+* [awesome-readme](https://github.com/matiassingers/awesome-readme)
+* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+* [dbader](https://github.com/dbader/readme-template)
+* [zenorocha](https://gist.github.com/zenorocha/4526327)
+* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+
