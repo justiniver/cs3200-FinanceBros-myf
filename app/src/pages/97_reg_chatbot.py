@@ -38,7 +38,7 @@ When you summarize Emily's data, do so in a manner that is easy to follow and ea
 
 *IMPORTANT*
 Your response must sanitize the data that are of the JSON data type. 
-Your response is passed through markdown so make sure to avoid unwanted slashes and asterics.
+Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
 
 """
 
