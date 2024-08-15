@@ -63,7 +63,7 @@ if st.button('Act as Alex, the Experienced Verified (Influencer) Trader',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'usaid_worker'
     st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/verified_user_home.py')
+    st.switch_page('pages/10_verified_user_home.py')
 
 if st.button('Act as Sarah, the Data Analyst', 
             type = 'primary', 
