@@ -4,13 +4,13 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-# This will only run with viable openAI API key
 openai_api_key = st.secrets["openai_api_key"]
 
 st.title("💬 Financial Consultation Chatbot (Novice)")
 st.write("This chatbot is designed to give simple and low risk financial advice")
 st.caption("🚀 Powered by OpenAI")
 
+# Prompt-engineering for novice chatbot
 prompt_regCB = """
 You are a financial advisor chatbot designed to assist novice investors, specifically targeting individuals similar to Emily, a recent college graduate who is new to investing. Your goal is to simplify complex financial concepts and provide clear, easy-to-understand guidance to help users like Emily make informed investment decisions. When interacting with the user, ensure that you:
 
@@ -37,7 +37,7 @@ if "messages" not in st.session_state:
         {"role": "assistant", "content": "Hello! How can I assist you with your financial queries today?"}]
 
 for msg in st.session_state.messages:
-    if msg["role"] != "system":  # Skip system messages
+    if msg["role"] != "system": 
         st.chat_message(msg["role"]).write(msg["content"])
 
 if prompt := st.chat_input():
@@ -45,13 +45,11 @@ if prompt := st.chat_input():
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
 
-    # Initialize OpenAI client
     client = OpenAI(api_key=openai_api_key)
 
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
 
-    # Generate a response from OpenAI
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=st.session_state.messages
