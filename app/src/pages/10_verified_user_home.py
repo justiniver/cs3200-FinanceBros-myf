@@ -32,7 +32,7 @@ if st.button('Dashboard',
             type='primary',
             use_container_width=True):
   st.switch_page('pages/03_my_dashboard.py')
-if st.button('Verified Chatbox', 
+if st.button('Financial AI Consultant (Verified)', 
             type='primary',
             use_container_width=True):
   st.switch_page('pages/98_verified_chatbot.py')
