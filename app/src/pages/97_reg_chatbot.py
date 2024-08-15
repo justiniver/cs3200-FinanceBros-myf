@@ -1,5 +1,8 @@
+import logging
+logger = logging.getLogger(__name__)
 from openai import OpenAI
 import streamlit as st
+import requests
 from modules.nav import SideBarLinks
 
 SideBarLinks()
@@ -10,8 +13,28 @@ st.title("💬 Financial Consultation Chatbot (Novice)")
 st.write("This chatbot is designed to give simple and low risk financial advice")
 st.caption("🚀 Powered by OpenAI")
 
-# Prompt for novice chatbot
-prompt_regCB = """
+# Data chatbot is provided (emily specific)
+dataPortfolio = {} 
+try:
+  dataPortfolio = requests.get('http://api:4000/u/myportfolios/9379').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  dataPortfolio = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+dataPosition = {} 
+try:
+  dataPosition = requests.get('http://api:4000/u/portfolios_stock/9379').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  dataPosition = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+EmilyData = f"This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPosition}"
+
+# Prompt for novice chatbot (general)
+prompt_regCB = f"""
+
+{EmilyData}
+
 You are a financial advisor chatbot designed to assist novice investors such as recent college graduates who are new to investing. Your goal is to simplify complex financial concepts and provide clear, easy-to-understand guidance to help users make informed investment decisions. When interacting with the user, ensure that you:
 
 - Use simple language, avoiding jargon and explaining any technical terms that might be necessary.
