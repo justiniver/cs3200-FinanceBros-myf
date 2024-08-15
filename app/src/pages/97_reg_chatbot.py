@@ -1,5 +1,8 @@
 from openai import OpenAI
 import streamlit as st
+from modules.nav import SideBarLinks
+
+SideBarLinks()
 
 # This will only run with viable openAI API key
 openai_api_key = st.secrets["openai_api_key"]
