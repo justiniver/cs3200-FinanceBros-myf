@@ -11,6 +11,7 @@ SideBarLinks()
 openai_api_key = st.secrets["openai_api_key"]
 
 st.title("💬 Financial Consultation Chatbot (Analyst)")
+st.write("This chatbot is designed for analysts to comprehand complex data")
 st.caption("🚀 Powered by OpenAI")
 
 if "messages" not in st.session_state:
