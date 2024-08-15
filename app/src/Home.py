@@ -61,29 +61,17 @@ if st.button('Act as Alex, the Experienced Verified (Influencer) Trader',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-<<<<<<< HEAD
     st.session_state['role'] = 'usaid_worker'
     st.session_state['first_name'] = 'Mohammad'
     st.switch_page('pages/verified_user_home.py')
-=======
-    st.session_state['role'] = 'experienced_verified_user'
-    st.session_state['first_name'] = 'Alex'
-    st.switch_page('pages/10_Experienced_User_Home.py')
->>>>>>> 67c2523064636a9b1bcf7567dfc0d4451cc2d75e
 
 if st.button('Act as Sarah, the Data Analyst', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-<<<<<<< HEAD
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'SysAdmin'
     st.switch_page('pages/data_analyst_home.py')
-=======
-    st.session_state['role'] = 'data_analyst'
-    st.session_state['first_name'] = 'Sarah'
-    st.switch_page('pages/20_Data_Analyst_Home.py')
->>>>>>> 67c2523064636a9b1bcf7567dfc0d4451cc2d75e
 
 
 
