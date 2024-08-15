@@ -136,7 +136,7 @@ def get_all_portfolios():
 def get_my_portfolios(user_id):
     current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT P_L, liquidated_Value, beta FROM personalPortfolio WHERE user_id = %s', (user_id,))
+    cursor.execute('SELECT P_L AS profitLoss, liquidated_Value AS liquidatedValue, beta AS riskLevel FROM personalPortfolio WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -147,7 +147,7 @@ def get_my_portfolios(user_id):
 def get_portfolios_userID(user_id):
     current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT s.ticker, s.sharePrice, s.stockName, s.beta FROM users u JOIN personalPortfolio ps ON u.user_id = ps.user_id JOIN portfolioStocks p ON ps.portfolio_id = p.portfolio_id JOIN stock s ON s.ticker = p.ticker WHERE u.user_id = %s', (user_id,))
+    cursor.execute('SELECT s.ticker AS ticker, s.sharePrice AS sharePrice, s.stockName AS companyName, s.beta AS riskLevel FROM users u JOIN personalPortfolio ps ON u.user_id = ps.user_id JOIN portfolioStocks p ON ps.portfolio_id = p.portfolio_id JOIN stock s ON s.ticker = p.ticker WHERE u.user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -217,42 +217,29 @@ def follow_user(user_id, following_id):
     response.mimetype = 'application/json'
     return response
 
-# @user.route('/addStockToPortfolio/<int:user_id>/ticker>', methods=['POST'])
-# def addStock(user_id, ticker):
-#     current_app.logger.info(f'POST /addStock route')
-#     cursor = db.get_db().cursor()
-#     cursor.execute('INSERT INTO portfolioStocks (portfolio_id, ticker) VALUES (596999, %s)', (ticker))
-#     response = make_response({'message': f'You added {ticker} to your portfolio!'})
-#     response.status_code = 200
-#     response.mimetype = 'application/json'
-#     return response
-
-@user.route('/addStockToPortfolio/<int:user_id>/<ticker>', methods=['POST'])
-def addStock(user_id, ticker):
-    current_app.logger.info(f'POST /addStock route for user_id: {user_id}, ticker: {ticker}')
+@user.route('/addStockToPortfolio/<int:portfolio_id>/<string:ticker>', methods=['POST'])
+def addStock(portfolio_id, ticker):
+    current_app.logger.info(f'POST /addStock route for portfolio_id: {portfolio_id} and ticker: {ticker}')
     
-    try:
-        cursor = db.get_db().cursor()
-        # Ensure that ticker is passed as a tuple to avoid SQL errors
-        cursor.execute('INSERT INTO portfolioStocks (portfolio_id, ticker) VALUES (596999, %s)', (ticker,))
-        
-        # Commit the transaction
-        db.get_db().commit()
-
-        # Create a successful response
-        response = make_response({'message': f'You added {ticker} to your portfolio!'})
-        response.status_code = 200
-        response.mimetype = 'application/json'
-        
-    except Exception as e:
-        # Handle any errors that occur during the process
-        current_app.logger.error(f'Error adding stock to portfolio: {e}')
-        response = make_response({'error': 'An error occurred while adding the stock to your portfolio.'})
-        response.status_code = 500
-        response.mimetype = 'application/json'
+    cursor = db.get_db().cursor()
     
-    finally:
-        # Close the cursor to free resources
-        cursor.close()
+    # Insert the stock ticker into the specified portfolio
+    cursor.execute('INSERT INTO portfolioStocks (portfolio_id, ticker) VALUES (%s, %s)', (portfolio_id, ticker))
+    db.get_db().commit()  # Commit the transaction
     
+    response = make_response({'message': f'You added {ticker} to portfolio {portfolio_id}!'})
+    response.status_code = 200
+    response.mimetype = 'application/json'
     return response
+
+@user.route('/getUserPortfolio/<int:user_id>', methods=['GET'])
+def get__user_portfolios(user_id):
+    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT portfolio_id FROM personalPortfolio WHERE user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
