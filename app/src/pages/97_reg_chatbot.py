@@ -18,19 +18,19 @@ dataPortfolio = {}
 try:
   dataPortfolio = requests.get('http://api:4000/u/myportfolios/9379').json()
 except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  st.write("**Important**: Could not connect to sample api (for portfolio), so using dummy data.")
   dataPortfolio = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 dataPosition = {} 
 try:
   dataPosition = requests.get('http://api:4000/u/portfolios_stock/9379').json()
 except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  st.write("**Important**: Could not connect to sample api (for position), so using dummy data.")
   dataPosition = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 EmilyData = f"This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPosition}"
 
-# Prompt for novice chatbot (general)
+# Prompt for novice chatbot (including emily's data)
 prompt_regCB = f"""
 
 {EmilyData}
