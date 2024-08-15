@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('View My Portfolio', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_Portfolio_Info_Viz.py')
+  st.switch_page('pages/01_portfolio_info_viz.py')
 
 if st.button('View Verified Profiles', 
              type='primary',
@@ -28,3 +28,8 @@ if st.button('My Dashboard',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/03_my_dashboard.py')
+
+if st.button('Financial AI Consultant', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/99_consult_chatbox.py') 

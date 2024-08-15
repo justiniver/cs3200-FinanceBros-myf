@@ -12,7 +12,7 @@ dataAnalyst = Blueprint('dataAnalyst', __name__)
 def get_all_users():
     current_app.logger.info('GET /users route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM users ORDER BY user_id')
+    cursor.execute('SELECT * FROM users')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -26,7 +26,7 @@ def get_all_users():
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM users u JOIN personalPortfolio pp ON pp.user_id = u.user_id WHERE pp.user_id = %s', (user_id,))
+    cursor.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -78,11 +78,11 @@ def get_all_portfolios():
 
 # GET /portfolios/{id}
 
-@dataAnalyst.route('/portfolios/<user_id>', methods=['GET'])
-def get_portfolio_by_id(user_id):
-    current_app.logger.info(f'GET /portfolios/{user_id} route')
+@dataAnalyst.route('/portfolios/<portfolio_id>', methods=['GET'])
+def get_portfolio_by_id(portfolio_id):
+    current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM personalPortfolio WHERE user_id = %s', (user_id,))
+    cursor.execute('SELECT * FROM personalPortfolio WHERE portfolio_id = %s', (portfolio_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -158,15 +158,5 @@ def delete_user(user_id):
     return the_response
 
 
+    
 
-
-@dataAnalyst.route('/portfolios_stock/<int:user_id>', methods=['GET'])
-def get_portfolios_userID(user_id):
-    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT s.ticker, s.sharePrice, s.stockName, s.beta FROM users u JOIN personalPortfolio ps ON u.user_id = ps.user_id JOIN portfolioStocks p ON ps.portfolio_id = p.portfolio_id JOIN stock s ON s.ticker = p.ticker WHERE u.user_id = %s', (user_id,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response

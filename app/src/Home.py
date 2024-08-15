@@ -34,7 +34,7 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('FinacneBros App')
+st.title('FinanceBros App')
 st.write('\n\n')
 st.write('### Greetings! As which user would you like to log in?')
 
@@ -55,15 +55,15 @@ if st.button("Act as Emily, the Novice Investor",
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
     logger.info("Logging in as a novest trader Persona")
-    st.switch_page('pages/00_Reg_User_Home.py')
+    st.switch_page('pages/00_reg_user_home.py')
 
 if st.button('Act as Alex, the Experienced Verified (Influencer) Trader', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/verified_user_home.py')
+    st.session_state['role'] = 'ver_investor_user'
+    st.session_state['first_name'] = 'Alex'
+    st.switch_page('pages/10_verified_user_home.py')
 
 if st.button('Act as Sarah, the Data Analyst', 
             type = 'primary', 

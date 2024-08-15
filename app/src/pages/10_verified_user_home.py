@@ -17,18 +17,18 @@ st.write('### What would you like to do today?')
 if st.button('View Portfolio', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_Portfolio_Info_Viz.py')
+  st.switch_page('pages/01_portfolio_info_viz.py')
 
 if st.button('View Verified Profile', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/11_ver_public_profile.py')
 
 if st.button('Send Notifications to Followers', 
             type='primary',
             use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/12_send_notifs.py')
 if st.button('Dashboard', 
             type='primary',
             use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/03_my_dashboard.py')
