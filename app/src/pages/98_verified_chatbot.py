@@ -4,7 +4,7 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-# We can either just prompt engineer for this one too or we can implement UI such as a risk slider and the chatbot will go from there
+# we can either just prompt engineer for this one too or we can implement UI such as a risk slider and the chatbot will go from there
 
 # This will only run with viable openAI API key
 openai_api_key = st.secrets["openai_api_key"]

@@ -4,7 +4,8 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-# Do we even need a chatbot for analyst? 
+# do we even need a chatbot for analyst? 
+# for now we can keep this as a template
 
 # This will only run with viable openAI API key
 openai_api_key = st.secrets["openai_api_key"]
