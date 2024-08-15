@@ -11,12 +11,14 @@ st.set_page_config(layout='wide')
 # Title
 st.title("Create Notification")
 
+user_id = 1964  # Hardcoded user ID
+
 # Function to create a notification
 def create_notification(text, user_id):
     try:
         # Make a POST request to the correct route
         response = requests.post(
-            'http://api:4000/create-notifications',  # Correct route URL
+            'http://api:4000/v/notifications',  # Correct route URL
             json={'text': text, 'user_id': user_id}  # Pass user_id in the JSON payload
         )
         response.raise_for_status()
@@ -29,7 +31,6 @@ def create_notification(text, user_id):
 with st.form(key='create_form'):
     st.subheader("Create New Notification")
     text = st.text_area("Notification Text")  # Text area for user to input the notification
-    user_id = 1964  # Hardcoded user ID for the logged-in user (example)
     submit_button = st.form_submit_button(label='Create Notification')
 
     if submit_button:

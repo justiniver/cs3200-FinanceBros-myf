@@ -36,8 +36,8 @@ def create_notification():
     # Insert the new notification with the manually generated ID
     cursor.execute(
         'INSERT INTO notifications (notification_id, text, user_id) '
-        'VALUES (%s, %s, %s, %s)',
-        (next_notification_id, data['text'], 1)
+        'VALUES (%s, %s, %s)',
+        (next_notification_id, data['text'], 1964)
     )
     # Commit the transaction
     db.get_db().commit()
