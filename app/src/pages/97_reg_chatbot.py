@@ -13,7 +13,7 @@ st.title("💬 Financial Consultation Chatbot (Novice)")
 st.write("This chatbot is designed to give simple and low risk financial advice")
 st.caption("🚀 Powered by OpenAI")
 
-# Data chatbot is provided (emily specific)
+# Data chatbot is provided (emily specific) (Does Not Work (01_portfolio_info_viz.py also doesn't work for me))
 dataPortfolio = {} 
 try:
   dataPortfolio = requests.get('http://api:4000/u/myportfolios/9379').json()
