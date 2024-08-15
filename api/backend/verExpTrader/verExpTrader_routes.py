@@ -19,31 +19,6 @@ def get_all_notifications(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-# POST /notifications
-# [Alex-1]
-@experiencedTrader.route('/create-notifications', methods=['POST'])
-def create_notification():
-    current_app.logger.info('POST /notifications route')
-    # Get JSON data from the request
-    data = request.get_json()
-    # Validate required fields
-    if 'text' not in data or 'user_id' not in data:
-        return jsonify({'error': 'Missing required data'}), 400
-    cursor = db.get_db().cursor()
-    # Manually generate the next notification_id
-    cursor.execute('SELECT COALESCE(MAX(notification_id), 0) + 1 FROM notifications')
-    next_notification_id = cursor.fetchone()[0]
-    # Insert the new notification with the manually generated ID
-    cursor.execute(
-        'INSERT INTO notifications (notification_id, text, user_id) '
-        'VALUES (%s, %s, %s)',
-        (next_notification_id, data['text'], 1964)
-    )
-    # Commit the transaction
-    db.get_db().commit()
-    return jsonify({'message': 'Notification created successfully'}), 201
-
-
 
 # POST /notifications/{id}
 # This should be fixed to /notifications from /notifications/{id}
@@ -223,3 +198,22 @@ def update_photo(user_id, update_photo):
     except Exception as e:
         current_app.logger.error(f"Error updating bio for user {user_id}: {str(e)}")
         return jsonify({'error': 'Failed to update user bio'}), 500
+    
+
+
+@experiencedTrader.route('/create-notifications/<text>', methods=['POST'])
+def create_notifications(text):
+    current_app.logger.info(f'POST /create-notifications route')
+
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute(
+            'INSERT INTO notifications (text, user_id) VALUES (%s, 1974)', (text,))
+        db.get_db().commit()
+
+        # Return a success message with status code 200
+        return jsonify({'message': 'Notification created successfully'}), 200
+
+    except Exception as e:
+        current_app.logger.error(f"Error creating notification: {str(e)}")
+        return jsonify({'error': 'Failed to create notification'}), 500
