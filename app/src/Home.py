@@ -3,7 +3,7 @@
 # sample application for your project
 ##################################################
 #clear previous cache
-st.cache_data.clear()
+
 
 # Set up basic logging infrastructure
 import logging
