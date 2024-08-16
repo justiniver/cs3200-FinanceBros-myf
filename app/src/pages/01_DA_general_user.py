@@ -59,6 +59,23 @@ if key:
             response.raise_for_status()  # Check if the request was successful
             data = response.json()
             st.dataframe(data)
+        if st.button("Verify User"):
+            van_response = requests.put(f'http://api:4000/d/verify/{key}')
+            van_response.raise_for_status()  # Check if the request was successful
+            st.success(f"User {key} has been verified successfully.")
+            response = requests.get('http://api:4000/d/users')
+            response.raise_for_status()  # Check if the request was successful
+            data = response.json()
+            st.dataframe(data)
+        if st.button("Unverify User"):
+            unverify_response = requests.put(f'http://api:4000/d/unverify/{key}')
+            unverify_response.raise_for_status()  # Check if the request was successful
+            st.success(f"User {key} has been unverified successfully.")
+             # Fetch all users data from the API
+            response = requests.get('http://api:4000/d/users')
+            response.raise_for_status()  # Check if the request was successful
+            data = response.json()
+            st.dataframe(data)
     except requests.exceptions.RequestException as e:
         st.write("User does not exist or an error occurred.")
         st.write(f"Error: {e}")
