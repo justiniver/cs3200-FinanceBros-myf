@@ -26,3 +26,8 @@ except requests.exceptions.RequestException as e:
     st.write(f"Error: {e}")
     data = {"a": {"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 672c1c259298e7d59a833499a0568b946cb4fac7
