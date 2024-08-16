@@ -196,7 +196,7 @@ def get_stock_by_ticker(ticker):
 def get_notifications_for_user(user_id):
     current_app.logger.info(f'GET /notifications/{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notifications WHERE user_id = %s', (user_id,))
+    cursor.execute('SELECT n.user_id AS verifiedUser, n.text AS Post, n.likes, n.timeCreated FROM users u JOIN dashboardFeed df ON u.user_id = df.user_id JOIN dashboardNotifications dn ON dn.dashboard_feed_id = df.dashboard_feed_id JOIN notifications n ON n.notification_id = dn.notification_id WHERE u.user_id = %s', (user_id,))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
