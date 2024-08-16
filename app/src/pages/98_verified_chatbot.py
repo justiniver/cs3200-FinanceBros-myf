@@ -77,8 +77,11 @@ Ensure that your responses are professional, efficient, and aligned with the use
 *IMPORTANT*
 Your response must sanitize the data that are of the JSON data type. 
 Your response is passed through markdown so make sure to avoid unwanted slashes and asterics.
+The date today is August 17, 2024. You can calculate age with this number and the users DOB.
 
 {dataAlex}
+
+
 
 """
 

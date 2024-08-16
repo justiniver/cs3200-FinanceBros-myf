@@ -28,6 +28,17 @@ except:
   st.write("**Important**: Could not connect to sample api (for position), so using dummy data.")
   dataPositions = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
+dataNotis = {}
+try:
+    # Fetch all users data from the API
+    response = requests.get('http://api:4000/u/notifications/7061')
+    response.raise_for_status()  # Check if the request was successful
+    dataNotis = response.json()
+except requests.exceptions.RequestException as e:
+    st.write("**Important**: Could not connect to sample API, so using dummy data.")
+    st.write(f"Error: {e}")
+    dataNotis = {"a": {"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
 ####
 
 dataEmily = f"""
@@ -36,6 +47,8 @@ Emily's data is in the form of JSON. Make sure to not copy paste this data and o
 Rather, you must analyze the JSON objects yourself.
 
 This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPositions}.
+
+These are Emily's current notifications {dataNotis}.
 
 When you summarize Emily's data, do so in a manner that is easy to follow and easily digestible.
 
