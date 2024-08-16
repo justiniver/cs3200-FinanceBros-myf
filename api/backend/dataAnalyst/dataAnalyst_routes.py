@@ -194,3 +194,32 @@ def unban_user(user_id):
         return jsonify({"error": "Failed to unban user"}), 500    
     finally:
         cursor.close()
+
+
+
+# GET user metrics
+
+@dataAnalyst.route('/metrics', methods=['GET'])
+def get_all_user_metrics():
+    current_app.logger.info('GET /metrics route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT u.user_id AS user_id, SSN, f_name AS firstName, l_name AS lastName, password, email, verified, banned, phone, DOB, user_metric_id, dmStartTime, dmEndTime, mStartTime, mEndTime,activeUsers, portfolio_id, beta AS riskLevel, liquidated_Value, P_L AS profitLoss FROM users u JOIN userMetrics um ON u.user_id = um.user_id JOIN personalPortfolio pp ON pp.user_id = u.user_id ORDER BY u.user_id')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+# GET user specific metrics
+
+@dataAnalyst.route('/specificmetrics/<user_id>', methods=['GET'])
+def get_specific_user_metrics(user_id):
+    current_app.logger.info(f'GET /metrics/{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT u.user_id AS user_id, SSN, f_name AS firstName, l_name AS lastName, password, email, verified, banned, phone, DOB, user_metric_id, dmStartTime, dmEndTime, mStartTime, mEndTime,activeUsers, portfolio_id, beta AS riskLevel, liquidated_Value, P_L AS profitLoss FROM users u JOIN userMetrics um ON u.user_id = um.user_id JOIN personalPortfolio pp ON pp.user_id = u.user_id WHERE u.user_id = %s ORDER BY u.user_id', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response

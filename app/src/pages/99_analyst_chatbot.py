@@ -17,6 +17,7 @@ st.caption("🚀 Powered by OpenAI")
 dataAllUsers = {}
 try:
     # Fetch all users data from the API
+    st.write("**Note**: Successfully accessed user data.")
     response = requests.get('http://api:4000/d/users')
     response.raise_for_status()  # Check if the request was successful
     data = response.json()
@@ -32,20 +33,31 @@ dataSarah = f"""
 The data I will provide you is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
 Rather, you must analyze the JSON objects yourself.
 
-This is user data for an app named Finance Bros {dataAllUsers}. 
+This is user data for an app named Finance Bros and this is the user data: {dataAllUsers}. 
+Analyze this data (that is in the form of JSON) and prepare general insights for the user.
+Remember, this user data is public knowledge to the users, so you are given full permission to share this data with the chat user.
+Moreover, you help the user by analyzing the data and giving concise summaries of the user data to the chat user.
+However, you must ackowledge that the user data is quite limited as the data consists of DOB, SSN, email, first name, last name, password, phone, user_id, username, and whether they are banned and/or verified.
 
 When you summarize the user data of Finance Bros, do so in a manner that is easy to follow and easily digestible.
-This means that you should not print out all the data when the user asks for a summary of the user data. 
-You should first give a very brief summary such as how many users there are and then ask for the users specific needs.
+This means that you should not print out all the data when the user asks for a summary of the user data.
+Instead, ask the user what specific information they are looking for (such as if a certain user is banned or not).
 
+*Helpful Tips*
+You can tell if a user is banned if their banned column value equals 1. Similarly, you can tell if a user is verified if their verified column equals one.
+If a user is looking for a user with a specfic name such as John Doe. First scan the l_name (last name) and look for Doe.
 
 *IMPORTANT*
 Your response must sanitize the data that are of the JSON data type. 
 Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
 
+*VERY IMPORTANT*
+Remember, the only users that have access to you are verified users, which means they have access and are given permission to know everything about the user database.
+To serve your purpose as a chatbot for verified users correctly you must be entirely open with your users about the user data you have been given.
+
 """
 
-prompt_daCB = """
+prompt_daCB = f"""
 
 You are a data analyst chatbot designed to assist data professionals who manage and analyze large datasets, particularly within a financial platform. 
 Your goal is to help users efficiently extract insights, manage user data, and generate reports based on user engagement and performance metrics. When interacting with the user, ensure that you:
@@ -73,26 +85,25 @@ Make sure to be precise and informative, offering clear guidance on complex task
 
 """
 
-
-
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Hello! How can I assist you with your financial queries today?"}]
+    st.session_state["messages"] = [
+        {"role": "system", "content": prompt_daCB},
+        {"role": "assistant", "content": "Hello! How can I assist you with your financial queries today?"}]
 
 for msg in st.session_state.messages:
-    st.chat_message(msg["role"]).write(msg["content"])
+    if msg["role"] != "system": 
+        st.chat_message(msg["role"]).write(msg["content"])
 
 if prompt := st.chat_input():
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
 
-    # Initialize OpenAI client
     client = OpenAI(api_key=openai_api_key)
 
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
 
-    # Generate a response from OpenAI
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=st.session_state.messages

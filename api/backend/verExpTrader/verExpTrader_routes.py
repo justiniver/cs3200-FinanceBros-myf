@@ -267,3 +267,18 @@ def delete_written_notifications(notif_id):
     except Exception as e:
         current_app.logger.error(f"Error deleting notification: {str(e)}")
         return jsonify({'error': 'Failed to delete notification'}), 500
+
+@experiencedTrader.route('/update_notifications/<notif_id>/<message>', methods=['PUT'])
+def update_written_notifications(notif_id, message):
+    current_app.logger.info(f'PUT /update_notifications/{notif_id} with message: {message}')
+    
+    try:
+        with db.get_db().cursor() as cursor:
+            cursor.execute('UPDATE notifications SET text = %s WHERE notification_id = %s', (message, notif_id))
+            db.get_db().commit()
+
+        return jsonify({'message': 'Notification updated successfully'}), 200
+
+    except Exception as e:
+        current_app.logger.error(f"Error updating notification: {str(e)}")
+        return jsonify({'error': 'Failed to update notification'}), 500

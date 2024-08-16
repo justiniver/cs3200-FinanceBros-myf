@@ -1,8 +1,6 @@
 ##################################################
 # This is the main/entry-point file for the 
 # sample application for your project
-##################################################
-#clear previous cache
 
 
 # Set up basic logging infrastructure
