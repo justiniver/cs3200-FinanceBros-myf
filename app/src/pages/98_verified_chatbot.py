@@ -37,6 +37,22 @@ except:
 
 ####
 
+dataEmily = f"""
+
+Alex's data is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
+Rather, you must analyze the JSON objects yourself.
+
+This is Alex's portfolio {dataPortfolio}, and these are her positions {dataPositions}.
+
+When you summarize Emily's data, do so in a manner that is easy to follow and easily digestible.
+
+*IMPORTANT*
+Your response must sanitize the data that are of the JSON data type. 
+Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
+
+"""
+
+
 # Prompt for verified influencer chatbot
 prompt_verCB = """
 
