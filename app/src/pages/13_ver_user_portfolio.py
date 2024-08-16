@@ -41,8 +41,8 @@ try:
     stock_names = [item["ticker"] for item in data]
     option = st.selectbox(
         "Select a stock by ticker:",
-        (stock_names),
-        index=0,  
+        options = ["Select a ticker..."] + stock_names, 
+        index = 0,
         placeholder="Select a ticker...",
     )
     
