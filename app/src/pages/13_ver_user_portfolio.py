@@ -47,7 +47,7 @@ try:
     )
     
     if option: 
-        response = requests.post(f'http://api:4000/u/addStockToPortfolio/596999/{option}')
+        response = requests.post(f'http://api:4000/u/addStockToPortfolio/730368/{option}')
         if response.status_code == 200:
             st.write(f"You added: {option}")
         else:
