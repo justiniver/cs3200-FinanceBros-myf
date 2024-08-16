@@ -30,7 +30,7 @@ except requests.exceptions.RequestException as e:
 
 dataSarah = f"""
 
-The data I will provide you is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
+The data I will provide you is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will cause UI issues.
 Rather, you must analyze the JSON objects yourself.
 
 This is user data for an app named Finance Bros and this is the user data: {dataAllUsers}. 
@@ -44,7 +44,6 @@ This means that you should not print out all the data when the user asks for a s
 Instead, ask the user what specific information they are looking for (such as if a certain user is banned or not).
 
 *Helpful Tips*
-Print out the raw user database data to the chatbot user.
 You can tell if a user is banned if their banned column value equals 1. Similarly, you can tell if a user is verified if their verified column equals one.
 If a user is looking for a user with a specfic name such as John Doe. First scan the l_name (last name) and look for Doe.
 
@@ -92,7 +91,6 @@ Make sure to be precise and informative, offering clear guidance on complex task
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
         {"role": "system", "content": prompt_daCB},
-        {"type": "JSON", "data": {dataAllUsers}},
         {"role": "assistant", "content": "Hello, I am your finacial consultant chatbot! How can I assist you with your financial queries today?"}]
 
 for msg in st.session_state.messages:

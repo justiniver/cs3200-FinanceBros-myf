@@ -32,7 +32,7 @@ except:
 
 dataEmily = f"""
 
-Emily's data is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
+Emily's data is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will cause UI issues.
 Rather, you must analyze the JSON objects yourself.
 
 This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPositions}.
