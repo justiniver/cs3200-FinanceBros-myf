@@ -14,11 +14,49 @@ st.caption("🚀 Powered by OpenAI")
 
 #### Data for chatbot (alex specific)
 
+dataPortfolio = {} 
+try:
+  dataPortfolio = requests.get('http://api:4000/v/myportfolios/2942').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  dataPortfolio = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+dataPositions = {} 
+try:
+  dataPositions = requests.get('http://api:4000/u/portfolios_stock/1964').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  dataPositions = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+dataFollowers = {} 
+try:
+  dataFollowers = requests.get('http://api:4000/v/followers/1964').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  dataFollowers = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 ####
 
+dataAlex = f"""
+
+Alex's data is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
+Rather, you must analyze the JSON objects yourself.
+
+This is Alex's portfolio {dataPortfolio}, and these are his positions {dataPositions}.
+
+When you summarize Alex's data, do so in a manner that is easy to follow and easily digestible.
+
+These are Alex's followers {dataFollowers}. 
+
+*IMPORTANT*
+Your response must sanitize the data that are of the JSON data type. 
+Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
+
+"""
+
+
 # Prompt for verified influencer chatbot
-prompt_verCB = """
+prompt_verCB = f"""
 
 You are a financial advisor chatbot designed to assist experienced verified traders that are well-known financial stock influencers with a large following. 
 Your goal is to help these users efficiently manage their public financial persona and provide real-time, accurate updates to their followers. When interacting with the user, ensure that you:
@@ -39,6 +77,8 @@ Ensure that your responses are professional, efficient, and aligned with the use
 *IMPORTANT*
 Your response must sanitize the data that are of the JSON data type. 
 Your response is passed through markdown so make sure to avoid unwanted slashes and asterics.
+
+{dataAlex}
 
 """
 
