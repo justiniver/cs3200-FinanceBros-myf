@@ -213,6 +213,13 @@ INSERT INTO stock (ticker, sharePrice, stockName, beta) VALUES ('GG', '671.82', 
 INSERT INTO stock (ticker, sharePrice, stockName, beta) VALUES ('MSBF', '474.51', 'MSB Financial Corp.', '2.1107877');
 INSERT INTO stock (ticker, sharePrice, stockName, beta) VALUES ('TCBI', '276.89', 'Texas Capital Bancshares, Inc.', '0.328632');
 INSERT INTO stock (ticker, sharePrice, stockName, beta) VALUES ('SGH', '695.32', 'SMART Global Holdings, Inc.', '2.0359705');
+
+
+INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('2123423', 'Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum.', '32', '2024-06-09 13:47:18', '2024-06-09 13:47:41', '2024-07-03 12:52:20', '46437', '1964');
+INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('34243', 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.', '4', '2024-01-18 19:32:46', '2024-01-18 19:33:09', '2024-02-25 11:42:21', '52139', '1964');
+INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('43124', 'Curabitur convallis.', '19', '2024-06-21 12:11:11', '2024-06-21 12:11:37', '2024-03-19 17:21:27', '70827', '1964');
+INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('32423324', 'Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum.', '32', '2024-06-09 13:47:18', '2024-06-09 13:47:41', '2024-07-03 12:52:20', '46437', '1964');
+
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('414', 'Maecenas pulvinar lobortis est. Phasellus sit amet erat.', '25', '2024-05-29 05:21:41', '2024-05-29 05:21:57', '2024-02-06 16:11:34', '19574', '6235');
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('439', 'Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum.', '32', '2024-06-09 13:47:18', '2024-06-09 13:47:41', '2024-07-03 12:52:20', '46437', '7767');
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('200', 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.', '4', '2024-01-18 19:32:46', '2024-01-18 19:33:09', '2024-02-25 11:42:21', '52139', '9580');
