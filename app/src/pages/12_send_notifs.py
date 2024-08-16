@@ -1,44 +1,30 @@
 import logging
-import requests
-import streamlit as st
-
-# Configure logging
 logger = logging.getLogger(__name__)
+import streamlit as st
+import requests
+from streamlit_extras.app_logo import add_logo
+from modules.nav import SideBarLinks
+import json
 
-# Set page configuration
-st.set_page_config(layout='wide')
+SideBarLinks()
 
-# Title
-st.title("Create Notification")
+# st.write(f"### Your written Notifications:")
+# notificationTable = requests.get('http://api:4000/v/get_notifications/1964').json()
+# st.dataframe(notificationTable)
 
-user_id = 1964  # Hardcoded user ID
+st.subheader("Create New Notification")
+text = st.text_input("Create Notification Text")  # Text area for user to input the notification
+if text:
+   response = requests.post(f"http://api:4000/v/create-notifications/{text}")
+user_written_notifs =  requests.get('http://api:4000/v/get_notifications/1964').json()
+st.dataframe(user_written_notifs) 
 
-# Function to create a notification
-def create_notification(text, user_id):
-    try:
-        # Make a POST request to the correct route
-        response = requests.post(
-            'http://api:4000/v/notifications',  # Correct route URL
-            json={'text': text, 'user_id': user_id}  # Pass user_id in the JSON payload
-        )
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestException as e:
-        logger.error(f"Error creating notification: {e}")
-        return None
+st.subheader("Delete Notification")
+text_id = st.text_input("Enter Notification ID")  # Text area for user to input the notification
+if text_id:
+    user_delete_notifs = requests.delete(f'http://api:4000/v/delete_notifications/{text_id}').json()
+    st.write(user_delete_notifs)
+user_written_notifs =  requests.get('http://api:4000/v/get_notifications/1964').json()
+st.dataframe(user_written_notifs) 
 
-# Form to create a notification
-with st.form(key='create_form'):
-    st.subheader("Create New Notification")
-    text = st.text_area("Notification Text")  # Text area for user to input the notification
-    submit_button = st.form_submit_button(label='Create Notification')
 
-    if submit_button:
-        if text:
-            result = create_notification(text, user_id)
-            if result:
-                st.success(result.get('message', 'Notification created successfully.'))
-            else:
-                st.error("Failed to create notification.")
-        else:
-            st.error("Please fill in the notification text.")
