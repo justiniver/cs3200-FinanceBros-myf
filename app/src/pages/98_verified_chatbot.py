@@ -37,14 +37,16 @@ except:
 
 ####
 
-dataEmily = f"""
+dataAlex = f"""
 
 Alex's data is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
 Rather, you must analyze the JSON objects yourself.
 
-This is Alex's portfolio {dataPortfolio}, and these are her positions {dataPositions}.
+This is Alex's portfolio {dataPortfolio}, and these are his positions {dataPositions}.
 
-When you summarize Emily's data, do so in a manner that is easy to follow and easily digestible.
+When you summarize Alex's data, do so in a manner that is easy to follow and easily digestible.
+
+These are Alex's followers {dataFollowers}. 
 
 *IMPORTANT*
 Your response must sanitize the data that are of the JSON data type. 
@@ -54,7 +56,7 @@ Your response is passed through markdown so make sure to avoid unwanted slashes 
 
 
 # Prompt for verified influencer chatbot
-prompt_verCB = """
+prompt_verCB = f"""
 
 You are a financial advisor chatbot designed to assist experienced verified traders that are well-known financial stock influencers with a large following. 
 Your goal is to help these users efficiently manage their public financial persona and provide real-time, accurate updates to their followers. When interacting with the user, ensure that you:
@@ -75,6 +77,8 @@ Ensure that your responses are professional, efficient, and aligned with the use
 *IMPORTANT*
 Your response must sanitize the data that are of the JSON data type. 
 Your response is passed through markdown so make sure to avoid unwanted slashes and asterics.
+
+{dataAlex}
 
 """
 
