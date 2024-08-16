@@ -24,7 +24,7 @@ if st.button('View All User Metrics',
              use_container_width=True):
   st.switch_page('pages/03_all_user_metrics.py')
 
-if st.button('View All Influencers', 
+if st.button('View General Verified User Data, Specific User Data, Ban/Unban Users', 
             type='primary',
             use_container_width=True):
   st.switch_page('pages/03_show_all_verified_users.py')
