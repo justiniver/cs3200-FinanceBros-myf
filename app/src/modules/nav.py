@@ -8,6 +8,7 @@ def HomeNav():
 
 def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("Home.py", label="Home", icon='🏠')
 
 
 #### ------------------------ System Admin Role ------------------------
