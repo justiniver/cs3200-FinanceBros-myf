@@ -4,12 +4,14 @@ import streamlit as st
 
 #### ------------------------ General ------------------------
 def HomeNav():
-   st.sidebar.page_link("Home.py", label="Home", icon='🏠')
+    st.sidebar.page_link("Home.py", label="Home", icon='🏠')
+    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
     st.sidebar.page_link("Home.py", label="Home", icon='🏠')
+    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+
 
 
 #### ------------------------ System Admin Role ------------------------
@@ -43,6 +45,7 @@ def SideBarLinks(show_home=False):
             AdminPageNav()
 
     # Always show the About page at the bottom of the list of links
+    
     AboutPageNav()
 
     if st.session_state["authenticated"]:
