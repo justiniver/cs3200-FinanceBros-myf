@@ -203,12 +203,12 @@ def update_photo(user_id, update_photo):
 
 @experiencedTrader.route('/create-notifications/<text>', methods=['POST'])
 def create_notifications(text):
-    current_app.logger.info(f'POST /create-notifications route')
+    current_app.logger.info(f'POST /create-notifications{text} route')
 
     try:
         cursor = db.get_db().cursor()
         cursor.execute(
-            'INSERT INTO notifications (text, user_id) VALUES (%s, 1974)', (text,))
+            'INSERT INTO notifications(text, user_id) VALUES (%s, 1964)', (text,))
         db.get_db().commit()
 
         # Return a success message with status code 200
@@ -217,3 +217,16 @@ def create_notifications(text):
     except Exception as e:
         current_app.logger.error(f"Error creating notification: {str(e)}")
         return jsonify({'error': 'Failed to create notification'}), 500
+    
+@experiencedTrader.route('/get_notifications/<user_id>', methods=['GET'])
+def get_all_written_notifications(user_id):
+    current_app.logger.info('GET /notifications{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT text, likes, timeCreated\
+                   FROM notifications\
+                   WHERE user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
