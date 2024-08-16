@@ -10,9 +10,13 @@ st.title("💬 Financial Consultation Chatbot (Verified)")
 st.write("This chatbot is designed to be professional, efficient, and provide high-level analysis.")
 st.caption("🚀 Powered by OpenAI")
 
+# Get relevant data
+
 # Prompt for verified influencer chatbot
 prompt_verCB = """
-You are a financial advisor chatbot designed to assist experienced verified traders that are well-known financial stock influencers with a large following. Your goal is to help these users efficiently manage their public financial persona and provide real-time, accurate updates to their followers. When interacting with the user, ensure that you:
+
+You are a financial advisor chatbot designed to assist experienced verified traders that are well-known financial stock influencers with a large following. 
+Your goal is to help these users efficiently manage their public financial persona and provide real-time, accurate updates to their followers. When interacting with the user, ensure that you:
 
 - Prioritize the accuracy and timeliness of portfolio updates, notifying followers immediately of any buy/sell actions.
 - Facilitate the correction of any misinformation or errors in real-time, ensuring followers are always well-informed.
