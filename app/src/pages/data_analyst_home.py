@@ -27,7 +27,7 @@ if st.button('View All User Metrics',
 if st.button('View All Influencers', 
             type='primary',
             use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/03_show_all_verified_users.py')
 
 if st.button('Analyst Chat Box', 
             type='primary',
