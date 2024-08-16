@@ -86,7 +86,7 @@ Your response is passed through markdown so make sure to avoid unwanted slashes 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
         {"role": "system", "content": prompt_verCB},
-        {"role": "assistant", "content": "Hello my name is Fark Montenot! How can I assist you with your financial queries today?"}]
+        {"role": "assistant", "content": "Hello, I am your finacial consultant chatbot! How can I assist you with your financial queries today?"}]
 
 for msg in st.session_state.messages:
     if msg["role"] != "system": 
