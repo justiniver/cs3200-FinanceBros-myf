@@ -12,7 +12,8 @@ st.title("💬 Financial Consultation Chatbot (Novice)")
 st.write("This chatbot is designed to give simple and low risk financial advice")
 st.caption("🚀 Powered by OpenAI")
 
-# Data chatbot is provided (emily specific)
+#### Data for chatbot (emily specific)
+
 dataPortfolio = {} 
 try:
   dataPortfolio = requests.get('http://api:4000/u/myportfolios/9379').json()
@@ -26,6 +27,8 @@ try:
 except:
   st.write("**Important**: Could not connect to sample api (for position), so using dummy data.")
   dataPosition = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+####
 
 EmilyData = f"""
 
