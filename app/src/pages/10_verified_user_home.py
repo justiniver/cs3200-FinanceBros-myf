@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('View Portfolio', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_Portfolio_Info_Viz.py')
+  st.switch_page('pages/13_ver_user_portfolio.py')
 
 if st.button('View Verified Profile', 
              type='primary',

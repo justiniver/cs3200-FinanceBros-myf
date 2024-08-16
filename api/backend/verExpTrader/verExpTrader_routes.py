@@ -90,8 +90,30 @@ def get_all_stocks_in_portfolio(portoflio_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-# POST /users
+# GET /myportfolios
+@experiencedTrader.route('/myportfolios/<int:user_id>', methods=['GET'])
+def get_my_portfolios(user_id):
+    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT P_L, liquidated_Value, beta FROM personalPortfolio WHERE user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
+@experiencedTrader.route('/portfolios_stock/<int:user_id>', methods=['GET'])
+def get_portfolios_userID(user_id):
+    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT s.ticker, s.sharePrice, s.stockName, s.beta FROM users u JOIN personalPortfolio ps ON u.user_id = ps.user_id JOIN portfolioStocks p ON ps.portfolio_id = p.portfolio_id JOIN stock s ON s.ticker = p.ticker WHERE u.user_id = %s', (user_id,))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# POST /users
 @experiencedTrader.route('/follow', methods=['POST'])
 def follow_user():
     data = request.json
@@ -222,7 +244,7 @@ def create_notifications(text):
 def get_all_written_notifications(user_id):
     current_app.logger.info('GET /notifications{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT text, likes, timeCreated\
+    cursor.execute('SELECT *\
                    FROM notifications\
                    WHERE user_id = %s', (user_id,))
     theData = cursor.fetchall()
@@ -230,3 +252,18 @@ def get_all_written_notifications(user_id):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+@experiencedTrader.route('/delete_notifications/<notif_id>', methods=['DELETE'])
+def delete_written_notifications(notif_id):
+    current_app.logger.info(f'DELETE /notifications/{notif_id} route')
+    
+    try:
+        with db.get_db().cursor() as cursor:
+            cursor.execute('DELETE FROM notifications WHERE notification_id = %s', (notif_id,))
+            db.get_db().commit()
+
+        return jsonify({'message': 'Notification deleted successfully'}), 200
+
+    except Exception as e:
+        current_app.logger.error(f"Error deleting notification: {str(e)}")
+        return jsonify({'error': 'Failed to delete notification'}), 500
