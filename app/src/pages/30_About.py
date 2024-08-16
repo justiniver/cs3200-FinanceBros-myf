@@ -20,7 +20,7 @@ st.markdown (
     confidence and precision. Finance Bros are not financial advisors.
 
     The goal of this demo is to provide how certain users will interact with our software data!
-
     Stay tuned for more information and features to come!
+
     """
         )
