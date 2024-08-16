@@ -15,6 +15,7 @@ st.write("Here are all currently tracked metrics for each user")
 data = {} 
 try:
   data = requests.get('http://api:4000/d/metrics').json()
+  st.dataframe(data)
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}

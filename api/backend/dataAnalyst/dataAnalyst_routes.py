@@ -203,7 +203,7 @@ def unban_user(user_id):
 def get_all_user_metrics():
     current_app.logger.info('GET /metrics route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT *FROM userMetrics um JOIN notifications n ON um.user_id = n.user_id JOIN follows f ON f.following_id = n.user_id JOIN personalPortfolio pp ON pp.user_id = n.user_id  ORDER BY likes, timeCreated')
+    cursor.execute('SELECT * FROM users u JOIN userMetrics um ON u.user_id = um.user_id JOIN personalPortfolio pp ON pp.user_id = n.user_id ORDER BY u.user_id')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
