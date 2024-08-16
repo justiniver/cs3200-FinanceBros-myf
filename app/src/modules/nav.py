@@ -3,8 +3,9 @@
 import streamlit as st
 
 #### ------------------------ General ------------------------
-def HomeNav():
-    st.sidebar.page_link("Home.py", label="Home", icon='🏠')
+#def HomeNav():
+ #   st.sidebar.page_link("Home.py", label="Home", icon='🏠')
+
 
 def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
@@ -36,8 +37,6 @@ def SideBarLinks(show_home=False):
 
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
-
-
         
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state['role'] == 'administrator':
