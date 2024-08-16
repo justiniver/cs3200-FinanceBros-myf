@@ -47,7 +47,6 @@ Emily's data is in the form of JSON. Make sure to not copy paste this data and o
 Rather, you must analyze the JSON objects yourself.
 
 This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPositions}.
-
 These are Emily's current notifications {dataNotis}.
 
 When you summarize Emily's data, do so in a manner that is easy to follow and easily digestible.

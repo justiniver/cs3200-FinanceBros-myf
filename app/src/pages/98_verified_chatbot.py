@@ -35,6 +35,17 @@ except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   dataFollowers = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
+dataNotis = {}
+try:
+    # Fetch all users data from the API
+    response = requests.get('http://api:4000/v/user_notifications/1964')
+    response.raise_for_status()  # Check if the request was successful
+    dataNotis = response.json()
+except requests.exceptions.RequestException as e:
+    st.write("**Important**: Could not connect to sample API, so using dummy data.")
+    st.write(f"Error: {e}")
+    dataNotis = {"a": {"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
 ####
 
 dataAlex = f"""
@@ -43,10 +54,12 @@ Alex's data is in the form of JSON. Make sure to not copy paste this data and ou
 Rather, you must analyze the JSON objects yourself.
 
 This is Alex's portfolio {dataPortfolio}, and these are his positions {dataPositions}.
+These are Alex's followers {dataFollowers}, and these are Alex's current notifications {dataNotis}.
 
 When you summarize Alex's data, do so in a manner that is easy to follow and easily digestible.
-
-These are Alex's followers {dataFollowers}. 
+If Alex asks for his notifications provide the notification data. 
+However, you must make it clear that you cannot make changes on your end regarding data. 
+Instead, you can help him navigate and understand the data better.
 
 *IMPORTANT*
 Your response must sanitize the data that are of the JSON data type. 
