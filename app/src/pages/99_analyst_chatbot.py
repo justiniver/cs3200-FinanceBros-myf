@@ -1,5 +1,7 @@
+import logging
 from openai import OpenAI
 import streamlit as st
+import requests
 from modules.nav import SideBarLinks
 
 SideBarLinks()
@@ -12,9 +14,36 @@ st.write("This chatbot is designed for analysts to comprehand complex data")
 st.caption("🚀 Powered by OpenAI")
 
 #### Data for chatbot (sarah specific)
-
+dataAllUsers = {}
+try:
+    # Fetch all users data from the API
+    response = requests.get('http://api:4000/d/users')
+    response.raise_for_status()  # Check if the request was successful
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    st.write("**Important**: Could not connect to sample API, so using dummy data.")
+    st.write(f"Error: {e}")
+    data = {"a": {"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 ####
+
+dataSarah = f"""
+
+The data I will provide you is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
+Rather, you must analyze the JSON objects yourself.
+
+This is user data for an app named Finance Bros {dataAllUsers}. 
+
+When you summarize the user data of Finance Bros, do so in a manner that is easy to follow and easily digestible.
+This means that you should not print out all the data when the user asks for a summary of the user data. 
+You should first give a very brief summary such as how many users there are and then ask for the users specific needs.
+
+
+*IMPORTANT*
+Your response must sanitize the data that are of the JSON data type. 
+Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
+
+"""
 
 prompt_daCB = """
 
@@ -39,6 +68,8 @@ Example interactions:
 - **Chatbot:** "To ban a user, you'll need to update their status in the database. I can generate the SQL update statement for you, or guide you through the process if you need more details."
 
 Make sure to be precise and informative, offering clear guidance on complex tasks while ensuring that the user understands the processes involved.
+
+{dataSarah}
 
 """
 

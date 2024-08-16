@@ -30,7 +30,7 @@ except:
 
 ####
 
-EmilyData = f"""
+dataEmily = f"""
 
 Emily's data is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
 Rather, you must analyze the JSON objects yourself.
@@ -71,7 +71,7 @@ Think of it like not putting all your eggs in one basket. If one investment does
 
 Make sure to be patient and supportive, encouraging the user as they learn and build confidence in managing their investments.
 
-{EmilyData}
+{dataEmily}
 
 """
 
