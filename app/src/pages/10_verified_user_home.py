@@ -32,6 +32,12 @@ if st.button('Dashboard',
             type='primary',
             use_container_width=True):
   st.switch_page('pages/03_my_dashboard.py')
+
+if st.button('See Notifications From Following', 
+            type='primary',
+            use_container_width=True):
+  st.switch_page('pages/02_verified_user_see_notifications.py')
+
 if st.button('Financial AI Consultant (Verified)', 
             type='primary',
             use_container_width=True):

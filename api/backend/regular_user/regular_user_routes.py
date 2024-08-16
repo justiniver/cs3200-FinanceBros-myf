@@ -69,7 +69,7 @@ def get_all_influencers():
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
-    return the_response
+    return the_response 
 
 # POST /influencers/{id}/notifications
 # [Emily-4]
