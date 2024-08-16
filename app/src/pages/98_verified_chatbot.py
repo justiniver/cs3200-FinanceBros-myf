@@ -14,6 +14,26 @@ st.caption("🚀 Powered by OpenAI")
 
 #### Data for chatbot (alex specific)
 
+dataPortfolio = {} 
+try:
+  dataPortfolio = requests.get('http://api:4000/v/myportfolios/2942').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  dataPortfolio = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+dataPositions = {} 
+try:
+  dataPositions = requests.get('http://api:4000/u/portfolios_stock/1964').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  dataPositions = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+dataFollowers = {} 
+try:
+  dataFollowers = requests.get('http://api:4000/v/followers/1964').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  dataFollowers = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 ####
 
