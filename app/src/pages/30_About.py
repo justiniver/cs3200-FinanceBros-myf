@@ -20,13 +20,7 @@ st.markdown (
     confidence and precision. Finance Bros are not financial advisors.
 
     The goal of this demo is to provide how certain users will interact with our software data!
+
     Stay tuned for more information and features to come!
-
-    Disclaimer: The information provided on this platform is for informational purposes only 
-    and should not be construed as financial advice. We are not licensed financial advisors. 
-    Any investment decisions or financial strategies discussed here should be considered with caution 
-    and consulted with a qualified financial advisor. Your financial situation is unique, 
-    and it is important to seek personalized advice before making any financial decisions.
-
     """
         )

@@ -6,11 +6,11 @@ experiencedTrader = Blueprint('experiencedTrader', __name__)
 
 # GET /notifications
 # [Alex-1]
-@experiencedTrader.route('/notifications/<user_id>', methods=['GET'])
-def get_all_notifications(user_id):
+@experiencedTrader.route('/user_notifications/<user_id>', methods=['GET'])
+def get_user_notifications(user_id):
     current_app.logger.info('GET /notifications{user_id} route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT *\
+    cursor.execute('SELECT DISTINCT n.user_id, n.timeCreated, n.text, n.likes\
                    FROM userNotifications un join notifications n on un.user_id = n.user_id\
                    WHERE un.user_id = %s', (user_id,))
     theData = cursor.fetchall()
@@ -19,6 +19,15 @@ def get_all_notifications(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+@experiencedTrader.route('/follow/<int:user_id>/<int:following_id>', methods=['POST'])
+def follow_user_verified(user_id, following_id):
+    current_app.logger.info(f'POST /follow/{user_id}/{following_id} route')
+    cursor = db.get_db().cursor()
+    cursor.execute('INSERT INTO follows (follower_id, following_id) VALUES (%s, %s)', (user_id, following_id))
+    response = make_response({'message': f'User {user_id} followed {following_id} successfully'})
+    response.status_code = 200
+    response.mimetype = 'application/json'
+    return response
 
 # POST /notifications/{id}
 # This should be fixed to /notifications from /notifications/{id}
@@ -282,3 +291,14 @@ def update_written_notifications(notif_id, message):
     except Exception as e:
         current_app.logger.error(f"Error updating notification: {str(e)}")
         return jsonify({'error': 'Failed to update notification'}), 500
+    
+@experiencedTrader.route('/recstocks', methods=['GET'])
+def get_all_stocks():
+    current_app.logger.info('GET /stocks route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM stock')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response

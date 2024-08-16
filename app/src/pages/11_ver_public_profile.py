@@ -11,7 +11,7 @@ st.set_page_config(layout = 'wide')
 SideBarLinks()
 
 st.title("Welcome to your profile Alex!")
-st.write("Here are your followers:")
+st.write("Here's your followers:")
 data = {} 
 try:
   data = requests.get('http://api:4000/v/followers/1964').json()

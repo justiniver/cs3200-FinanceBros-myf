@@ -29,7 +29,7 @@ try:
         if follow:
             follow_id = requests.get(f'http://api:4000/u/users/{option}').json()
             user_id_influencer = follow_id[0]['user_id']
-            follow_json = requests.post(f'http://api:4000/u/follow/7061/{user_id_influencer}')
+            follow_json = requests.post(f'http://api:4000/u/follow/9379/{user_id_influencer}')
             st.write(f"You have followed {option}!")
 except Exception as e:
     st.write("Choose an Influencer...")

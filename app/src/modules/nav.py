@@ -3,9 +3,9 @@
 import streamlit as st
 
 #### ------------------------ General ------------------------
-def HomeNav():
-    st.sidebar.page_link("Home.py", label="Home", icon='🏠')
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+#def HomeNav():
+ #   st.sidebar.page_link("Home.py", label="Home", icon='🏠')
+  #  st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 
 def AboutPageNav():
@@ -32,11 +32,9 @@ def SideBarLinks(show_home=False):
     if 'authenticated' not in st.session_state:
         st.session_state.authenticated = False
         st.switch_page('Home.py')
-        
-    if show_home:
-        # Show the Home page link (the landing page)
-        HomeNav()
-
+    
+    AboutPageNav()
+    
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
         
@@ -46,7 +44,7 @@ def SideBarLinks(show_home=False):
 
     # Always show the About page at the bottom of the list of links
     
-    AboutPageNav()
+    #AboutPageNav()
 
     if st.session_state["authenticated"]:
         # Always show a logout button if there is a logged in user
