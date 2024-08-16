@@ -10,7 +10,10 @@ st.title("💬 Financial Consultation Chatbot (Verified)")
 st.write("This chatbot is designed to be professional, efficient, and provide high-level analysis.")
 st.caption("🚀 Powered by OpenAI")
 
-# Get relevant data
+#### Data for chatbot (alex specific)
+
+
+####
 
 # Prompt for verified influencer chatbot
 prompt_verCB = """

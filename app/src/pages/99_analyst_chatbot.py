@@ -11,7 +11,10 @@ st.title("💬 Financial Consultation Chatbot (Analyst)")
 st.write("This chatbot is designed for analysts to comprehand complex data")
 st.caption("🚀 Powered by OpenAI")
 
-# Get relevant data 
+#### Data for chatbot (sarah specific)
+
+
+####
 
 prompt_daCB = """
 
