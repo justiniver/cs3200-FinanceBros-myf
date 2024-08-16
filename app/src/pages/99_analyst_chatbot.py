@@ -39,7 +39,7 @@ This means that you should not print out all the data when the user asks for a s
 Instead, ask the user what specific information they are looking for (such as if a certain user is banned or not).
 
 *Helpful Tips*
-You can tell if a user is banned if their banned column value equals 1. Similarly, you can tell if a user is verified if their verified column equals one.
+You can tell if a user is banned if their banned column value equals 1. Similarly, you can tell if a user is verified if their verified column equals 1.
 If a user is looking for a user with a specfic name such as John Doe. First scan the l_name (last name) and look for Doe.
 
 *IMPORTANT*
