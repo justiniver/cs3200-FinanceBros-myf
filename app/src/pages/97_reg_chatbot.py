@@ -21,12 +21,12 @@ except:
   st.write("**Important**: Could not connect to sample api (for portfolio), so using dummy data.")
   dataPortfolio = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
-dataPosition = {} 
+dataPositions = {} 
 try:
-  dataPosition = requests.get('http://api:4000/u/portfolios_stock/9379').json()
+  dataPositions = requests.get('http://api:4000/u/portfolios_stock/9379').json()
 except:
   st.write("**Important**: Could not connect to sample api (for position), so using dummy data.")
-  dataPosition = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+  dataPositions = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 ####
 
@@ -35,7 +35,7 @@ dataEmily = f"""
 Emily's data is in the form of JSON. Make sure to not copy paste this data and output it to the user as this will not be cause UI issues.
 Rather, you must analyze the JSON objects yourself.
 
-This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPosition}.
+This is Emily's portfolio {dataPortfolio}, and these are her positions {dataPositions}.
 
 When you summarize Emily's data, do so in a manner that is easy to follow and easily digestible.
 
