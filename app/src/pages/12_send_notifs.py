@@ -27,4 +27,12 @@ if text_id:
 user_written_notifs =  requests.get('http://api:4000/v/get_notifications/1964').json()
 st.dataframe(user_written_notifs) 
 
+st.subheader("Update Notification")
+notif_id = st.text_input("Enter Notification ID:")
+message = st.text_input("Enter Text intended to update")
+if message:
+    user_update_notifs = requests.put(f'http://api:4000/v/update_notifications/{notif_id}/{message}').json()
+    st.write(user_update_notifs)
+user_written_notifs =  requests.get('http://api:4000/v/get_notifications/1964').json()
+st.dataframe(user_written_notifs) 
 
