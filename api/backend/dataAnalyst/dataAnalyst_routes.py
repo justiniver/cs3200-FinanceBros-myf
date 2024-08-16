@@ -194,3 +194,18 @@ def unban_user(user_id):
         return jsonify({"error": "Failed to unban user"}), 500    
     finally:
         cursor.close()
+
+
+
+# GET user metrics
+
+@dataAnalyst.route('/metrics', methods=['GET'])
+def get_all_user_metrics():
+    current_app.logger.info('GET /metrics route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT *FROM userMetrics um JOIN notifications n ON um.user_id = n.user_id JOIN follows f ON f.following_id = n.user_id JOIN personalPortfolio pp ON pp.user_id = n.user_id  ORDER BY likes, timeCreated')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response

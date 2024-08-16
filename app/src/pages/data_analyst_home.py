@@ -22,7 +22,7 @@ if st.button('View General User Data, Specific User Data, Ban/Unban Users',
 if st.button('View All User Metrics', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/03_all_user_metrics.py')
 
 if st.button('View All Influencers', 
             type='primary',
