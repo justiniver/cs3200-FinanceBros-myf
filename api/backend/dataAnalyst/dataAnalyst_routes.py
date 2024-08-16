@@ -1,4 +1,3 @@
-
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
@@ -6,7 +5,7 @@ from backend.db_connection import db
 dataAnalyst = Blueprint('dataAnalyst', __name__)
 
 
-# GET /user
+# GET /users
 
 @dataAnalyst.route('/users', methods=['GET'])
 def get_all_users():
@@ -232,6 +231,8 @@ def unverify_user(user_id):
         return jsonify({"error": "Failed to unverify user"}), 500    
     finally:
         cursor.close()
+
+
 # GET user metrics
 
 @dataAnalyst.route('/metrics', methods=['GET'])

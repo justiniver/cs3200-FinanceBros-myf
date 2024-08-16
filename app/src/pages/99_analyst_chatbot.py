@@ -6,7 +6,6 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-# This will only run with viable openAI API key
 openai_api_key = st.secrets["openai_api_key"]
 
 st.title("💬 Financial Consultation Chatbot (Analyst)")
@@ -14,17 +13,13 @@ st.write("This chatbot is designed for analysts to comprehand complex data")
 st.caption("🚀 Powered by OpenAI")
 
 #### Data for chatbot (sarah specific)
+
 dataAllUsers = {}
 try:
-    # Fetch all users data from the API
-    st.write("**Note**: Successfully accessed user data.")
-    response = requests.get('http://api:4000/d/users')
-    response.raise_for_status()  # Check if the request was successful
-    data = response.json()
+    dataAllUsers = requests.get('http://api:4000/d/users').json()
 except requests.exceptions.RequestException as e:
     st.write("**Important**: Could not connect to sample API, so using dummy data.")
-    st.write(f"Error: {e}")
-    data = {"a": {"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+    dataAllUsers = {"a": {"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 ####
 

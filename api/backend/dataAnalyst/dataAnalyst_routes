@@ -6,7 +6,7 @@ from backend.db_connection import db
 dataAnalyst = Blueprint('dataAnalyst', __name__)
 
 
-# GET /user
+# GET /users
 
 @dataAnalyst.route('/users', methods=['GET'])
 def get_all_users():
