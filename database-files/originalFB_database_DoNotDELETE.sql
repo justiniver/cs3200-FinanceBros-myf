@@ -525,12 +525,13 @@ INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewe
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('43124', 'Curabitur convallis.', '19', '2024-06-21 12:11:11', '2024-06-21 12:11:37', '2024-03-19 17:21:27', '70827', '1964');
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('32423324', 'Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum.', '32', '2024-06-09 13:47:18', '2024-06-09 13:47:41', '2024-07-03 12:52:20', '46437', '1964');
 
+INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('359', 'Curabitur convallis.', '19', '2024-06-21 12:11:11', '2024-06-21 12:11:37', '2024-03-19 17:21:27', '70827', '1');
+INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('101', 'Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.', '40', '2023-08-18 05:26:46', '2023-08-18 05:27:16', '2023-11-13 23:36:56', '162755', '1');
+INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('494', 'Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl.', '31', '2024-02-02 00:37:48', '2024-02-02 00:38:06', '2024-08-12 15:14:36', '193769', '4');
+
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('414', 'Maecenas pulvinar lobortis est. Phasellus sit amet erat.', '25', '2024-05-29 05:21:41', '2024-05-29 05:21:57', '2024-02-06 16:11:34', '19574', '6235');
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('439', 'Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum.', '32', '2024-06-09 13:47:18', '2024-06-09 13:47:41', '2024-07-03 12:52:20', '46437', '7767');
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('200', 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.', '4', '2024-01-18 19:32:46', '2024-01-18 19:33:09', '2024-02-25 11:42:21', '52139', '9580');
-INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('359', 'Curabitur convallis.', '19', '2024-06-21 12:11:11', '2024-06-21 12:11:37', '2024-03-19 17:21:27', '70827', '10576');
-INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('101', 'Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.', '40', '2023-08-18 05:26:46', '2023-08-18 05:27:16', '2023-11-13 23:36:56', '162755', '11186');
-INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('494', 'Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl.', '31', '2024-02-02 00:37:48', '2024-02-02 00:38:06', '2024-08-12 15:14:36', '193769', '3969');
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('498', 'Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien.', '4', '2023-09-24 07:39:51', '2023-09-24 07:40:20', '2023-10-12 17:22:13', '185079', '1048');
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('287', 'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', '11', '2023-10-25 04:26:13', '2023-10-25 04:26:30', '2023-10-01 22:39:44', '59988', '7573');
 INSERT INTO notifications (notification_id, text, likes, timeCreated, firstViewedAt, lastViewedAt, viewedAtResponseTime, user_id) VALUES ('105', 'Nulla suscipit ligula in lacus.', '34', '2023-12-09 15:29:14', '2023-12-09 15:29:36', '2024-03-17 05:15:31', '134544', '1005');
@@ -861,6 +862,11 @@ INSERT INTO dashboardNotifications (notification_id, dashboard_feed_id) VALUES (
 INSERT INTO dashboardNotifications (notification_id, dashboard_feed_id) VALUES (183, 195);
 INSERT INTO dashboardNotifications (notification_id, dashboard_feed_id) VALUES (105, 250);
 INSERT INTO dashboardNotifications (notification_id, dashboard_feed_id) VALUES (498, 154);
+
+INSERT INTO dashboardNotifications (notification_id, dashboard_feed_id) VALUES (2123423, 154);
+INSERT INTO dashboardNotifications (notification_id, dashboard_feed_id) VALUES (34243, 154);
+INSERT INTO dashboardNotifications (notification_id, dashboard_feed_id) VALUES (32423324, 154);
+
 INSERT INTO userNotifications (user_id, notification_id) VALUES (6235, 414);
 INSERT INTO userNotifications (user_id, notification_id) VALUES (6084, 439);
 INSERT INTO userNotifications (user_id, notification_id) VALUES (7939, 200);
@@ -1022,4 +1028,5 @@ INSERT INTO userNotifications (user_id, notification_id) VALUES
 (526, 183),
 (9379, 100),
 (11321, 408),
-(10822, 180);
+(10822, 180),
+(7061, 2123423);
