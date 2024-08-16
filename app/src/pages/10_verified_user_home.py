@@ -27,7 +27,7 @@ if st.button('View Verified Profile',
 if st.button('Send Notifications to Followers', 
             type='primary',
             use_container_width=True):
-  st.switch_page('pages/12_send_notifs2.py')
+  st.switch_page('pages/12_send_notifs.py')
 if st.button('Dashboard', 
             type='primary',
             use_container_width=True):
