@@ -4,9 +4,7 @@ This repository is for the Finance Bros project, which is part of the Summer 202
 
 ## Description
 
-The Finance Bros project is a social media platform for finance enthusiasts that aims to help users make informed financial decisions. By offering detailed performance metrics and strategies from leading financial figures, the platform provides a unique perspective on investment opportunities. Users can stay informed with real-time data and trends, receive personalized recommendations, and follow the activities of influential traders. This platform is designed to guide both novice and experienced investors through the complexities of the financial market.
-
-A key feature of this project is the AI-powered financial consultation chatbot. The chatbot, powered by OpenAI, is designed to assist novice investors by simplifying complex financial concepts and providing clear, personalized guidance. It can access and analyze a user's portfolio to offer recommendations and explain financial metrics in an easy-to-understand manner.
+The Finance Bros project is a social media platform for finance enthusiasts that aims to help users make informed financial decisions. By offering detailed performance metrics and strategies from leading financial figures, the platform provides a unique perspective on investment opportunities. Users can stay informed with real-time data and trends, receive personalized recommendations, and follow the activities of influential traders. This platform is designed to guide both novice and experienced investors through the complexities of the financial market. Additionally, a financial consultant chatbot feature is available and is customized to each users needs.
 
 ## Getting Started
 
