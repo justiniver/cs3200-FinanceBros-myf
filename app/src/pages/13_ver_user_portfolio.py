@@ -13,7 +13,7 @@ st.write(f"### Hi, {st.session_state['first_name']}.")
 
 data = {} 
 try:
-  data = requests.get('http://api:4000/u/myportfolios/2942').json()
+  data = requests.get('http://api:4000/v/myportfolios/2942').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}

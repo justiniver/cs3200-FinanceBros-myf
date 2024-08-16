@@ -1,7 +1,7 @@
 ##################################################
 # This is the main/entry-point file for the 
 # sample application for your project
-##################################################
+
 
 # Set up basic logging infrastructure
 import logging
