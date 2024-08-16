@@ -195,6 +195,44 @@ def unban_user(user_id):
     finally:
         cursor.close()
 
+@dataAnalyst.route('/verify/<user_id>', methods=['PUT'])
+def verify_user(user_id):
+    current_app.logger.info(f'PUT /d/users/{user_id} route')
+    try:
+        cursor = db.get_db().cursor()
+        current_app.logger.info(f"Attempting to verify user with id: {user_id}")
+        cursor.execute('UPDATE users SET verified = 1 WHERE user_id = %s', (user_id,))
+        db.get_db().commit()
+        if cursor.rowcount == 0:
+            current_app.logger.info(f"No user found with id {user_id}")
+            return jsonify({"error": "User not found"}), 404
+        return jsonify({"message": f"User {user_id} has been verified successfully."}), 200   
+    except Exception as e:
+        current_app.logger.error(f"Error verifying user {user_id}: {e}")
+        db.get_db().rollback()
+        return jsonify({"error": "Failed to verify user"}), 500
+    finally:
+        cursor.close()
+
+@dataAnalyst.route('/unverify/<user_id>', methods=['PUT'])
+def unverify_user(user_id):
+    current_app.logger.info(f'PUT /d/users/{user_id} route')
+    try:
+        cursor = db.get_db().cursor()
+        current_app.logger.info(f"Attempting to unverify user with id: {user_id}")
+        cursor.execute('UPDATE users SET verified = 0 WHERE user_id = %s', (user_id,))
+        db.get_db().commit()
+        if cursor.rowcount == 0:
+            current_app.logger.info(f"No user found with id {user_id}")
+            return jsonify({"error": "User not found"}), 404
+        return jsonify({"message": f"User {user_id} has been unverified successfully."}), 200
+    except Exception as e:
+        current_app.logger.error(f"Error unverifying user {user_id}: {e}")
+        db.get_db().rollback()
+        return jsonify({"error": "Failed to unverify user"}), 500    
+    finally:
+        cursor.close()
+
 
 
 # GET user metrics
