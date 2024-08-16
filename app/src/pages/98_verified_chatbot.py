@@ -1,5 +1,7 @@
+import logging
 from openai import OpenAI
 import streamlit as st
+import requests
 from modules.nav import SideBarLinks
 
 SideBarLinks()

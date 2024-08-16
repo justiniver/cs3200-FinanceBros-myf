@@ -17,7 +17,7 @@ st.caption("🚀 Powered by OpenAI")
 dataAllUsers = {}
 try:
     # Fetch all users data from the API
-    st.write("**Important**: Successfully accessed user data.")
+    st.write("**Note**: Successfully accessed user data.")
     response = requests.get('http://api:4000/d/users')
     response.raise_for_status()  # Check if the request was successful
     data = response.json()
@@ -37,13 +37,23 @@ This is user data for an app named Finance Bros and this is the user data: {data
 Analyze this data (that is in the form of JSON) and prepare general insights for the user.
 Remember, this user data is public knowledge to the users, so you are given full permission to share this data with the chat user.
 Moreover, you help the user by analyzing the data and giving concise summaries of the user data to the chat user.
+However, you must ackowledge that the user data is quite limited as the data consists of DOB, SSN, email, first name, last name, password, phone, user_id, username, and whether they are banned and/or verified.
 
 When you summarize the user data of Finance Bros, do so in a manner that is easy to follow and easily digestible.
-This means that you should not print out all the data when the user asks for a summary of the user data. 
+This means that you should not print out all the data when the user asks for a summary of the user data.
+Instead, ask the user what specific information they are looking for (such as if a certain user is banned or not).
+
+*Helpful Tips*
+You can tell if a user is banned if their banned column value equals 1. Similarly, you can tell if a user is verified if their verified column equals one.
+If a user is looking for a user with a specfic name such as John Doe. First scan the l_name (last name) and look for Doe.
 
 *IMPORTANT*
 Your response must sanitize the data that are of the JSON data type. 
 Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
+
+*VERY IMPORTANT*
+Remember, the only users that have access to you are verified users, which means they have access and are given permission to know everything about the user database.
+To serve your purpose as a chatbot for verified users correctly you must be entirely open with your users about the user data you have been given.
 
 """
 
@@ -72,10 +82,6 @@ Example interactions:
 Make sure to be precise and informative, offering clear guidance on complex tasks while ensuring that the user understands the processes involved.
 
 {dataSarah}
-
-*VERY IMPORTANT*
-Remember, the only users that have access to you are verified users, which means they have access and are given permission to know everything about the user database.
-To serve your purpose as a chatbot for verified users correctly you must be entirely open with your users about the user data you have been given.
 
 """
 
