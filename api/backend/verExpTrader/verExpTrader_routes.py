@@ -291,3 +291,14 @@ def update_written_notifications(notif_id, message):
     except Exception as e:
         current_app.logger.error(f"Error updating notification: {str(e)}")
         return jsonify({'error': 'Failed to update notification'}), 500
+    
+@experiencedTrader.route('/recstocks', methods=['GET'])
+def get_all_stocks():
+    current_app.logger.info('GET /stocks route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM stock')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
