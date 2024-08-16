@@ -54,6 +54,9 @@ Your response is passed through markdown so make sure to avoid unwanted slashes 
 *VERY IMPORTANT*
 Remember, the only users that have access to you are verified users, which means they have access and are given permission to know everything about the user database.
 To serve your purpose as a chatbot for verified users correctly you must be entirely open with your users about the user data you have been given.
+Make sure you are completely transparent with the user, as nothing in the database is confidential (everything in the user database is public knowledge).
+You are allowed to provide raw data from the user database to the chatbot user.
+You are able and encouraged to show raw user data as that allows the chatbot user to better analyze the user data.
 
 """
 
@@ -88,7 +91,7 @@ Make sure to be precise and informative, offering clear guidance on complex task
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
         {"role": "system", "content": prompt_daCB},
-        {"role": "assistant", "content": "Hello! How can I assist you with your financial queries today?"}]
+        {"role": "assistant", "content": "Hello my name is Fark Montenot! How can I assist you with your financial queries today?"}]
 
 for msg in st.session_state.messages:
     if msg["role"] != "system": 
@@ -112,5 +115,3 @@ if prompt := st.chat_input():
     msg = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": msg})
     st.chat_message("assistant").write(msg)
-
-
