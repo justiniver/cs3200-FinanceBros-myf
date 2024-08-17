@@ -80,8 +80,8 @@ For common issues:
 
 ## Acknowledgments
 
-* [Mark Fontenot Project Template]([(https://github.com/NEU-CS3200/24su-3200-project-template)])
-* [OpenAI API + Streamlit Template]([https://github.com/streamlit/llm-examples])
+* [Mark Fontenot Project Template](https://github.com/NEU-CS3200/24su-3200-project-template)
+* [OpenAI API + Streamlit Template](https://github.com/streamlit/llm-examples)
 
 ## Disclaimer
 
