@@ -28,11 +28,6 @@ if st.button('Send Notifications to Followers',
             type='primary',
             use_container_width=True):
   st.switch_page('pages/12_send_notifs.py')
-if st.button('Dashboard', 
-            type='primary',
-            use_container_width=True):
-  st.switch_page('pages/03_my_dashboard.py')
-
 if st.button('See Notifications From Following', 
             type='primary',
             use_container_width=True):
