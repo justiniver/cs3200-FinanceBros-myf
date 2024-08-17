@@ -22,41 +22,33 @@ The Finance Bros project is a social media platform for finance enthusiasts that
 
 * Clone the repository from GitHub
 * Set up a virtual environment and activate it:
-  'python -m venv venv'
-  source venv/bin/activate 
+  `python -m venv venv`
+  `source venv/bin/activate`
 * Install the required dependencies:
-  pip install -r requirements.txt
+  `pip install -r requirements.txt`
 * Set up the PostgreSQL database and run the provided SQL script to create necessary tables:
-  psql -U yourusername -d yourdatabase -f setup.sql
+  `psql -U yourusername -d yourdatabase -f setup.sql`
 * Add your OpenAI API key to the Streamlit secrets:
-  echo "[openai]\\nopenai_api_key=your_api_key_here" > .streamlit/secrets.toml
+  `echo "[openai]\\nopenai_api_key=your_api_key_here" > .streamlit/secrets.toml`
+  ###### Note: The chatbot feature will not work without a valid openAI API key
+  
 ### Executing program
 
 * Start the Flask development server:
-  \`\`\`
-  flask run
-  \`\`\`
+  `flask run`
 * Start the Streamlit application to use the financial consultation chatbot:
-  \`\`\`
-  streamlit run 97_reg_chatbot.py
-  \`\`\`
-* Access the application by navigating to \`http://127.0.0.1:8501/\` in your web browser.
+  `streamlit run 97_reg_chatbot.py`
+* Access the application by navigating to `http://127.0.0.1:8501/\` in your web browser.
 
 ## Help
 
 For common issues:
 * Ensure that PostgreSQL is correctly installed and the database is running.
-* Virtual environment activation issues on Windows can be resolved by running:
-  \`\`\`
-  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-  \`\`\`
 * If you encounter issues with the OpenAI API, ensure that your API key is correctly set in the Streamlit secrets file.
 * Check the Flask and Streamlit documentation for more details on error messages.
 
-\`\`\`
-flask --help
-streamlit --help
-\`\`\`
+`flask --help`
+`streamlit --help`
 
 ## Authors
 
@@ -71,7 +63,7 @@ streamlit --help
 
 * 0.3
     * Added AI-powered financial consultation chatbot feature
-    * See [commit change](https://github.com/guenbr/cs3200-FinanceBros/commits/main) or [release history](https://github.com/guenbr/cs3200-FinanceBros/releases)
+    * See [commit change](https://github.com/guenbr/cs3200-FinanceBros/commits/main)
 * 0.2
     * Various bug fixes and optimizations
 * 0.1
