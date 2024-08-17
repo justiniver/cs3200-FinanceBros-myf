@@ -85,4 +85,4 @@ For common issues:
 
 ## Disclaimer
 
-<sub>Disclaimer: The information provided on this platform is for informational purposes only and should not be construed as financial advice. We are not licensed financial advisors. Any investment decisions or financial strategies discussed here should be considered with caution and consulted with a qualified financial advisor. Your financial situation is unique, and it is important to seek personalized advice before making any financial decisions.</sub>.
+<sub>The information provided on this platform is for informational purposes only and should not be construed as financial advice. We are not licensed financial advisors. Any investment decisions or financial strategies discussed here should be considered with caution and consulted with a qualified financial advisor. Your financial situation is unique, and it is important to seek personalized advice before making any financial decisions.</sub>.
