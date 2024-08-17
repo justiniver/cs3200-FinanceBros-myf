@@ -6,7 +6,8 @@ dataAnalyst = Blueprint('dataAnalyst', __name__)
 
 
 # GET u/users
-
+# [Sarah-1]
+# This function pulls all user data from the users table for the Data Analyst
 @dataAnalyst.route('/users', methods=['GET'])
 def get_all_users():
     current_app.logger.info('GET /users route')
@@ -20,7 +21,8 @@ def get_all_users():
 
 
 # GET /users{id}
-
+# [Sarah-3]
+# This function returns specific user data given a specific user_id
 @dataAnalyst.route('/users/<user_id>', methods=['GET'])
 def get_user_by_id(user_id):
     current_app.logger.info(f'GET /users/{user_id} route')
@@ -34,7 +36,8 @@ def get_user_by_id(user_id):
 
 
 # GET /influencers
-
+# [Sarah-3]
+# This function returns the verified private profile of all influencers
 @dataAnalyst.route('/influencers', methods=['GET'])
 def get_all_influencers():
     current_app.logger.info('GET /influencers route')
@@ -47,105 +50,9 @@ def get_all_influencers():
     return the_response
 
 
-# GET /influencers/{id}
-
-@dataAnalyst.route('/influencers/<verified_user_id>', methods=['GET'])
-def get_influencer_by_id(verified_user_id):
-    current_app.logger.info(f'GET /influencers/{verified_user_id} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM verifiedPublicProfile WHERE verified_user_id = %s', (verified_user_id,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-# GET /portfolios
-
-@dataAnalyst.route('/portfolios', methods=['GET'])
-def get_all_portfolios():
-    current_app.logger.info('GET /portfolios route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM personalPortfolio')
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-# GET /portfolios/{id}
-
-@dataAnalyst.route('/portfolios/<portfolio_id>', methods=['GET'])
-def get_portfolio_by_id(portfolio_id):
-    current_app.logger.info(f'GET /portfolios/{portfolio_id} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM personalPortfolio WHERE portfolio_id = %s', (portfolio_id,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-# GET /stocks
-
-@dataAnalyst.route('/stocks', methods=['GET'])
-def get_all_stocks():
-    current_app.logger.info('GET /stocks route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stock')
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-
-# GET /stocks/{id}
-
-@dataAnalyst.route('/stocks/<ticker>', methods=['GET'])
-def get_stock_by_id(ticker):
-    current_app.logger.info(f'GET /stock/{ticker} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stock WHERE ticker = %s', (ticker,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-# GET /notifications
-
-@dataAnalyst.route('/notifications', methods=['GET'])
-def get_all_notifications():
-    current_app.logger.info('GET /notifications route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notifications')
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-# GET /notifications/{id}
-
-@dataAnalyst.route('/notifications/<notification_id>', methods=['GET'])
-def get_notification_by_id(notification_id):
-    current_app.logger.info('GET /notifications/{notification_id} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notifications WHERE notification_id = %s', (notification_id,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-#GET /portfolios{id}
+# GET /portfolios{id}
+# [Sarah-3]
+# This function returns every stock in a specific given users portfolio
 @dataAnalyst.route('/myportfolios_stock/<int:user_id>', methods=['GET'])
 def get__user_portfolios_userID(user_id):
     current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
@@ -158,6 +65,8 @@ def get__user_portfolios_userID(user_id):
     return the_response
 
 # PUT /banuser
+# [Sarah-4]
+# This function bans a user given a specific user_id
 @dataAnalyst.route('/banUser/<user_id>', methods=['PUT'])
 def ban_user(user_id):
     current_app.logger.info(f'PUT /d/users/{user_id} route')
@@ -178,6 +87,8 @@ def ban_user(user_id):
         cursor.close()
 
 # PUT /unbanuser
+# [Sarah-4]
+# This function unbans a user given a specific user_id
 @dataAnalyst.route('/unbanUser/<user_id>', methods=['PUT'])
 def unban_user(user_id):
     current_app.logger.info(f'PUT /d/users/{user_id} route')
@@ -198,6 +109,8 @@ def unban_user(user_id):
         cursor.close()
 
 # PUT / verifyuser
+# [Sarah-4]
+# This function verifies a user given a specific user_id
 @dataAnalyst.route('/verify/<user_id>', methods=['PUT'])
 def verify_user(user_id):
     current_app.logger.info(f'PUT /d/users/{user_id} route')
@@ -218,6 +131,8 @@ def verify_user(user_id):
         cursor.close()
 
 # PUT / unverifyuser
+# [Sarah-4]
+# This function verifies a user given a specific user_id
 @dataAnalyst.route('/unverify/<user_id>', methods=['PUT'])
 def unverify_user(user_id):
     current_app.logger.info(f'PUT /d/users/{user_id} route')
@@ -238,7 +153,10 @@ def unverify_user(user_id):
         cursor.close()
 
 
-# GET /usermetrics
+# GET /metrics
+# [Sarah-1]
+# This function returns dashboard metrics and notification metrics of a 
+# all users
 @dataAnalyst.route('/metrics', methods=['GET'])
 def get_all_user_metrics():
     current_app.logger.info('GET /metrics route')
@@ -251,7 +169,10 @@ def get_all_user_metrics():
     return the_response
 
 
-# GET user specific metrics
+# GET /metrics/<user_id>
+# [Sarah-1]
+# This function returns dashboard metrics and notification metrics of a 
+# given specified user
 @dataAnalyst.route('/specificmetrics/<user_id>', methods=['GET'])
 def get_specific_user_metrics(user_id):
     current_app.logger.info(f'GET /metrics/{user_id} route')
@@ -262,4 +183,3 @@ def get_specific_user_metrics(user_id):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
-
