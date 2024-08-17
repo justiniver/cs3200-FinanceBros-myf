@@ -48,8 +48,7 @@ The Finance Bros project is a social media platform for finance enthusiasts that
 
 * Start the Flask development server:
   `flask run`
-* Start the Streamlit application to use the financial consultation chatbot:
-  `streamlit run 97_reg_chatbot.py`
+* Start the Streamlit application
 * Access the application by navigating to `http://127.0.0.1:8501/` in your web browser.
 
 ## Help
