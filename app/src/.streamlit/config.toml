@@ -6,5 +6,5 @@ base="dark"
 primaryColor="#4b0082"  # indigo
 secondaryBackgroundColor="#353A42"  # lighter shade
 textColor="#e0e0e0"  # light gray
-font="Garamond"  # garamond font
+font="sans serif"  # san serif font
 
