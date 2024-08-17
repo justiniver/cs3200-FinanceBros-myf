@@ -22,7 +22,7 @@ The Finance Bros project is a social media platform for finance enthusiasts that
 
 * Clone the repository from GitHub
 * Set up a virtual environment and activate it:
-  python -m venv venv
+  'python -m venv venv'
   source venv/bin/activate 
 * Install the required dependencies:
   pip install -r requirements.txt
