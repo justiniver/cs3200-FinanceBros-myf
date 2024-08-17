@@ -2,28 +2,6 @@ from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
 
-user = Blueprint('user', __name__)
-
-# GET /users/<username>
-# [Emily-4]
-#This function displays the specific user_id of the given username that
-# Emily wants to view.
-@user.route('/users/<username>', methods=['GET'])
-def get_username_by_id(username):
-    current_app.logger.info(f'GET /users/{username} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT user_id FROM users WHERE username = %s', (username,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-from flask import Blueprint, request, jsonify, make_response, current_app
-import json
-from backend.db_connection import db
-
 experiencedTrader = Blueprint('experiencedTrader', __name__)
 
 # GET /notifications
