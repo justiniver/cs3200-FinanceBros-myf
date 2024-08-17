@@ -4,7 +4,7 @@ This repository is for the Finance Bros project, which is part of the Summer 202
 
 [Watch this project video (YouTube)](https://www.youtube.com/watch?v=h0k6nTx9WQ8)
 
-[Watch this project video (Drive)]((https://drive.google.com/file/d/1xEvD-DX-1S-J9cZIN2m7kjXQMQX093R-/view))
+[Watch this project video (Drive)](https://drive.google.com/file/d/1xEvD-DX-1S-J9cZIN2m7kjXQMQX093R-/view)
 
 ## Description
 
