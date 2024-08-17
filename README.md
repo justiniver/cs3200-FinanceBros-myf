@@ -25,8 +25,7 @@ The Finance Bros project is a social media platform for finance enthusiasts that
 * Set up a virtual environment and activate it
 * Install the required dependencies:
   `pip install -r requirements.txt`
-* Set up the mySQL database and run the provided SQL script to create necessary tables:
-  `psql -U yourusername -d yourdatabase -f setup.sql`
+* Set up the mySQL database and run the provided SQL script
 * Copy and rename `.env.template` to `.env` and create a password
 * Add your OpenAI API key to the Streamlit secrets:
   `echo "[openai]\\nopenai_api_key=your_api_key_here" > .streamlit/secrets.toml`
