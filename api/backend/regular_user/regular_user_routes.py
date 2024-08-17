@@ -4,48 +4,10 @@ from backend.db_connection import db
 
 user = Blueprint('user', __name__)
 
-
-# GET /users
-# [Emily-1]
-@user.route('/users', methods=['GET'])
-def get_all_users():
-    current_app.logger.info('GET /users route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM users')
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-# POST /users
-# [Emily-1]
-@user.route('/users/create', methods=['POST'])
-def create_user(data):
-    current_app.logger.info('POST /users route')
-    data = request.get_json()
-    cursor = db.get_db().cursor()
-    cursor.execute('INSERT INTO users (username, email, password) VALUES (%s, %s, %s)', 
-                   (data['username'], data['email'], data['password']))
-    db.get_db().commit()
-    the_response = make_response({'message': 'User created successfully'})
-    the_response.status_code = 201
-    the_response.mimetype = 'application/json'
-    return the_response
-
-# GET /users/{id}
-# [Emily-2]
-@user.route('/users/<int:user_id>', methods=['GET'])
-def get_user_by_id(user_id):
-    current_app.logger.info(f'GET /users/{user_id} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
+# GET /users/<username>
+# [Emily-4]
+#This function displays the specific user_id of the given username that
+# Emily wants to view.
 @user.route('/users/<username>', methods=['GET'])
 def get_username_by_id(username):
     current_app.logger.info(f'GET /users/{username} route')
@@ -60,6 +22,7 @@ def get_username_by_id(username):
 
 # GET /influencers
 # [Emily-4]
+# This function gets all usernames of all verified users in the database.
 @user.route('/influencers', methods=['GET'])
 def get_all_influencers():
     current_app.logger.info('GET /influencers route')
@@ -71,23 +34,9 @@ def get_all_influencers():
     the_response.mimetype = 'application/json'
     return the_response
 
-# POST /influencers/{id}/notifications
-# [Emily-4]
-@user.route('/influencers/<int:influencer_id>/notifications', methods=['POST'])
-def create_influencer_notification(influencer_id, message):
-    current_app.logger.info(f'POST /influencers/{influencer_id}/notifications route')
-    data = request.get_json()
-    cursor = db.get_db().cursor()
-    cursor.execute('INSERT INTO notifications (influencer_id, message) VALUES (%s, %s)', 
-                   (influencer_id, message,))
-    db.get_db().commit()
-    the_response = make_response({'message': 'Notification created successfully'})
-    the_response.status_code = 201
-    the_response.mimetype = 'application/json'
-    return the_response
-
 # GET /influencers/{id}
 # [Emily-4]
+# This returns the verified public profile of the selected verified user, Emily selects.
 @user.route('/influencers/<username>', methods=['GET'])
 def get_influencer_by_username(username):
     current_app.logger.info(f'GET /influencers/{username} route')
@@ -100,20 +49,9 @@ def get_influencer_by_username(username):
     the_response.mimetype = 'application/json'
     return the_response
 
-# GET /portfolios
+# GET /portfolios/{id}
 # [Emily-2]
-@user.route('/portfolios', methods=['GET'])
-def get_all_portfolios():
-    current_app.logger.info('GET /portfolios route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM personalPortfolio')
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-# GET /myportfolios
+# This function returns all portfolios statistics of a specific user. 
 @user.route('/myportfolios/<int:user_id>', methods=['GET'])
 def get_my_portfolios(user_id):
     current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
@@ -125,6 +63,9 @@ def get_my_portfolios(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# GET /portfolios/{id}
+# [Emily-2]
+# This returns all stocks in the portfolio of the specific user_id
 @user.route('/portfolios_stock/<int:user_id>', methods=['GET'])
 def get_portfolios_userID(user_id):
     current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
@@ -138,6 +79,7 @@ def get_portfolios_userID(user_id):
 
 # GET /stocks
 # [Emily-2]
+# Returns all stocks a user can add to their portfolio.
 @user.route('/stocks', methods=['GET'])
 def get_all_stocks():
     current_app.logger.info('GET /stocks route')
@@ -149,6 +91,9 @@ def get_all_stocks():
     the_response.mimetype = 'application/json'
     return the_response
 
+# GET /recStocks
+# [Emily-2]
+# Returns top 5 rec. stocks that the stock has the lowest beta of all stocks.
 @user.route('/recStocks', methods=['GET'])
 def recStocks():
     current_app.logger.info('GET /stocks route')
@@ -160,21 +105,9 @@ def recStocks():
     the_response.mimetype = 'application/json'
     return the_response
 
-
-# GET /stocks/{id}
-# [Emily-2]
-@user.route('/stocks/<int:stock_id>', methods=['GET'])
-def get_stock_by_ticker(ticker):
-    current_app.logger.info(f'GET /stock/{ticker} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM stock WHERE ticker = %s', (ticker,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
 # GET notifications/{user_id}
+# [Emily-3]
+# This function returns all notifications from the users followed by specfic user_id
 @user.route('/notifications/<int:user_id>', methods=['GET'])
 def get_notifications_for_user(user_id):
     current_app.logger.info(f'GET /notifications/{user_id} route')
@@ -186,7 +119,9 @@ def get_notifications_for_user(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-
+# Post /follow/{user_id}
+# [Emily-4]
+# This function allows the user to follow another verified user by verfied users' user_id.
 @user.route('/follow/<int:user_id>/<int:following_id>', methods=['POST'])
 def follow_user(user_id, following_id):
     current_app.logger.info(f'POST /follow/{user_id}/{following_id} route')
@@ -197,8 +132,9 @@ def follow_user(user_id, following_id):
     response.mimetype = 'application/json'
     return response
 
-# GET /ticker
+# GET /stocks
 # [Emily-2]
+# This functions allows the user to click the TICKER name they want to add to their portfolio.
 @user.route('/getTicker', methods=['GET'])
 def get_all_ticker():
     current_app.logger.info('GET /getTicker route')
@@ -210,6 +146,9 @@ def get_all_ticker():
     the_response.mimetype = 'application/json'
     return the_response
 
+# POST /stocks
+# [Emily-1]
+# This function allows the user to INSERT a specfic stock in their portfolio_id by ticker name.
 @user.route('/addStockToPortfolio/<int:portfolio_id>/<string:ticker>', methods=['POST'])
 def addStock(portfolio_id, ticker):
     current_app.logger.info(f'POST /addStock route for portfolio_id: {portfolio_id} and ticker: {ticker}')
@@ -220,14 +159,3 @@ def addStock(portfolio_id, ticker):
     response.status_code = 200
     response.mimetype = 'application/json'
     return response
-
-@user.route('/getUserPortfolio/<int:user_id>', methods=['GET'])
-def get__user_portfolios(user_id):
-    current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT portfolio_id FROM personalPortfolio WHERE user_id = %s', (user_id,))
-    theData = cursor.fetchall()
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response

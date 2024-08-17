@@ -19,10 +19,15 @@ if st.button('View Portfolio',
              use_container_width=True):
   st.switch_page('pages/11_ver_user_portfolio.py')
 
-if st.button('View Verified Profile', 
+if st.button('View My Verified Profile', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/12_ver_public_profile.py')
+
+if st.button('View Other Verified Profiles and Follow', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/15_ver_other_profiles.py')
 
 if st.button('Send Notifications to Followers', 
             type='primary',
