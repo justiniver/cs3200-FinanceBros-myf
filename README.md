@@ -59,6 +59,11 @@ For common issues:
 `flask --help`
 `streamlit --help`
 
+* Rerun docker container when encountering docker issues.
+
+`docker compose down`
+`docker compose up -d`
+
 ## Authors
 
 * Bryan Guen
