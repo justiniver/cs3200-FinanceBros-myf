@@ -4,7 +4,6 @@ logging.basicConfig(level=logging.DEBUG)
 from flask import Flask
 
 from backend.db_connection import db
-from backend.customers.customer_routes import customers
 from backend.products.products_routes import products
 from backend.dataAnalyst.dataAnalyst_routes import dataAnalyst
 from backend.verExpTrader.verExpTrader_routes import experiencedTrader
@@ -96,8 +95,6 @@ def create_app():
 
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
-    app.register_blueprint(customers,   url_prefix='/c')
-    app.register_blueprint(products,    url_prefix='/p')
     app.register_blueprint(dataAnalyst, url_prefix='/d')
     app.register_blueprint(experiencedTrader, url_prefix='/v')
     app.register_blueprint(user, url_prefix='/u')
