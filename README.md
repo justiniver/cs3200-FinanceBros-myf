@@ -20,28 +20,16 @@ The Finance Bros project is a social media platform for finance enthusiasts that
 
 ### Installing
 
-* Clone the repository from GitHub:
-  \`\`\`
-  git clone https://github.com/guenbr/cs3200-FinanceBros.git
-  \`\`\`
+* Clone the repository from GitHub
 * Set up a virtual environment and activate it:
-  \`\`\`
   python -m venv venv
-  source venv/bin/activate  # On Windows use `venv\\Scripts\\activate`
-  \`\`\`
+  source venv/bin/activate 
 * Install the required dependencies:
-  \`\`\`
   pip install -r requirements.txt
-  \`\`\`
 * Set up the PostgreSQL database and run the provided SQL script to create necessary tables:
-  \`\`\`
   psql -U yourusername -d yourdatabase -f setup.sql
-  \`\`\`
 * Add your OpenAI API key to the Streamlit secrets:
-  \`\`\`
   echo "[openai]\\nopenai_api_key=your_api_key_here" > .streamlit/secrets.toml
-  \`\`\`
-
 ### Executing program
 
 * Start the Flask development server:
