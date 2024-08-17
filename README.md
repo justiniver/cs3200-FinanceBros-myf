@@ -1,4 +1,4 @@
-# Summer 2024 CS 3200 Finance Bros Repository
+# CS3200 Finance Bros Repository
 
 This repository is for the Finance Bros project, which is part of the Summer 2024 CS 3200 course. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
 
@@ -69,16 +69,7 @@ For common issues:
 * 0.1
     * Initial Release
 
-## License
-
-Not sure
-
 ## Acknowledgments
 
-Not sure
-
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* [Mark Fontenot Project Template]([(https://github.com/NEU-CS3200/24su-3200-project-template)])
+* [OpenAI API + Streamlit Template]([https://github.com/streamlit/llm-examples])
