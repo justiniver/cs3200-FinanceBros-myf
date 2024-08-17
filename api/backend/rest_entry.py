@@ -4,7 +4,6 @@ logging.basicConfig(level=logging.DEBUG)
 from flask import Flask
 
 from backend.db_connection import db
-from backend.products.products_routes import products
 from backend.dataAnalyst.dataAnalyst_routes import dataAnalyst
 from backend.verExpTrader.verExpTrader_routes import experiencedTrader
 from backend.regular_user.regular_user_routes import user
