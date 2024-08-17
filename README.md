@@ -71,10 +71,5 @@ For common issues:
 
 ## Acknowledgments
 
-Not sure
-
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* [Mark Fontenot Project Template]([(https://github.com/NEU-CS3200/24su-3200-project-template)])
+* [OpenAI API + Streamlit Template]([https://github.com/streamlit/llm-examples])
