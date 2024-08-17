@@ -5,7 +5,7 @@ from backend.db_connection import db
 dataAnalyst = Blueprint('dataAnalyst', __name__)
 
 
-# GET /users
+# GET u/users
 
 @dataAnalyst.route('/users', methods=['GET'])
 def get_all_users():
@@ -145,6 +145,7 @@ def get_notification_by_id(notification_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+#GET /portfolios{id}
 @dataAnalyst.route('/myportfolios_stock/<int:user_id>', methods=['GET'])
 def get__user_portfolios_userID(user_id):
     current_app.logger.info(f'GET /personalPortfolio/{user_id} route')
@@ -156,6 +157,7 @@ def get__user_portfolios_userID(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# PUT /banuser
 @dataAnalyst.route('/banUser/<user_id>', methods=['PUT'])
 def ban_user(user_id):
     current_app.logger.info(f'PUT /d/users/{user_id} route')
@@ -175,6 +177,7 @@ def ban_user(user_id):
     finally:
         cursor.close()
 
+# PUT /unbanuser
 @dataAnalyst.route('/unbanUser/<user_id>', methods=['PUT'])
 def unban_user(user_id):
     current_app.logger.info(f'PUT /d/users/{user_id} route')
@@ -194,6 +197,7 @@ def unban_user(user_id):
     finally:
         cursor.close()
 
+# PUT / verifyuser
 @dataAnalyst.route('/verify/<user_id>', methods=['PUT'])
 def verify_user(user_id):
     current_app.logger.info(f'PUT /d/users/{user_id} route')
@@ -213,6 +217,7 @@ def verify_user(user_id):
     finally:
         cursor.close()
 
+# PUT / unverifyuser
 @dataAnalyst.route('/unverify/<user_id>', methods=['PUT'])
 def unverify_user(user_id):
     current_app.logger.info(f'PUT /d/users/{user_id} route')
@@ -233,8 +238,7 @@ def unverify_user(user_id):
         cursor.close()
 
 
-# GET user metrics
-
+# GET /usermetrics
 @dataAnalyst.route('/metrics', methods=['GET'])
 def get_all_user_metrics():
     current_app.logger.info('GET /metrics route')
@@ -248,7 +252,6 @@ def get_all_user_metrics():
 
 
 # GET user specific metrics
-
 @dataAnalyst.route('/specificmetrics/<user_id>', methods=['GET'])
 def get_specific_user_metrics(user_id):
     current_app.logger.info(f'GET /metrics/{user_id} route')
