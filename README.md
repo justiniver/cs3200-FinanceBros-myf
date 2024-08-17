@@ -61,8 +61,7 @@ For common issues:
 
 * Rerun docker container when encountering docker issues.
 
-`docker compose down`
-`docker compose up -d`
+In terminal run `docker compose down` and `docker compose up -d`
 
 ## Authors
 
