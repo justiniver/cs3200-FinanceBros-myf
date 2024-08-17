@@ -12,26 +12,33 @@ The Finance Bros project is a social media platform for finance enthusiasts that
 
 * Python 3.8 or higher
 * Flask 2.0.1
-* SQLAlchemy 1.4
-* PostgreSQL 13
+* mySQL Ver 14.14
 * OpenAI API Key
 * Streamlit 1.0.0
 * Windows 10 or macOS 10.15 Catalina
+* Docker and Docker Compose
+* Datagrip
 
 ### Installing
 
 * Clone the repository from GitHub
-* Set up a virtual environment and activate it:
-  `python -m venv venv`
-  `source venv/bin/activate`
+* Set up a virtual environment and activate it
 * Install the required dependencies:
   `pip install -r requirements.txt`
-* Set up the PostgreSQL database and run the provided SQL script to create necessary tables:
+* Set up the mySQL database and run the provided SQL script to create necessary tables:
   `psql -U yourusername -d yourdatabase -f setup.sql`
 * Add your OpenAI API key to the Streamlit secrets:
   `echo "[openai]\\nopenai_api_key=your_api_key_here" > .streamlit/secrets.toml`
   ###### Note: The chatbot feature will not work without a valid openAI API key
-  
+
+### Docker and MYSQL
+
+* Setup connection in MySQL
+  `port = your_port`
+  `user = root`
+  `password = your_password`
+* Run Docker containers
+  In the virutal environment `docker compose up`
 ### Executing program
 
 * Start the Flask development server:
