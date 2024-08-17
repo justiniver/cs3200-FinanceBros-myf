@@ -54,8 +54,8 @@ The Finance Bros project is a social media platform for finance enthusiasts that
 ## Help
 
 For common issues:
-* Ensure that PostgreSQL is correctly installed and the database is running.
-* If you encounter issues with the OpenAI API, ensure that your API key is correctly set in the Streamlit secrets file.
+* Ensure that MySQL is correctly installed and the database is running.
+* If you encounter issues with the OpenAI API, ensure that your API key is correctly set in the Streamlit secrets file. This secrets.toml file should be next to the configure.toml file.
 * Check the Flask and Streamlit documentation for more details on error messages.
 
 `flask --help`
