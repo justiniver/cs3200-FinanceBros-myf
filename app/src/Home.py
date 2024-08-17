@@ -49,7 +49,7 @@ if st.button("Act as Emily, the Novice Investor",
     st.session_state['role'] = 'nov_investor_user'
     st.session_state['first_name'] = 'Emily'
     logger.info("Logging in as a novest trader Persona")
-    st.switch_page('pages/00_Reg_User_Home.py')
+    st.switch_page('pages/00_novice_user_home.py')
 
 if st.button('Act as Alex, the Experienced Verified (Influencer) Trader', 
             type = 'primary', 
@@ -65,7 +65,7 @@ if st.button('Act as Sarah, the Data Analyst',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'Sarah, the data analyst'
-    st.switch_page('pages/data_analyst_home.py')
+    st.switch_page('pages/20_data_analyst_home.py')
 
 
 

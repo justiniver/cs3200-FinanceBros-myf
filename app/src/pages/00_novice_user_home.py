@@ -17,17 +17,17 @@ st.write('### What would you like to do today?')
 if st.button('View My Portfolio', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_Portfolio_Info_Viz.py')
+  st.switch_page('pages/01_novice_user_portfolio.py')
 
 if st.button('View Verified Profiles and Follow', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/00_Reg_User_View_Profile.py') 
+  st.switch_page('pages/02_novice_user_view_profile.py') 
 
 if st.button('Check Posted Notifications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/04_Reg_User_GetNot.py')
+  st.switch_page('pages/03_novice_user_check_notifications.py')
 
 if st.button('Financial AI Consultant (Novice)', 
              type='primary',

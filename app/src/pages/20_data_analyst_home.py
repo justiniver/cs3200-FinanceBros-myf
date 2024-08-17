@@ -17,17 +17,17 @@ st.write('### What would you like to do today?')
 if st.button('View General User Data, Specific User Data, Ban/Unban Users', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_DA_general_user.py')
+  st.switch_page('pages/21_data_analyst_user_data.py')
 
 if st.button('View All User Metrics', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/03_all_user_metrics.py')
+  st.switch_page('pages/22_data_analyst_user_metrics.py')
 
 if st.button('View General Verified User Data, Specific User Data, Ban/Unban Users', 
             type='primary',
             use_container_width=True):
-  st.switch_page('pages/03_show_all_verified_users.py')
+  st.switch_page('pages/23_data_analyst_verif_users.py')
 
 if st.button('Analyst Chat Box', 
             type='primary',
