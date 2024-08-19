@@ -2,10 +2,6 @@
 
 This repository is for the Finance Bros project, which is part of the Summer 2024 CS 3200 course. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
 
-##### Disclaimer
-
-<sub> The data being used for the project as of now is mock data. In the future, we are planning on making the transition away from mock data and using real publicly available financial data.</sub>.
-
 [Project video (YouTube)](https://www.youtube.com/watch?v=h0k6nTx9WQ8)
 
 [Project video (Drive)](https://drive.google.com/file/d/1xEvD-DX-1S-J9cZIN2m7kjXQMQX093R-/view)
@@ -93,6 +89,6 @@ In terminal run `docker compose down` and `docker compose up -d`
 * [Mark Fontenot Project Template](https://github.com/NEU-CS3200/24su-3200-project-template)
 * [OpenAI API + Streamlit Template](https://github.com/streamlit/llm-examples)
 
-##### Disclaimer
+<sub> Disclaimer #1: The data being used for the project as of now is mock data. In the future, we are planning on making the transition away from mock data and instead using real publicly available financial data.</sub>
 
-<sub>The information provided on this platform is for informational purposes only and should not be construed as financial advice. We are not licensed financial advisors. Any investment decisions or financial strategies discussed here should be considered with caution and consulted with a qualified financial advisor. Your financial situation is unique, and it is important to seek personalized advice before making any financial decisions.</sub>.
+<sub> Disclaimer #2: The information provided on this platform is for informational purposes only and should not be construed as financial advice. We are not licensed financial advisors. Any investment decisions or financial strategies discussed here should be considered with caution and consulted with a qualified financial advisor. Your financial situation is unique, and it is important to seek personalized advice before making any financial decisions.</sub>.
