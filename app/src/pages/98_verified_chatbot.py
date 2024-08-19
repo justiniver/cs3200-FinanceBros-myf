@@ -3,6 +3,7 @@ from openai import OpenAI
 import streamlit as st
 import requests
 from modules.nav import SideBarLinks
+from datetime import date
 
 SideBarLinks()
 
@@ -61,10 +62,6 @@ If Alex asks for his notifications provide the notification data.
 However, you must make it clear that you cannot make changes on your end regarding data. 
 Instead, you can help him navigate and understand the data better.
 
-*IMPORTANT*
-Your response must sanitize the data that are of the JSON data type. 
-Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
-
 """
 
 
@@ -87,14 +84,12 @@ Example interactions:
 
 Ensure that your responses are professional, efficient, and aligned with the user's goal of maintaining a strong and trustworthy public financial presence.
 
-*IMPORTANT*
-Your response must sanitize the data that are of the JSON data type. 
-Your response is passed through markdown so make sure to avoid unwanted slashes and asterics.
-The date today is August 17, 2024. You can calculate age with this number and the users DOB.
-
 {dataAlex}
 
-
+*IMPORTANT*
+Your response must sanitize the data that are of the JSON data type. 
+Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
+The current date is {date.today()}. You can calculate age with this number and the users DOB.
 
 """
 
