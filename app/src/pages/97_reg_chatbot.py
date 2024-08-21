@@ -3,6 +3,7 @@ from openai import OpenAI
 import streamlit as st
 import requests
 from modules.nav import SideBarLinks
+from datetime import date
 
 SideBarLinks()
 
@@ -84,6 +85,11 @@ Think of it like not putting all your eggs in one basket. If one investment does
 Make sure to be patient and supportive, encouraging the user as they learn and build confidence in managing their investments.
 
 {dataEmily}
+
+*IMPORTANT*
+Your response must sanitize the data that are of the JSON data type. 
+Your response is passed through markdown so make sure to avoid unwanted slashes and asterisks.
+The current date is {date.today()}. You can calculate age with this number and the users DOB.
 
 """
 
