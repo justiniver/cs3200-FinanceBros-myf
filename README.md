@@ -1,6 +1,6 @@
-# Finance Bros Project
+# FinanceBros Project
 
-This repository is for the Finance Bros project, which is part of the Summer 2024 CS 3200 course. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
+This repository is for the FinanceBros project, which is part of the Summer 2024 CS 3200 course. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
 
 [Project video (YouTube)](https://www.youtube.com/watch?v=h0k6nTx9WQ8)
 
@@ -8,7 +8,7 @@ This repository is for the Finance Bros project, which is part of the Summer 202
 
 ## Description
 
-The Finance Bros project is a social media platform for finance enthusiasts that aims to help users make informed financial decisions. By offering detailed performance metrics and strategies from leading financial figures, the platform provides a unique perspective on investment opportunities. Users can stay informed with real-time data and trends, receive personalized recommendations, and follow the activities of influential traders. This platform is designed to guide both novice and experienced investors through the complexities of the financial market. Additionally, a financial consultant chatbot feature is available and is customized to each users needs.
+The FinanceBros project is a social media platform for finance enthusiasts that aims to help users make informed financial decisions. By offering detailed performance metrics and strategies from leading financial figures, the platform provides a unique perspective on investment opportunities. Users can stay informed with real-time data and trends, receive personalized recommendations, and follow the activities of influential traders. This platform is designed to guide both novice and experienced investors through the complexities of the financial market. Additionally, a financial consultant chatbot feature is available and is customized to each users needs.
 
 ## Getting Started
 
