@@ -1,4 +1,4 @@
-# CS3200 Finance Bros Repository
+# Finance Bros Project
 
 This repository is for the Finance Bros project, which is part of the Summer 2024 CS 3200 course. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
 
