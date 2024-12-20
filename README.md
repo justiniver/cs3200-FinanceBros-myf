@@ -89,6 +89,8 @@ In terminal run `docker compose down` and `docker compose up -d`
 * [Mark Fontenot Project Template](https://github.com/NEU-CS3200/24su-3200-project-template)
 * [OpenAI API + Streamlit Template](https://github.com/streamlit/llm-examples)
 
+###### In the future, I am planning on building a stock prediction model based on the given data.
+
 <sub> Disclaimer #1: The data being used for the project as of now is mock data. In the future, we are planning on making the transition away from mock data and instead using real publicly available financial data.</sub>
 
 <sub> Disclaimer #2: The information provided on this platform is for informational purposes only and should not be construed as financial advice. We are not licensed financial advisors. Any investment decisions or financial strategies discussed here should be considered with caution and consulted with a qualified financial advisor. Your financial situation is unique, and it is important to seek personalized advice before making any financial decisions.</sub>
