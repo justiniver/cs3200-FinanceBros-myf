@@ -78,7 +78,6 @@ In terminal run `docker compose down` and `docker compose up -d`
 
 * 0.3
     * Added AI-powered financial consultation chatbot feature
-    * See [commit change](https://github.com/guenbr/cs3200-FinanceBros/commits/main)
 * 0.2
     * Various bug fixes and optimizations
 * 0.1
