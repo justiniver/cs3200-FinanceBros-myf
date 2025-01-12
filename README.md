@@ -1,6 +1,6 @@
-# CS3200 Finance Bros Repository
+# FinanceBros Project
 
-This repository is for the Finance Bros project, which is part of the Summer 2024 CS 3200 course. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
+This repository is for the FinanceBros project. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
 
 [Project video (YouTube)](https://www.youtube.com/watch?v=h0k6nTx9WQ8)
 
@@ -8,7 +8,7 @@ This repository is for the Finance Bros project, which is part of the Summer 202
 
 ## Description
 
-The Finance Bros project is a social media platform for finance enthusiasts that aims to help users make informed financial decisions. By offering detailed performance metrics and strategies from leading financial figures, the platform provides a unique perspective on investment opportunities. Users can stay informed with real-time data and trends, receive personalized recommendations, and follow the activities of influential traders. This platform is designed to guide both novice and experienced investors through the complexities of the financial market. Additionally, a financial consultant chatbot feature is available and is customized to each users needs.
+The FinanceBros project is a social media platform for finance enthusiasts that aims to help users make informed financial decisions. By offering detailed performance metrics and strategies from leading financial figures, the platform provides a unique perspective on investment opportunities. Users can stay informed with real-time data and trends, receive personalized recommendations, and follow the activities of influential traders. This platform is designed to guide both novice and experienced investors through the complexities of the financial market. Additionally, a financial consultant chatbot feature is available and is customized to each users needs.
 
 ## Getting Started
 
@@ -78,7 +78,6 @@ In terminal run `docker compose down` and `docker compose up -d`
 
 * 0.3
     * Added AI-powered financial consultation chatbot feature
-    * See [commit change](https://github.com/guenbr/cs3200-FinanceBros/commits/main)
 * 0.2
     * Various bug fixes and optimizations
 * 0.1
@@ -88,6 +87,8 @@ In terminal run `docker compose down` and `docker compose up -d`
 
 * [Mark Fontenot Project Template](https://github.com/NEU-CS3200/24su-3200-project-template)
 * [OpenAI API + Streamlit Template](https://github.com/streamlit/llm-examples)
+
+###### In the future, I am planning on building a stock prediction model based on the given data.
 
 <sub> Disclaimer #1: The data being used for the project as of now is mock data. In the future, we are planning on making the transition away from mock data and instead using real publicly available financial data.</sub>
 
