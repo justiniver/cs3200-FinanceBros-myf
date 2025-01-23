@@ -1,6 +1,6 @@
 # FinanceBros Project
 
-This repository is for the FinanceBros project. The project is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
+FinanceBros is designed to empower users to make strategic financial decisions by providing insights derived from top traders, political influencers, and comprehensive market analyses. It also includes an AI-powered chatbot that provides personalized financial advice catered to the users financial expertise.
 
 [Project video (YouTube)](https://www.youtube.com/watch?v=h0k6nTx9WQ8)
 
